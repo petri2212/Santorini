@@ -23,8 +23,7 @@
 
 - ### Costruire
 
-  - Si può costruire un _block_ o una _dome_ nelle 8 caselle prive di altri worker attorno al worker che è stato mosso
-  - Si può costruire una _dome_ solo sopra un edificio composto da 3 _blocks_
+  - Si può costruire un _block_ o una _dome_ in una delle 8 caselle adiacenti e libere da altri lavoratori attorno al lavoratore appena mosso. Si può costruire una _dome_ solo sopra un edificio composto da 3 _blocks_
   - Una torre di 3 _blocks_ e una _dome_ in cima viene chiamata _Complete Tower_ (Torre Completa)
 
 ## Condizione di vittoria
