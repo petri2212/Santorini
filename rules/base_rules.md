@@ -1,8 +1,8 @@
-# Regole di Santorini (godless)
-
+# Regole di Santorini 
+## Gioco base
+---
 ## Setup
-
-- Inizia il giocatore più piccolo (nel nostro caso scelto randomicamente) a posizionare due worker in un qualsiasi spazio non occupato della board, seguito dal secondo giocatore che farà lo stesso.
+Inizia il giocatore più piccolo (nel nostro caso scelto randomicamente) a posizionare due worker in un qualsiasi spazio non occupato della board, seguito dal secondo giocatore che farà lo stesso.
 
 ## Terminologia
 
@@ -13,7 +13,7 @@
 
 ## Come giocare
 
-- In ogni turno il giocatore sceglierà solo uno tra i suoi worker, lo dovrà muovere e solo dopo costruire con lo stesso.
+In ogni turno il giocatore sceglierà solo uno tra i suoi worker, lo dovrà muovere e solo dopo costruire con lo stesso.
 
 - ### Muoversi
 
