@@ -1,4 +1,0 @@
-Vogliamo realizzare un gioco da tavolo (Santorini) utilizzando il inguaggio di programmazione java. Il gioco si svolge su una BOARD con una larghezza di 5 x 5 blocchi, sulla quale si potra avere (2-4) giocatori massimo.
-Ogni giocatore ha la possibilita di muoversi in una delle 8 caselle adiacenti a lui purche non sia occupata da un altro worker o da una cupola, inoltre non potrà muoversi verso una costruzioni con più di un livello di disparità,
-ma questo vale solo se deve salire(verso il basso può saltare tutti i livelli ch vuole). Dopo essersi mosso il worker può decidere di costruire un block; un giocatore vince quanto il worker arriva in cima ad una costruzione
-di 3 blocks. un giocatore perde se il suo worker non può muoversi verso nessuna direzione.
