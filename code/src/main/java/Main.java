@@ -1,4 +1,4 @@
-package main.Santorini.gameComponents;
+package src.main.java;
 
 import src.main.java.gameComponents.GameController;
 import src.main.java.gameComponents.Board;
