@@ -30,9 +30,9 @@ public class GameController {
 //                int xPos = 1;
 //                int yPos = 1;
 //                // check per vedere se può con if
-//                board.checkWorkerPresence(xPos, yPos);
+//                Check.isWorkerPresent(board, xPos, yPos);
 //                // se può lo mette
-//                player = PlayerColor.RED;
+//                player = PlayerColor.RED; // giusto come esempio qui
 //                board.placeWorker(player, xPos, yPos);
 //                // così un'altra volta e anche per il secondo giocatore
 //                // CAMBIO TURNO
@@ -45,7 +45,7 @@ public class GameController {
 //
 //                // check per vedere se i worker del player attuale si possono muovere
 //                Worker workers[][] = board.findWorkersOf(player);
-//                board.checkPossibleMovement(workers);
+//                Check.PossibleMovement(board, workers);
 //                // se questa funzione torna falso vince il giocatore AVVERSARIO!!
 //                // ==> GAMESTATE.ENDED
 //
@@ -60,22 +60,22 @@ public class GameController {
 //                desiredxPos = 2;
 //                desiredyPos = 1;
 //                // check per vedere se la mossa è nel 3x3 intorno al player con if
-//                board.isMoveCorrect(currentxPos, currentyPos, desiredxPos, desiredyPos);
+//                Check.isMoveCorrect(currentxPos, currentyPos, desiredxPos, desiredyPos);
 //                // check per vedere se il movimento è possibile (no celle già occupate o dome) con if
-//                board.isValidMovement(currentxPos, currentyPos, desiredxPos, desiredyPos);
+//                board.isValidMovement(board, currentxPos, currentyPos, desiredxPos, desiredyPos);
 //                // se possibile si sposta il worker
 //                board.moveWorker(chosenWorker, currentxPos, currentyPos, desiredxPos, desiredyPos)
 //                // check per vedere se il worker è su un terzo livello con un if
-//                board.checkWinCondition(desiredxPos, desiredyPos);
+//                Check.WinCondition(board, desiredxPos, desiredyPos);
 //                // SE VERO ==> GAMESTATE.ENDED
 //
 //                // seleziona una casella dove costruire
 //                desiredxPos = 3;
 //                desiredyPos = 2;
 //                // check per vedere se la mossa è nel 3x3 intorno al player con if
-//                board.isMoveCorrect(currentxPos, currentyPos, desiredxPos, desiredyPos);
+//                Check.isMoveCorrect(currentxPos, currentyPos, desiredxPos, desiredyPos);
 //                // check per vedere se la costruzione è possibile (non è dome) con if
-//                board.isValidConstruction(desiredxPos, desiredyPos);
+//                Check.isValidConstruction(board, desiredxPos, desiredyPos);
 //                // se possibile livella la torre di quella cell
 //                board.buildTower(desiredxPos, desiredyPos);
                 // CAMBIO TURNO
