@@ -1,13 +1,13 @@
 
-package main.Santorini.gameComponents;
+package src.main.java.gameComponents;
 
 public class Worker {
 
-    private int ID id;
+    private int id;
     private PlayerColor player;
 
     public Worker(PlayerColor player) {
-        this.id = IDMAKER.getInstance().getNextID();
+        this.id = IDMaker.getInstance().getNextID();
         this.player = player;
     }
 
@@ -16,7 +16,7 @@ public class Worker {
         return id;
     }
 
-    public Player getPlayer() {
+    public PlayerColor getPlayer() {
         return player;
     }
 

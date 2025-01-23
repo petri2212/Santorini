@@ -1,5 +1,5 @@
 
-package main.Santorini.gameComponents;
+package src.main.java.gameComponents;
 
 public enum GameState {
     STARTING,

@@ -1,5 +1,5 @@
 
-package main.Santorini.gameComponents;
+package src.main.java.gameComponents;
 
 public class IDMaker {
 

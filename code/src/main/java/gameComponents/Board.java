@@ -1,5 +1,5 @@
 
-package main.Santorini.gameComponents;
+package src.main.java.gameComponents;
 
 public class Board {
 
@@ -15,7 +15,7 @@ public class Board {
         // Inizializzazione della board 5x5 composta da classi Cell
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
-                this.board[i][j] = Cell(i, j, null, null);
+                this.board[i][j] = new Cell(i, j);
             }
         }
     }
@@ -26,20 +26,20 @@ public class Board {
     }
 
     public Cell cellAt(int xPos, int yPos) {
-        return board[xPos, yPos];
+        return board[xPos][yPos];
     }
 
     
     // Setters
     // GAMESTATE.STARTING
     public void placeWorker(Worker worker, int xPos, int yPos) {
-        cellAt(xPos,yPos).setWorker(worker, xPos, yPos)
+        cellAt(xPos,yPos).setWorker(worker);
     }
 
     // GAMESTATE.RUNNING
     public void moveWorker(Worker worker, int sxPos, int syPos, int fxPos, int fyPos) {
         cellAt(sxPos, syPos).removeWorker();
-        cellAt(fxPos, fyPos).setWorker(worker)
+        cellAt(fxPos, fyPos).setWorker(worker);
     }
     
     public void buildTower(int fxPos, int fyPos) {
@@ -50,8 +50,8 @@ public class Board {
     // Prefissi: s = starting, f = final
 
     // Non dovrebbe servire se c'è già un check nella GUI, ma nel caso è qui
-    public isInsideBoard(int xPos, int yPos) {
-        if (fxPos < 0 || fxPos > 4) || (fyPos < 0 || fyPos > 4) return false;
+    public boolean isInsideBoard(int xPos, int yPos) {
+        if ((xPos < 0 || xPos > 4) || (yPos < 0 || yPos > 4)) return false;
         return true;
     }
 
@@ -71,26 +71,26 @@ public class Board {
     // Check per vedere se il movimento è valido
     public boolean isValidMovement(int sxPos, int syPos, int fxPos, int fyPos) {
 
-        if cellAt(fxPos, fyPos).getTower().isDome() return false
-        if isWorkerPresent(xPos, yPos) return false;
+        if (cellAt(fxPos, fyPos).getTower().isDome()) return false;
+        if (isWorkerPresent(fxPos, fyPos)) return false;
 
         int startingHeight = cellAt(sxPos, syPos).getTower().getHeight();
         int finalHeight = cellAt(fxPos, fyPos).getTower().getHeight();
-        if finalHeight - startingHeight > 1 return false; // non può salire su una torre più alta di +1
+        if (finalHeight - startingHeight > 1) return false; // non può salire su una torre più alta di +1
         return true;
 
     }
 
     // Check se un worker è in una casella di altezza 3
     public boolean checkWinCondition(int xPos, int yPos) {
-        if cellAt(xPos, yPos).getTower().getHeight() == 3 return true;
+        if (cellAt(xPos, yPos).getTower().getHeight() == 3) return true;
         return false;
     }
 
     // Check per vedere se la costruzione è valida
     public boolean isValidConstruction(int fxPos, int fyPos) {
 
-        if cellAt(fxPos, fyPos).getTower.isDome() return false
+        if (cellAt(fxPos, fyPos).getTower().isDome()) return false;
         return true;
 
     }
@@ -113,8 +113,8 @@ public class Board {
             for (int x = leftRange; x <= rightRange; x++) {
                 for (int y = upRange; y <= downRange; y++) {
 
-                    if (x == workerxPos && y == workeryPos) continue // sé stesso
-                    if (cellAt(x, y).getTower().isDome()) continue // il worker non può salire su un dome
+                    if (x == workerxPos && y == workeryPos) continue; // sé stesso
+                    if (cellAt(x, y).getTower().isDome()) continue; // il worker non può salire su un dome
 
                     if (cellAt(x, y).getTower().getHeight() <= 1 + starting_height) {
                         // un worker si può muovere
@@ -129,7 +129,7 @@ public class Board {
 
     // Utils
 
-    private clamp(int min, int n, int max) {
+    private int clamp(int min, int n, int max) {
         // Non avevo voglia di stare a scrivere minmax ovunque
         return Math.max(min, Math.min(max, n));
     }
@@ -144,15 +144,17 @@ public class Board {
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
 
-                if (cellAt(i, j).getWorker().getPlayer() == color){
-                    positions[count] == new int[] {i, j};
+                if (cellAt(i, j).getWorker().getPlayer() == color) {
+                    positions[count] = new int[] {i, j};
                     count++;
 
-                    if count == 2 return positions;
+                    if (count == 2) return positions;
 
                 }
             }
         }
+        // ridondante, ma almeno non da' errore
+		return positions;
     }
     
 }

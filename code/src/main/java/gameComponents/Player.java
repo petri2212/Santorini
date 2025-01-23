@@ -1,5 +1,5 @@
 
-package main.Santorini.gameComponents;
+package src.main.java.gameComponents;
 
 public class Player {
 
@@ -16,7 +16,7 @@ public class Player {
     // Setters
     private PlayerColor setColor() {
 
-        id = IDMaker.getInstance().getNextID();
+        int id = IDMaker.getInstance().getNextID();
         if (id % 2 == 1) {
             return PlayerColor.RED;
         }

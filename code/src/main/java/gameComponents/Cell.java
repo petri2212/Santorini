@@ -1,18 +1,18 @@
 
-package main.Santorini.gameComponents;
+package src.main.java.gameComponents;
 
 public class Cell {
 
-    private static int xPos;
-    private static int yPos;
-    private static Tower tower;
-    private static Worker worker;
-    private static WorkerStatus status;
+    private int xPos;
+    private int yPos;
+    private Tower tower;
+    private Worker worker;
+    private WorkerStatus status;
 
     public Cell(int xPos, int yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
-        this.tower = 0;
+        this.tower = new Tower();
         this.worker = null;
         this.status = WorkerStatus.ABSENT;
     }
@@ -44,7 +44,7 @@ public class Cell {
     // Setters
     // Tower related
     public boolean levelUpTower() {
-        return this.Tower.levelUp();
+        return tower.levelUp();
     }
 
     // Worker related
@@ -59,7 +59,7 @@ public class Cell {
     }
 
     // Utils
-    public bool isDome() {
+    public boolean isDome() {
         return tower.isDome();
     }
 
