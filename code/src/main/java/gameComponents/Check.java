@@ -1,30 +1,68 @@
 package src.main.java.gameComponents;
 
+/**
+ * Provides static methods to validate moves, construction, and
+ * game statuses in the Santorini board game.
+ */
 public class Check {
 
     // Check generali
     // Prefissi: s = starting, f = final
 
-    // Non dovrebbe servire se c'è già un check nella GUI, ma nel caso è qui
-    public static boolean isInsideBoard(int xPos, int yPos) {
-        if ((xPos < 0 || xPos > 4) || (yPos < 0 || yPos > 4)) return false;
+    /**
+     * Checks if the specified position is inside the standard 5x5 board.
+     *
+     *@param board the {@link Board} object.
+     * @param xPos the row index to check.
+     * @param yPos the column index to check.
+     * @return true if [xPos, yPos] is within [0..4], false otherwise.
+     */
+    public static boolean isInsideBoard(Board board, int xPos, int yPos) {
+    	// Non dovrebbe servire se c'è già un check nella GUI, ma nel caso è qui
+        if ((xPos < 0 || xPos > board.getWidth()) || (yPos < 0 || yPos > board.getHeight())) return false;
         return true;
     }
 
-    // Check per vedere se la casella scelta è nei dintorni 3x3 della casella di partenza
+    /**
+     * Checks if the move from [sxPos, syPos] to [fxPos, fyPos] is within one cell distance.
+     * 
+     * @param sxPos starting x-position.
+     * @param syPos starting y-position.
+     * @param fxPos final x-position.
+     * @param fyPos final y-position.
+     * @return false if it is the same cell or more than 1 cell away, true otherwise.
+     */
     public static boolean isMoveCorrect(int sxPos, int syPos, int fxPos, int fyPos) {
         if (sxPos == fxPos && syPos == fyPos) return false; // non si è mosso
         if (Math.abs(fxPos - sxPos) > 1 || Math.abs(fyPos - syPos) > 1) return false;
         return true;
     }
 
-    // Check per testare la presenza di worker in una Cell
+    /**
+     * Checks if the Worker is present in the cell. 
+     * 
+     * Note: The original code had inverted logic. Here we name it clearly:
+     * 
+     * @param board the {@link Board} object.
+     * @param xPos  the x-position of the cell.
+     * @param yPos  the y-position of the cell.
+     * @return true if a worker is present, false otherwise.
+     */
     public static boolean isWorkerPresent(Board board, int xPos, int yPos) {
-        if (board.cellAt(xPos, yPos).getStatus() == WorkerStatus.ABSENT) return true;
-        return false;
+    	return board.cellAt(xPos, yPos).getStatus() == WorkerStatus.PRESENT;
     }
 
-    // Check per vedere se il movimento è valido
+    /**
+     * Checks if a movement from start to final positions is valid,
+     * considering the presence of a dome or another worker and the height difference.
+     *
+     * @param board the current {@link Board}.
+     * @param sxPos starting x-position.
+     * @param syPos starting y-position.
+     * @param fxPos final x-position.
+     * @param fyPos final y-position.
+     * @return true if the movement is valid, false otherwise.
+     */
     public static boolean isValidMovement(Board board, int sxPos, int syPos, int fxPos, int fyPos) {
 
         if (board.cellAt(fxPos, fyPos).getTower().isDome()) return false;
@@ -37,21 +75,39 @@ public class Check {
 
     }
 
-    // Check se un worker è in una casella di altezza 3
+    /**
+     * Checks if a Worker at [xPos, yPos] is on a tower of height 3 (winning condition).
+     *
+     * @param board the {@link Board} object.
+     * @param xPos  the x-position to check.
+     * @param yPos  the y-position to check.
+     * @return true if the cell's tower height is 3, false otherwise.
+     */
     public static boolean WinCondition(Board board, int xPos, int yPos) {
-        if (board.cellAt(xPos, yPos).getTower().getHeight() == 3) return true;
-        return false;
+        return board.cellAt(xPos, yPos).getTower().getHeight() == 3;
     }
 
-    // Check per vedere se la costruzione è valida
+    /**
+     * Checks if a construction on [fxPos, fyPos] is valid (not a dome).
+     *
+     * @param board the {@link Board} object.
+     * @param fxPos the x-position where the worker attempts to build.
+     * @param fyPos the y-position where the worker attempts to build.
+     * @return true if a new level can be built, false otherwise.
+     */
     public static boolean isValidConstruction(Board board, int fxPos, int fyPos) {
-
-        if (board.cellAt(fxPos, fyPos).getTower().isDome()) return false;
-        return true;
+        return board.cellAt(fxPos, fyPos).getTower().isDome() == false;
 
     }
 
-    // Check per vedere se il movimento degli worker è possibile a inizio gioco
+    /**
+     * Checks if any of the two workers of the current player can move.
+     * 
+     * @param board   the {@link Board} object.
+     * @param workers an array containing positions of the player's 2 workers,
+     *                in the form [[x1, y1], [x2, y2]].
+     * @return true if at least one worker can move, false if neither can move.
+     */
     public static boolean PossibleMovement(Board board, int[][] workers) {
 
         for (int i = 0; i < 2; i++) {
@@ -61,10 +117,13 @@ public class Check {
 
             int starting_height = board.cellAt(workerxPos, workeryPos).getTower().getHeight();
 
-            int leftRange = clamp(0, workerxPos - 1, 4);
-            int rightRange = clamp(0, workerxPos + 1, 4);
-            int upRange = clamp(0, workeryPos - 1, 4);
-            int downRange = clamp(0, workerxPos + 1, 4);
+            int verticalRange = board.getHeight() - 1;
+            int horizontalRange = board.getWidth() - 1;
+            
+            int leftRange = clamp(0, workerxPos - 1, horizontalRange);
+            int rightRange = clamp(0, workerxPos + 1, horizontalRange);
+            int upRange = clamp(0, workeryPos - 1, verticalRange);
+            int downRange = clamp(0, workeryPos + 1, verticalRange);
 
             for (int x = leftRange; x <= rightRange; x++) {
                 for (int y = upRange; y <= downRange; y++) {
@@ -83,8 +142,16 @@ public class Check {
         return false; // nessun worker si può muovere ==> GameState.ENDED
     }
 
-    // Utils
+    // UTILS
 
+    /**
+     * Clamps the integer n between min and max.
+     *
+     * @param min the minimum value.
+     * @param n   the value to clamp.
+     * @param max the maximum value.
+     * @return the clamped value.
+     */
     private static int clamp(int min, int n, int max) {
         // Non avevo voglia di stare a scrivere minmax ovunque
         return Math.max(min, Math.min(max, n));

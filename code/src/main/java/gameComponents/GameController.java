@@ -2,12 +2,27 @@
 package src.main.java.gameComponents;
 import java.util.Random;
 
+/**
+ * PROTOTYPE
+ * Controls the overall flow of the game, managing turn order and the current
+ * {@link GameState}.
+ */
 public class GameController {
 
+    /** The main board of the game. */
     private Board board;
+    /** The current player's turn, can be RED or BLUE. */
     private PlayerColor turn;
+    /** The current state of the game. */
     private GameState gameState;
 
+    /**
+     * Constructs a {@code GameController} with a given board, sets the
+     * initial {@link GameState} to STARTING, and randomly picks which player
+     * (RED or BLUE) goes first.
+     *
+     * @param board the {@link Board} to be used by the game.
+     */
     public GameController(Board board) {
         this.board = board;
         this.gameState = GameState.STARTING;
@@ -15,6 +30,9 @@ public class GameController {
         this.turn = PlayerColor.values()[rng];
     }
 
+    /**
+     * Outlines the main game loop logic based on {@link GameState}.
+     */
     public void gameLoop() {
 
         // Non funziona ancora, questa è giusto l'idea raffazzonata
