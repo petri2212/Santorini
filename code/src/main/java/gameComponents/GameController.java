@@ -18,8 +18,6 @@ public class GameController {
     private PlayerColor turn;
     /** The current state of the game. */
     private GameState gameState;
-    private Player redPlayer;
-    private Player bluePlayer;
     private Player currentPlayer;
     private Player opponentPlayer;
     private Player winner;
@@ -36,8 +34,6 @@ public class GameController {
     	
         this.board = board;
         this.gameState = GameState.STARTING;
-        this.bluePlayer = bluePlayer;
-        this.redPlayer = redPlayer;
         this.winner = null;
         this.looser = null;
         
@@ -242,6 +238,7 @@ public class GameController {
 	                // è parte della gui festeggiare per la vittoria/sconfitta 🥳🥳
 	
 	            	print("Congratulazioni", winner, "hai vinto!!");
+	            	print("Riprova di nuovo", looser);
 	            	
 	                break;
 	

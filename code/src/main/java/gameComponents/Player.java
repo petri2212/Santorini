@@ -43,24 +43,4 @@ public class Player {
         return workers;
     }
     
-    // SETTERS
-    
-    /**
-     * Determines the player's color based on the ID from {@link IDMaker}.
-     * If the ID is odd => RED, if even => BLUE.
-     *
-     * @return the {@link PlayerColor} for this player.
-     */
-    private PlayerColor setColor() {
-
-        int id = IDMaker.getInstance().getNextID();
-        if (id % 2 == 1) {
-            return PlayerColor.RED;
-        }
-        return PlayerColor.BLUE;
-
-    }
-
-
-    
 }
