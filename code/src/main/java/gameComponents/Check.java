@@ -10,7 +10,7 @@ public class Check {
     // Prefissi: s = starting, f = final
 
     /**
-     * Checks if the specified position is inside the standard 5x5 board.
+     * Checks if the specified position is inside the board.
      *
      *@param board the {@link Board} object.
      * @param xPos the row index to check.
@@ -32,7 +32,9 @@ public class Check {
      * @param fyPos final y-position.
      * @return false if it is the same cell or more than 1 cell away, true otherwise.
      */
-    public static boolean isMoveCorrect(int sxPos, int syPos, int fxPos, int fyPos) {
+    public static boolean isMoveCorrect(Cell startingCell, Cell finalCell) {
+    	int sxPos = startingCell.getPos()[0], syPos = startingCell.getPos()[1];
+    	int fxPos = finalCell.getPos()[0], fyPos = finalCell.getPos()[1];
         if (sxPos == fxPos && syPos == fyPos) return false; // non si è mosso
         if (Math.abs(fxPos - sxPos) > 1 || Math.abs(fyPos - syPos) > 1) return false;
         return true;
@@ -48,8 +50,8 @@ public class Check {
      * @param yPos  the y-position of the cell.
      * @return true if a worker is present, false otherwise.
      */
-    public static boolean isWorkerPresent(Board board, int xPos, int yPos) {
-    	return board.cellAt(xPos, yPos).getStatus() == WorkerStatus.PRESENT;
+    public static boolean isWorkerPresent(Cell cell) {
+    	return cell.getStatus() == WorkerStatus.PRESENT;
     }
 
     /**
@@ -63,10 +65,13 @@ public class Check {
      * @param fyPos final y-position.
      * @return true if the movement is valid, false otherwise.
      */
-    public static boolean isValidMovement(Board board, int sxPos, int syPos, int fxPos, int fyPos) {
+    public static boolean isValidMovement(Board board, Cell startingCell, Cell finalCell) {
 
+    	int sxPos = startingCell.getPos()[0], syPos = startingCell.getPos()[1];
+    	int fxPos = finalCell.getPos()[0], fyPos = finalCell.getPos()[1];
+    	
         if (board.cellAt(fxPos, fyPos).getTower().isDome()) return false;
-        if (isWorkerPresent(board, fxPos, fyPos)) return false;
+        if (isWorkerPresent(finalCell)) return false;
 
         int startingHeight = board.cellAt(sxPos, syPos).getTower().getHeight();
         int finalHeight = board.cellAt(fxPos, fyPos).getTower().getHeight();
@@ -83,8 +88,8 @@ public class Check {
      * @param yPos  the y-position to check.
      * @return true if the cell's tower height is 3, false otherwise.
      */
-    public static boolean WinCondition(Board board, int xPos, int yPos) {
-        return board.cellAt(xPos, yPos).getTower().getHeight() == 3;
+    public static boolean WinCondition(Cell cell) {
+        return cell.getTower().getHeight() == 3;
     }
 
     /**
@@ -95,8 +100,8 @@ public class Check {
      * @param fyPos the y-position where the worker attempts to build.
      * @return true if a new level can be built, false otherwise.
      */
-    public static boolean isValidConstruction(Board board, int fxPos, int fyPos) {
-        return board.cellAt(fxPos, fyPos).getTower().isDome() == false;
+    public static boolean isValidConstruction(Cell cell) {
+        return cell.getTower().isDome() == false;
 
     }
 
@@ -108,13 +113,12 @@ public class Check {
      *                in the form [[x1, y1], [x2, y2]].
      * @return true if at least one worker can move, false if neither can move.
      */
-    public static boolean PossibleMovement(Board board, int[][] workers) {
+    public static boolean PossibleMovement(Board board, Cell[] workers) {
 
         for (int i = 0; i < 2; i++) {
-
-            int workerxPos = workers[i][0];
-            int workeryPos = workers[i][1];
-
+	
+        	int workerxPos = workers[i].getPos()[0], workeryPos = workers[i].getPos()[1];
+        
             int starting_height = board.cellAt(workerxPos, workeryPos).getTower().getHeight();
 
             int verticalRange = board.getHeight() - 1;

@@ -110,9 +110,9 @@ public class Board {
      * @param fxPos  The final x-coordinate.
      * @param fyPos  The final y-coordinate.
      */
-    public void moveWorker(Worker worker, int sxPos, int syPos, int fxPos, int fyPos) {
-        cellAt(sxPos, syPos).removeWorker();
-        cellAt(fxPos, fyPos).setWorker(worker);
+    public void moveWorker(Worker worker, Cell startingCell, Cell finalCell) {
+        startingCell.removeWorker();
+        finalCell.setWorker(worker);
     }
     
     
@@ -122,8 +122,8 @@ public class Board {
      * @param fxPos The x-coordinate where to build.
      * @param fyPos The y-coordinate where to build.
      */
-    public void buildTower(int fxPos, int fyPos) {
-        cellAt(fxPos, fyPos).getTower().levelUp();
+    public void buildTower(Cell cell) {
+        cell.getTower().levelUp();
     }
     
     // UTILS
@@ -134,10 +134,12 @@ public class Board {
      * @param color The {@link PlayerColor} of the workers to find.
      * @return A 2D array of size [2][2], where each sub-array is [x, y].
      */
-    public int[][] findWorkersOf(PlayerColor color) {
+    public Cell[] findWorkersOf(Player player) {
 
+    	PlayerColor color = player.getColor();
+    	
         int count = 0;
-        int[][] positions = new int[2][2];
+        Cell[] positions = new Cell[2];
 
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
@@ -146,7 +148,7 @@ public class Board {
             	if (cell.getStatus() == WorkerStatus.ABSENT) continue;
             	
             	if (cell.getWorker().getPlayer() == color) {
-                    positions[count] = new int[] {i, j};
+                    positions[count] = cell;
                     count++;
                     	
                     // quick exit

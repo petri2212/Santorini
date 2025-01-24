@@ -2,6 +2,8 @@ package src.main.java;
 
 import src.main.java.gameComponents.GameController;
 import src.main.java.gameComponents.Board;
+import src.main.java.gameComponents.Player;
+import src.main.java.gameComponents.PlayerColor;
 
 /**
  * The Main class is the entry point for the Santorini board game application. 
@@ -19,7 +21,10 @@ public class Main {
 
     	// inizializza una board 5x5
     	Board board = new Board(5, 5);
-        GameController game = new GameController(board);
+    	Player redPlayer = new Player(PlayerColor.RED);
+    	Player bluePlayer = new Player(PlayerColor.BLUE);
+    	
+        GameController game = new GameController(board, redPlayer, bluePlayer);
         // inizia il gioco
         game.gameLoop();
         

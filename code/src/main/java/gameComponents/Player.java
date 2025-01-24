@@ -16,13 +16,33 @@ public class Player {
      * Constructs a new Player, assigning RED or BLUE based on the next ID from {@link IDMaker}.
      * Each player gets exactly two {@link Worker} objects.
      */
-    public Player() {
-        this.color = setColor();
+    public Player(PlayerColor color) {
+        this.color = color;
         this.workers = new Worker[2];
         workers[0] = new Worker(color);
         workers[1] = new Worker(color);
     }
 
+    // GETTERS
+    
+    /**
+     * Returns this player's color.
+     *
+     * @return the {@link PlayerColor}.
+     */
+    public PlayerColor getColor() {
+        return color;
+    }
+
+    /**
+     * Returns the two workers belonging to this player.
+     *
+     * @return an array of exactly two {@link Worker} objects.
+     */
+    public Worker[] getWorkers() {
+        return workers;
+    }
+    
     // SETTERS
     
     /**
@@ -41,22 +61,6 @@ public class Player {
 
     }
 
-    /**
-     * Returns this player's color.
-     *
-     * @return the {@link PlayerColor}.
-     */
-    public PlayerColor getColor() {
-        return color;
-    }
 
-    /**
-     * Returns the two workers belonging to this player.
-     *
-     * @return an array of exactly two {@link Worker} objects.
-     */
-    public Worker[] getWorkers() {
-        return workers;
-    }
     
 }

@@ -20,4 +20,5 @@ public enum GameState {
      * Represents the end of the game.
      */
     ENDED,
+    IDLE,
 }
