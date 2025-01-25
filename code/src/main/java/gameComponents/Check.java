@@ -18,9 +18,7 @@ public class Check {
      * @return true if [xPos, yPos] is within [0..4], false otherwise.
      */
     public static boolean isInsideBoard(Board board, int xPos, int yPos) {
-    	// Non dovrebbe servire se c'è già un check nella GUI, ma nel caso è qui
-        if ((xPos < 0 || xPos > board.getWidth()) || (yPos < 0 || yPos > board.getHeight())) return false;
-        return true;
+        return xPos >= 0 && xPos < board.getHeight() && yPos >= 0 && yPos < board.getWidth();
     }
 
     /**
@@ -33,11 +31,10 @@ public class Check {
      * @return false if it is the same cell or more than 1 cell away, true otherwise.
      */
     public static boolean isMoveCorrect(Cell startingCell, Cell finalCell) {
-    	int sxPos = startingCell.getPos()[0], syPos = startingCell.getPos()[1];
-    	int fxPos = finalCell.getPos()[0], fyPos = finalCell.getPos()[1];
-        if (sxPos == fxPos && syPos == fyPos) return false; // non si è mosso
-        if (Math.abs(fxPos - sxPos) > 1 || Math.abs(fyPos - syPos) > 1) return false;
-        return true;
+        if (startingCell.equals(finalCell)) return false;
+        int dx = Math.abs(finalCell.getX() - startingCell.getX());
+        int dy = Math.abs(finalCell.getY() - startingCell.getY());
+        return dx <= 1 && dy <= 1;
     }
 
     /**
@@ -65,19 +62,12 @@ public class Check {
      * @param fyPos final y-position.
      * @return true if the movement is valid, false otherwise.
      */
-    public static boolean isValidMovement(Board board, Cell startingCell, Cell finalCell) {
-
-    	int sxPos = startingCell.getPos()[0], syPos = startingCell.getPos()[1];
-    	int fxPos = finalCell.getPos()[0], fyPos = finalCell.getPos()[1];
-    	
-        if (board.cellAt(fxPos, fyPos).getTower().isDome()) return false;
+    public static boolean isValidMovement(Cell startingCell, Cell finalCell) {
+        if (finalCell.isDome()) return false;
         if (isWorkerPresent(finalCell)) return false;
-
-        int startingHeight = board.cellAt(sxPos, syPos).getTower().getHeight();
-        int finalHeight = board.cellAt(fxPos, fyPos).getTower().getHeight();
-        if (finalHeight - startingHeight > 1) return false; // non può salire su una torre più alta di +1
-        return true;
-
+        int startingHeight = startingCell.getTower().getHeight();
+        int finalHeight = finalCell.getTower().getHeight();
+        return (finalHeight - startingHeight) <= 1;
     }
 
     /**
@@ -88,7 +78,7 @@ public class Check {
      * @param yPos  the y-position to check.
      * @return true if the cell's tower height is 3, false otherwise.
      */
-    public static boolean WinCondition(Cell cell) {
+    public static boolean isWinCondition(Cell cell) {
         return cell.getTower().getHeight() == 3;
     }
 
@@ -101,8 +91,7 @@ public class Check {
      * @return true if a new level can be built, false otherwise.
      */
     public static boolean isValidConstruction(Cell cell) {
-        return cell.getTower().isDome() == false;
-
+        return !cell.isDome();
     }
 
     /**
@@ -117,48 +106,26 @@ public class Check {
 
         for (int i = 0; i < 2; i++) {
 	
-        	int workerxPos = workers[i].getPos()[0], workeryPos = workers[i].getPos()[1];
-        
-            int starting_height = board.cellAt(workerxPos, workeryPos).getTower().getHeight();
+        	int workerxPos = workers[i].getX();
+            int workeryPos = workers[i].getY();
 
-            int verticalRange = board.getHeight() - 1;
-            int horizontalRange = board.getWidth() - 1;
-            
-            int leftRange = clamp(0, workerxPos - 1, horizontalRange);
-            int rightRange = clamp(0, workerxPos + 1, horizontalRange);
-            int upRange = clamp(0, workeryPos - 1, verticalRange);
-            int downRange = clamp(0, workeryPos + 1, verticalRange);
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
 
-            for (int x = leftRange; x <= rightRange; x++) {
-                for (int y = upRange; y <= downRange; y++) {
+                    int xPos = workerxPos + dx;
+                    int yPos = workeryPos + dy;
 
-                    if (x == workerxPos && y == workeryPos) continue; // sé stesso
-                    if (board.cellAt(x, y).getTower().isDome()) continue; // il worker non può salire su un dome
-
-                    if (board.cellAt(x, y).getTower().getHeight() <= 1 + starting_height) {
-                        // un worker si può muovere
-                        return true;
-                    }
+                    // sé stesso
+                    if (dx == 0 && dy == 0) continue; 
+                    // fuori dalla board 
+                    if (!isInsideBoard(board, xPos, yPos)) continue;
+                    // è un movimento valido?
+                    if (!isValidMovement(workers[i], board.cellAt(xPos, yPos))) continue; 
+                    return true;
                 }
             }
         }
-
         return false; // nessun worker si può muovere ==> GameState.ENDED
-    }
-
-    // UTILS
-
-    /**
-     * Clamps the integer n between min and max.
-     *
-     * @param min the minimum value.
-     * @param n   the value to clamp.
-     * @param max the maximum value.
-     * @return the clamped value.
-     */
-    private static int clamp(int min, int n, int max) {
-        // Non avevo voglia di stare a scrivere minmax ovunque
-        return Math.max(min, Math.min(max, n));
     }
 	
 }

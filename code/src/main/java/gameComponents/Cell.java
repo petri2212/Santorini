@@ -8,15 +8,13 @@ package src.main.java.gameComponents;
 public class Cell {
 
     /** The x-coordinate (row) of this cell. */
-    private int xPos;
+    private final int xPos;
     /** The y-coordinate (column) of this cell. */
-    private int yPos;
+    private final int yPos;
     /** The Tower in this cell. */
-    private Tower tower;
+    private final Tower tower;
     /** The Worker in this cell (null if no Worker present). */
     private Worker worker;
-    /** Tracks whether a Worker is present or absent. */
-    private WorkerStatus status;
     
     /**
      * Constructs a Cell with the given coordinates. Initializes a new Tower
@@ -30,13 +28,20 @@ public class Cell {
         this.yPos = yPos;
         this.tower = new Tower();
         this.worker = null;
-        this.status = WorkerStatus.ABSENT;
     }
 
     // GETTERS
     
     // CELL RELATED
     
+    public int getX() {
+        return xPos;
+    }
+
+    public int getY() {
+        return yPos;
+    }
+
     /**
      * Returns the [x, y] coordinates of this cell.
      *
@@ -75,7 +80,7 @@ public class Cell {
      * @return the {@link WorkerStatus} enum value of this cell.
      */
     public WorkerStatus getStatus() {
-        return status;
+        return (worker != null) ? WorkerStatus.PRESENT : WorkerStatus.ABSENT;
     }
 
     /**
@@ -112,7 +117,6 @@ public class Cell {
      */
     public void setWorker(Worker worker) {
         this.worker = worker;
-        this.status = WorkerStatus.PRESENT;
     }
 
     /**
@@ -120,7 +124,6 @@ public class Cell {
      */
     public void removeWorker() {
         this.worker = null;
-        this.status = WorkerStatus.ABSENT;
     }
 
     // UTILS

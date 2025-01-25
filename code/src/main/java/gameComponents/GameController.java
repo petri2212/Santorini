@@ -36,21 +36,16 @@ public class GameController {
         this.gameState = GameState.STARTING;
         this.winner = null;
         this.looser = null;
-        
-        int rng = new Random().nextInt(2);
-        this.turn = PlayerColor.values()[rng];
-        
-        if (this.turn == PlayerColor.RED) {
-        	this.currentPlayer = redPlayer;
-        	this.opponentPlayer = bluePlayer;
-        } else {
-        	this.currentPlayer = bluePlayer;
-        	this.opponentPlayer = redPlayer;
-        }
+		initializePlayers(redPlayer, bluePlayer);
         
     }
     
-    /**
+	private void initializePlayers(Player redPlayer, Player bluePlayer) {
+        this.currentPlayer = new Random().nextBoolean() ? redPlayer : bluePlayer;
+        this.opponentPlayer = (this.currentPlayer == redPlayer) ? bluePlayer : redPlayer;
+    }
+
+	/**
      * Outlines the main game loop logic based on {@link GameState}.
      */
     public void gameLoop() {
@@ -187,7 +182,7 @@ public class GameController {
 	            			// Controllo se il movimento è corretto (3x3 intorno al worker)
 	            			if (!Check.isMoveCorrect(startingCell, finalCell)) continue;
 	            			// Controllo se il movimento è possibile
-	            			if (!Check.isValidMovement(board, startingCell, finalCell)) continue;
+	            			if (!Check.isValidMovement(startingCell, finalCell)) continue;
 	            			
 	            			correct = true; 
 	            			
@@ -197,7 +192,7 @@ public class GameController {
 	            		board.moveWorker(startingCell.getWorker(), startingCell, finalCell);
 	            		
 	            		// Calcoliamo la win condition se il worker si trova su un "terzo" piano
-	            		if (Check.WinCondition(finalCell)) {
+	            		if (Check.isWinCondition(finalCell)) {
 	            			this.winner = currentPlayer;
 	            			this.looser = opponentPlayer;
 	            			nextGameState();
