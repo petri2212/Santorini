@@ -12,6 +12,8 @@ public enum GameState {
 	 * Represents the starting phase of the game.
 	 */
     STARTING,
+    INSERT_PLAYERS,
+    
     /**
      * Represents the main gameplay phase of the game.
      */
