@@ -2,7 +2,6 @@ package src.main.java.gui.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import src.main.java.Controller;
 import src.main.java.gui.view.MainPageView;
 

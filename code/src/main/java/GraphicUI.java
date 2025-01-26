@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import src.main.java.gameComponents.GameManager;
+import src.main.java.gui.controller.InsertPlayersController;
 import src.main.java.gui.controller.MainPageController;
 import src.main.java.gui.view.graphic.*;
 import resources.Images;
@@ -44,10 +45,10 @@ public class GraphicUI implements UI {
 	 * in the insert players page for the graphic.
 	 */
 	public void showInsertPlayersPage(GameManager model) {
-		/*InsertPlayersViewGraphic view = new InsertPlayersViewGraphic(mainFrame);
+		InsertPlayersViewGraphic view = new InsertPlayersViewGraphic(mainFrame);
 		InsertPlayersController controller = new InsertPlayersController(model, view);
 		controller.start();
-*/
+
 	}
 
 	/**

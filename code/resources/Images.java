@@ -13,8 +13,8 @@ import javax.imageio.ImageIO;
 public enum Images implements Resource<Image> {
 
 	MAIN_PAGE_BACKGROUND("./assets/Backgrounds/m_background_resized.png"),
-	ICON_SANTORINI("./assets/Backgrounds/santorini.png");
-	
+	ICON_SANTORINI("./assets/Backgrounds/santorini.png"),
+	IN_PLAYERS_BLURRED_BACK("./assets/Backgrounds/in_player_blurred.png");
 
 	private String path;
 

@@ -1,7 +1,8 @@
 
 package src.main.java.gameComponents;
-import java.io.File;
+import java.io.File;	
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 // TODO rimuovere quando abbiamo la GUI
@@ -22,8 +23,9 @@ public class GameManager {
     private PlayerColor turn;
     /** The current state of the game. */
     private GameState gameState;
-    private Player currentPlayer;
-    private Player opponentPlayer;
+    private ArrayList<Player> players;
+    //private Player currentPlayer;
+    //private Player opponentPlayer;
     private Player winner;
     private Player looser;
     private UI ui;
@@ -50,11 +52,19 @@ public class GameManager {
     
     
     
-	private void initializePlayers(Player redPlayer, Player bluePlayer) {
+	/*private void initializePlayers(Player redPlayer, Player bluePlayer) {
         this.currentPlayer = new Random().nextBoolean() ? redPlayer : bluePlayer;
         this.opponentPlayer = (this.currentPlayer == redPlayer) ? bluePlayer : redPlayer;
         
-    }
+    }*/
+    /**
+	 * Set the current players.
+	 *
+	 * @param players is a list of players
+	 */
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
+	}
 
 	/**
      * Outlines the main game loop logic based on {@link GameState}.
@@ -70,7 +80,7 @@ public class GameManager {
 	            case HOME:
 	            	  	this.winner = null;
 	            	  	this.looser = null;
-	            	  	
+	            	  	players = new ArrayList<>();
 	            		ui.showMainPage(this);
 	            		
 	            		
@@ -124,7 +134,7 @@ public class GameManager {
 	            	break;
 	            	
 	            case INSERT_PLAYERS:
-	            	
+	            	ui.showInsertPlayersPage(this);
 	            	
 	            	break;
 	            	
@@ -273,7 +283,7 @@ public class GameManager {
     	}
 
     
-
+/*
     private void cambioTurno() {
     	// Swap players
     	Player temp = this.currentPlayer;
@@ -283,6 +293,8 @@ public class GameManager {
     	// Swap turno
         this.turn = (this.turn == PlayerColor.RED) ? PlayerColor.BLUE : PlayerColor.RED;
     }
+    */
+    
     /*
     private void nextGameState() {
     	
