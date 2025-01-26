@@ -45,7 +45,7 @@ public class MainPageController extends Controller<MainPageView> {
 			 * This is an action form the view it ends the program.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				model.changeState(GameState.ENDED);
+				model.changeState(GameState.EXIT);
 			}
 		};
 	}

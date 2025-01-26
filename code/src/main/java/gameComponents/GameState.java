@@ -11,16 +11,20 @@ public enum GameState {
 	/**
 	 * Represents the starting phase of the game.
 	 */
-    STARTING,
+	HOME,
+    //STARTING,
+    INIT_GAME,
     INSERT_PLAYERS,
-    
+    GAME_STAGE,
+    CONTROLS,
     /**
      * Represents the main gameplay phase of the game.
      */
-    RUNNING,
+   // RUNNING,
     /**
      * Represents the end of the game.
      */
     ENDED,
+    EXIT,
     IDLE,
 }

@@ -35,16 +35,20 @@ public class GameManager {
      *
      * @param board the {@link Board} to be used by the game.
      */
-    public GameManager(Board board, Player redPlayer, Player bluePlayer,UI ui) {
+    public GameManager(UI ui) {
     	
-        this.board = board;
-        this.gameState = GameState.STARTING;
-        this.winner = null;
-        this.looser = null;
-		initializePlayers(redPlayer, bluePlayer);
+        //this.board = board;
+		//initializePlayers(redPlayer, bluePlayer);
 		this.ui = ui;
         
     }
+    
+    public void start() {
+    	gameState= GameState.HOME;
+    	gameLoop();
+    }
+    
+    
     
 	private void initializePlayers(Player redPlayer, Player bluePlayer) {
         this.currentPlayer = new Random().nextBoolean() ? redPlayer : bluePlayer;
@@ -54,25 +58,22 @@ public class GameManager {
 
 	/**
      * Outlines the main game loop logic based on {@link GameState}.
-	 * @throws IOException 
-	 * @throws UnsupportedAudioFileException 
-	 * @throws LineUnavailableException 
      */
     public void gameLoop() {
 
         // Non funziona ancora, questa è giusto l'idea raffazzonata
 
-    	while (this.gameState != GameState.IDLE) {
+    	
     	
 	        switch (gameState) {
 	
-	            case STARTING:
-	            	
+	            case HOME:
+	            	  	this.winner = null;
+	            	  	this.looser = null;
+	            	  	
 	            		ui.showMainPage(this);
 	            		
-
-	            	         
-	            	
+	            		
 	//                // in un for loop per 2 volte VV
 	//
 	//                // per 2 volte, per ogni player
@@ -88,7 +89,7 @@ public class GameManager {
 	//                // CAMBIO TURNO
 	//                // DOPO CAMBIO TURNO ==> GAMESTATE.RUNNING
 	//                break;
-	
+	/*
 	            	for (int i = 0; i < 2; i++) {
 	
 	            		for (int j = 0; j < 2; j ++) {
@@ -113,11 +114,13 @@ public class GameManager {
 		            			}	
 		            		}
 	            		}
+	            		
 	            	
 	            		cambioTurno();
 	            		
 	            	}
-	            	
+	        */
+	          	
 	            	break;
 	            	
 	            case INSERT_PLAYERS:
@@ -126,7 +129,7 @@ public class GameManager {
 	            	break;
 	            	
 	            	
-	            case RUNNING:
+	            case GAME_STAGE:
 	
 	//                // while loop finché una delle due condizioni di vittoria non sono vere VV
 	//
@@ -166,7 +169,7 @@ public class GameManager {
 	//                // se possibile livella la torre di quella cell
 	//                board.buildTower(desiredxPos, desiredyPos);
 	                // CAMBIO TURNO
-	            	
+	            	/*
 	            	while (winner == null) {
 	            		
 	            		// Troviamo i worker del current player
@@ -245,7 +248,7 @@ public class GameManager {
 	            		cambioTurno();
 	            		
 	            	}
-	            	
+	            	*/
 	                break;
 	
 	            case ENDED:
@@ -257,6 +260,10 @@ public class GameManager {
 	            	print("Riprova di nuovo", looser);
 	            	
 	                break;
+	                
+	            case EXIT:
+	    			System.exit(0);
+	    			break;
 	
 	            default:
 	                // se sei arrivato qui... ehm.. piacere... ? ora puoi tornare negli altri case sopra dello switch??
@@ -265,7 +272,7 @@ public class GameManager {
 	        
     	}
 
-    }
+    
 
     private void cambioTurno() {
     	// Swap players
@@ -276,7 +283,7 @@ public class GameManager {
     	// Swap turno
         this.turn = (this.turn == PlayerColor.RED) ? PlayerColor.BLUE : PlayerColor.RED;
     }
-    
+    /*
     private void nextGameState() {
     	
     	switch (this.gameState) {
@@ -294,6 +301,9 @@ public class GameManager {
     			print("Ehm...");
     	}
     }
+    */
+    
+    
     public void changeState(GameState nextState) {
     	this.gameState = nextState;
 		gameLoop();

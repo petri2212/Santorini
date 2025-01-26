@@ -29,20 +29,26 @@ public class Main {
     public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
     	// inizializza una board 5x5
-    	Board board = new Board(5, 5);
-    	Player redPlayer = new Player(PlayerColor.RED);
-    	Player bluePlayer = new Player(PlayerColor.BLUE);
+    	//Board board = new Board(5, 5);
+    	//Player redPlayer = new Player(PlayerColor.RED);
+    	//Player bluePlayer = new Player(PlayerColor.BLUE);
     	UI ui = new GraphicUI();
     	
-        GameManager game = new GameManager(board, redPlayer, bluePlayer, ui);
+        GameManager game = new GameManager(ui);
         // inizia il gioco
-        File file = new File("honey.wav");
+        File file = new File("back_sound.wav");
 		AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
 		
 		Clip clip = AudioSystem.getClip();
 		clip.open(audioStream);
 		clip.start();
-        game.gameLoop();
+		FloatControl fc= (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		fc.setValue(-40.0f);
+		
+		
+		//System.out.println(clip.getLevel());
+		
+        game.start();
         
     }
 }
