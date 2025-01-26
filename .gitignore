@@ -1,0 +1,32 @@
+# Ignore Maven's target directory (build artifacts)
+target/
+
+# Ignore IDE-specific folders and files
+.idea/
+.classpath
+.project
+.settings/
+
+# Ignore operating system files
+.DS_Store                # macOS
+Thumbs.db                # Windows
+desktop.ini              # Windows
+
+# Ignore temporary or log files
+*.log
+*.tmp
+*.bak
+
+# Ignore compiled Java classes
+*.class
+
+# Ignore generated assets or resources
+assets/generated/
+
+# Ignore documentation builds (if generated locally)
+docs/
+
+# Ignore other unnecessary files
+*.iml                     # IntelliJ IDEA project files
+*.swp                     # Swap files (e.g., from Vim)
+~$*                       # Temporary backup files
