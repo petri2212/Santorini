@@ -36,6 +36,7 @@ public class Main {
 
 		GameManager game = new GameManager(ui);
 		// inizia il gioco
+		/*
 		File file = new File("./assets/music/back_sound.wav");
 		AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
 
@@ -45,6 +46,7 @@ public class Main {
 		clip.start();
 		FloatControl fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		fc.setValue(-40.0f);
+		*/
 
 		// System.out.println(clip.getLevel());
 
