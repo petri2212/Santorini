@@ -13,7 +13,7 @@ import src.main.java.View;
 public abstract class GameStageView implements View {
 
 	protected static final int MAX_PICKED_WORKERS = 1;
-	private int isFirstTurn = 0;
+	private boolean isFirstTurn = true;
 
 	protected Board board;
 	protected String playerName;

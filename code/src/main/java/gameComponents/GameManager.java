@@ -137,6 +137,9 @@ public class GameManager {
 
 			board = new Board(5, 5);
 			changeState(GameState.GAME_STAGE);
+			
+			
+			
 			break;
 
 		case GAME_STAGE:

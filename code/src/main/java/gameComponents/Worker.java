@@ -10,7 +10,7 @@ public class Worker {
 	/** The unique ID of this worker, assigned by {@link IDMaker}. */
 	private int id;
 	/** The color of the player controlling this worker. */
-	private PlayerColor player;
+	// PlayerColor player;
 
 	/**
 	 * Constructs a Worker belonging to a specified player color. Also acquires a
@@ -18,9 +18,9 @@ public class Worker {
 	 *
 	 * @param player the {@link PlayerColor} owning this worker.
 	 */
-	public Worker(PlayerColor player) {
+	public Worker() {
 		this.id = IDMaker.getInstance().getNextID();
-		this.player = player;
+	//	this.player = player;
 	}
 
 	// GETTERS
@@ -39,8 +39,9 @@ public class Worker {
 	 *
 	 * @return the {@link PlayerColor}.
 	 */
+	/*
 	public PlayerColor getPlayer() {
 		return player;
-	}
+	}*/
 
 }

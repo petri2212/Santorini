@@ -133,6 +133,7 @@ public class Board {
 	 * @param color The {@link PlayerColor} of the workers to find.
 	 * @return A 2D array of size [2][2], where each sub-array is [x, y].
 	 */
+	/*
 	public Cell[] findWorkersOf(Player player) {
 
 		PlayerColor color = player.getColor();
@@ -155,10 +156,12 @@ public class Board {
 					if (count == 2)
 						return positions;
 				}
+				
 			}
 		}
 		// ridondante, ma almeno non da' errore
 		return positions;
 	}
+	*/
 
 }

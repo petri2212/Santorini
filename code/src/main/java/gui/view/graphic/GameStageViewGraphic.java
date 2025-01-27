@@ -40,6 +40,8 @@ public class GameStageViewGraphic extends GameStageView {
 	private final int btn_length = 124;
 
 	private JFrame mainFrame;
+	
+	//Jlabel
 	private JLabel lblWarningHeader;
 	private JLabel lblWarning;
 	private JLabel lblBoard;
@@ -47,14 +49,39 @@ public class GameStageViewGraphic extends GameStageView {
 	private JLabel lblLateralBoarderL;
 	private JLabel lblLateralBoarderR;
 	private JLabel lblPlayerTurn;
+	
+	//JPanel
 	private JPanel contentPane;
 	private JPanel panelObjects;
 	private JPanel panelWarning;
 	private JPanel panelGuide;
+	private JPanel panelBoardbottons;
+	
+	
+	//Jbutton
+	private JButton btnHelp;
+	private JButton btnEndTurn;
+	private JButton btnAcknowledge;
+	private JButton btnAccept;
+	private JButton btnCancel;
+	
+	private BackgroundPanel[] panelPickedWorkers = new BackgroundPanel[2];
+	
 
 	/* private action listeners */
 	private MouseListener actionMouseOnBoard;
-
+	
+	
+	private ActionListener actionHideGuidePanel;
+	private ActionListener actionHideWarningPanel;
+	private ActionListener actionShowHelpDialog;
+	private ActionListener actionShowReturnHomeDialog;
+	private ActionListener actionHideReturnMainPage;
+	
+	
+	
+	
+	
 	/**
 	 * 
 	 *
@@ -63,7 +90,11 @@ public class GameStageViewGraphic extends GameStageView {
 	public GameStageViewGraphic(JFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		actionMouseOnBoard = initActionMouseOnBoard();
-
+		actionHideGuidePanel = initActionHideGuidePanel();
+		actionHideWarningPanel = initActionHideWarningPanel();
+		actionShowHelpDialog = initActionShowHelpDialog();
+		actionShowReturnHomeDialog = initActionShowReturnHomeDialog();
+		actionHideReturnMainPage = initActionHideReturnMainPage();
 	}
 
 	/**
@@ -73,6 +104,7 @@ public class GameStageViewGraphic extends GameStageView {
 	 * to Change the turn and interact with buttons.
 	 */
 	public void show() {
+		//contentPane + panelObjects
 		contentPane = new JPanel();
 		contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -85,13 +117,183 @@ public class GameStageViewGraphic extends GameStageView {
 		panelObjects.setVisible(false);
 		panelObjects.setEnabled(false);
 		contentPane.add(panelObjects);
+		
+		//
+		/* ********************* GUIDE DIALOG ************************ */
+		panelGuide = new JPanel();
+		panelGuide.setVisible(false);
+		panelGuide.setEnabled(false);
+		panelGuide.setBounds(288, 185, 537, 346);
+		contentPane.add(panelGuide);
+		panelGuide.setLayout(null);
+
+		JLabel lblGuideHeader = new JLabel("Quick Guide");
+		lblGuideHeader.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGuideHeader.setBounds(0, 0, 537, 41);
+		panelGuide.add(lblGuideHeader);
+
+		JLabel lblGuide = new JLabel("<html>ciao questo è come funaizona il gioca</html>");
+		lblGuide.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGuide.setBounds(10, 40, 515, 230);
+		panelGuide.add(lblGuide);
+
+		JButton btnGuideAcknowledge = new JButton("Ok");
+		btnGuideAcknowledge.setBounds(208, 293, 117, 25);
+		btnGuideAcknowledge.addActionListener(actionHideGuidePanel);
+		panelGuide.add(btnGuideAcknowledge);
+
+		/* ********************* WARNING DIALOG ************************ */
+		panelWarning = new JPanel();
+		panelWarning.setVisible(true);
+		panelWarning.setEnabled(true);
+		panelWarning.setBounds(288, 285, 537, 246);
+		contentPane.add(panelWarning);
+		panelWarning.setLayout(null);
+
+		lblWarningHeader = new JLabel("Get Ready!");
+		lblWarningHeader.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWarningHeader.setBounds(0, 0, 537, 41);
+		panelWarning.add(lblWarningHeader);
+
+		lblWarning = new JLabel("Its " + playerName + "'s turn.");
+		lblWarning.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWarning.setBounds(10, 53, 515, 128);
+		panelWarning.add(lblWarning);
+
+		btnAcknowledge = new JButton("Ok");
+		btnAcknowledge.setBounds(208, 193, 117, 25);
+		btnAcknowledge.addActionListener(actionHideWarningPanel);
+		panelWarning.add(btnAcknowledge);
+
+		btnAccept = new JButton("Ok");
+		btnAccept.setVisible(false);
+		btnAccept.setEnabled(false);
+		btnAccept.setBounds(300, 193, 117, 25);
+		btnAccept.addActionListener(actionReturnMainPage);
+		panelWarning.add(btnAccept);
+
+		btnCancel = new JButton("Cancel");
+		btnCancel.setVisible(false);
+		btnCancel.setEnabled(false);
+		btnCancel.setBounds(100, 193, 117, 25);
+		btnCancel.addActionListener(actionHideReturnMainPage);
+		panelWarning.add(btnCancel);
+		
+		
+		/* ********************* Labels ************************ */
+		JLabel Workers = new JLabel("Workers");
+		Workers.setVerticalAlignment(SwingConstants.BOTTOM);
+		Workers.setHorizontalTextPosition(SwingConstants.CENTER);
+		Workers.setHorizontalAlignment(SwingConstants.CENTER);
+		Workers.setForeground(Color.WHITE);
+		Workers.setFont(new Font("Purisa", Font.BOLD, 16));
+		Workers.setBounds(942, 0, 188, 46);
+		contentPane.add(Workers);
+		//printWorkers();
+		
+		JLabel lblPlayerTurnHeader = new JLabel("Player's Turn:");
+		lblPlayerTurnHeader.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblPlayerTurnHeader.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblPlayerTurnHeader.setFont(new Font("Purisa", Font.BOLD, 16));
+		lblPlayerTurnHeader.setForeground(new Color(255, 255, 255));
+		lblPlayerTurnHeader.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPlayerTurnHeader.setBounds(0, 0, 188, 46);
+		contentPane.add(lblPlayerTurnHeader);
+		
+		lblPlayerTurn = new JLabel(playerName);
+		lblPlayerTurn.setFont(new Font("Purisa", Font.BOLD, 16));
+		lblPlayerTurn.setForeground(new Color(255, 255, 255));
+		lblPlayerTurn.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblPlayerTurn.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblPlayerTurn.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPlayerTurn.setBounds(0, 47, 189, 42);
+		contentPane.add(lblPlayerTurn);
+		
+		JLabel lblPickedWorker= new JLabel("Picked Workers");
+		lblPickedWorker.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblPickedWorker.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblPickedWorker.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPickedWorker.setForeground(Color.WHITE);
+		lblPickedWorker.setFont(new Font("Purisa", Font.BOLD, 16));
+		lblPickedWorker.setBounds(954, 345, 167, 46);
+		contentPane.add(lblPickedWorker);
+		
+		/* ********************* PICKED OBJECTS ************************ */
+		panelPickedWorkers[0] = new BackgroundPanel();
+		BackgroundPanel panelObject1 = panelPickedWorkers[0];
+		panelObject1.setBounds(953, 399, 67, 67);
+		panelObject1.setVisible(false);
+		panelObject1.setLayout(new BorderLayout(0, 0));
+		contentPane.add(panelObject1);
+
+		JLabel lblObject1 = new JLabel("1");
+		lblObject1.setFont(new Font("Purisa", Font.BOLD, 60));
+		lblObject1.setForeground(new Color(237, 51, 59));
+		lblObject1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblObject1.setHorizontalTextPosition(SwingConstants.CENTER);
+		panelObject1.add(lblObject1);
+
+		panelPickedWorkers[1] = new BackgroundPanel();
+		BackgroundPanel panelObject2 = panelPickedWorkers[1];
+		panelObject2.setBounds(1050, 399, 67, 67);
+		panelObject2.setVisible(false);
+		panelObject2.setLayout(new BorderLayout(0, 0));
+		contentPane.add(panelObject2);
+
+		JLabel lblObject2 = new JLabel("2");
+		lblObject2.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblObject2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblObject2.setFont(new Font("Purisa", Font.BOLD, 60));
+		lblObject2.setForeground(new Color(237, 51, 59));
+		panelObject2.add(lblObject2);
+		
+		
+		btnHelp = new JButton("Help");
+		btnHelp.setBackground(new Color(255, 255, 255));
+		btnHelp.setOpaque(false);
+		btnHelp.setFocusPainted(false);
+		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnHelp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnHelp.setForeground(new Color(255, 255, 255));
+		btnHelp.setFont(new Font("Purisa", Font.BOLD, 16));
+		btnHelp.setBounds(965, 645, 142, 57);
+		btnHelp.addActionListener(actionShowHelpDialog);
+
+		contentPane.add(btnHelp);
+		
+		btnEndTurn = new JButton("End Turn");
+		btnEndTurn.setEnabled(false);
+		btnEndTurn.setVisible(false);
+		btnEndTurn.setBackground(new Color(255, 255, 255));
+		btnEndTurn.setOpaque(false);
+		btnEndTurn.setFocusPainted(false);
+		btnEndTurn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEndTurn.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnEndTurn.setForeground(new Color(255, 255, 255));
+		btnEndTurn.setFont(new Font("Purisa", Font.BOLD, 16));
+		btnEndTurn.setBounds(965, 645, 142, 57);
+		btnEndTurn.addActionListener(actionEndTurn);
+		contentPane.add(btnEndTurn);
+		
+		JButton btnHome = new JButton("<--");
+		btnHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnHome.setOpaque(false);
+		btnHome.setForeground(Color.WHITE);
+		btnHome.setFont(new Font("Purisa", Font.BOLD, 16));
+		btnHome.setFocusPainted(false);
+		btnHome.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnHome.setBackground(Color.WHITE);
+		btnHome.setBounds(20, 645, 142, 57);
+		btnHome.addActionListener(actionShowReturnHomeDialog);
+		contentPane.add(btnHome);
+		
 
 		// buttons border
 
-		JPanel panelBoardbottons = new JPanel();
+		panelBoardbottons = new JPanel();
 		panelBoardbottons.setLayout(null);
-		panelBoardbottons.setVisible(true);
-		panelBoardbottons.setEnabled(true);
+		panelBoardbottons.setVisible(false);
+		panelBoardbottons.setEnabled(false);
 		panelBoardbottons.setOpaque(false);
 		panelBoardbottons.setBounds(220, 18, 1140, 750);
 		panelBoardbottons.setOpaque(false);
@@ -359,28 +561,144 @@ public class GameStageViewGraphic extends GameStageView {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				/*
-				 * 
-				 * ArrayList<BookshelfObject> obj = new ArrayList<>();
-				 * 
-				 * if (savedMatrixCoords.size() > 0) { ColumnButton button = (ColumnButton)
-				 * e.getSource();
-				 * 
-				 * boolean success = false;
-				 * 
-				 * if (bookshelf.isThereEnoughSpace(button.getColIndex(),
-				 * savedMatrixCoords.size())) { for (MatrixCoords coords : savedMatrixCoords) {
-				 * obj.add(board.tryPickObject(coords)); }
-				 * 
-				 * success = bookshelf.tryAdd(button.getColIndex(), obj); }
-				 * 
-				 * if (!success) { showColWarning(); } else { savedMatrixCoords = new
-				 * ArrayList<>(); hidePickedObjectsPanel(); printBookshelfObjects();
-				 * showEndTurnButton(); } }
-				 */
+					
+				
 			}
 		};
 
 	}
+	
+	
+	
+	private void hideGuidePanel() {
+		panelGuide.setVisible(false);
+		panelGuide.setEnabled(false);
+		panelObjects.setVisible(true);
+		panelObjects.setEnabled(true);
+	}
+	
+	private void showReturnHomeDialog() {
+		panelWarning.setVisible(true);
+		panelWarning.setEnabled(true);
+		lblWarningHeader.setText("Warning");
+		lblWarning.setText("<html>Are you sure you want to exit to the main menu?<br>All progress will be lost.");
+		btnAcknowledge.setVisible(false);
+		btnAcknowledge.setEnabled(false);
+		btnAccept.setVisible(true);
+		btnAccept.setEnabled(true);
+		btnCancel.setVisible(true);
+		btnCancel.setEnabled(true);
+		panelObjects.setVisible(false);
+		panelObjects.setEnabled(false);
+		panelBoardbottons.setVisible(false);
+		panelBoardbottons.setEnabled(false);
+	}
+	
+	private void hidePickedObjectsPanel() {
+		for (BackgroundPanel panel : panelPickedWorkers) {
+			panel.setVisible(false);
+		}
+	}
+	
+
+	private void showHelpDialog() {
+		panelGuide.setVisible(true);
+		panelObjects.setVisible(false);
+		panelObjects.setEnabled(false);
+	
+	}
+
+	private void hideWarningPanel() {
+		panelWarning.setVisible(false);
+		panelWarning.setEnabled(false);
+		panelBoardbottons.setVisible(true);
+		panelBoardbottons.setEnabled(true);
+	}
+	
+	private void showEndTurnButton() {
+		btnHelp.setVisible(false);
+		btnEndTurn.setVisible(true);
+		btnEndTurn.setEnabled(true);
+	}
+	private void hideReturnHomeDialog() {
+		panelWarning.setVisible(false);
+		panelWarning.setEnabled(false);
+		btnAcknowledge.setVisible(true);
+		btnAcknowledge.setEnabled(true);
+		btnAccept.setVisible(false);
+		btnAccept.setEnabled(false);
+		btnCancel.setVisible(false);
+		btnCancel.setEnabled(false);
+		panelBoardbottons.setVisible(true);
+		panelBoardbottons.setEnabled(true);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private ActionListener initActionHideGuidePanel() {
+		return new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				hideGuidePanel();
+			}
+		};
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private ActionListener initActionHideWarningPanel() {
+		return new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				hideWarningPanel();
+			}
+		};
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private ActionListener initActionShowReturnHomeDialog() {
+		return new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showReturnHomeDialog();
+			}
+		};
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private ActionListener initActionShowHelpDialog() {
+		return new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showHelpDialog();
+			}
+		};
+	}
+	
+	private ActionListener initActionHideReturnMainPage() {
+		return new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				hideReturnHomeDialog();
+			}
+		};
+	}
+
+	
 
 }

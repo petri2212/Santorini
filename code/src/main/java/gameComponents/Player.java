@@ -8,7 +8,7 @@ package src.main.java.gameComponents;
 public class Player {
 
 	/** The color of this player: RED or BLUE. */
-	private PlayerColor color;
+	//private PlayerColor color;
 
 	/** The two workers belonging to this player. */
 	private Worker[] workers;
@@ -21,8 +21,8 @@ public class Player {
 	public Player(String name) {
 		this.name = name;
 		this.workers = new Worker[2];
-		workers[0] = new Worker(color);
-		workers[1] = new Worker(color);
+		workers[0] = new Worker();
+		workers[1] = new Worker();
 	}
 
 	// GETTERS
@@ -32,13 +32,15 @@ public class Player {
 	 *
 	 * @return the {@link PlayerColor}.
 	 */
-	public PlayerColor getColor() {
+	/*public PlayerColor getColor() {
 		return color;
 	}
-
+*/
+	/*
 	public void setColor(PlayerColor color) {
 		this.color = color;
 	}
+	*/
 
 	/**
 	 * Returns the two workers belonging to this player.
