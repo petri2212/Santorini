@@ -50,7 +50,22 @@ public class GameManager {
     	gameLoop();
     }
     
+    public Board getBoard() {
+    	return this.board;
+    }
     
+    public PlayerColor getPlayerTurn() {
+    	return this.turn;
+    }
+    
+    /**
+     * Retrieves the current list of players.
+     *
+     * @return An ArrayList of {@link Player} objects representing the players in the game.
+     */
+    public ArrayList<Player> getPlayers() {
+        return this.players;
+    }
     
 	/*private void initializePlayers(Player redPlayer, Player bluePlayer) {
         this.currentPlayer = new Random().nextBoolean() ? redPlayer : bluePlayer;
@@ -65,7 +80,7 @@ public class GameManager {
 	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
-
+	
 	/**
      * Outlines the main game loop logic based on {@link GameState}.
      */

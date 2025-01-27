@@ -18,7 +18,8 @@ public class Player {
      * Constructs a new Player, assigning RED or BLUE based on the next ID from {@link IDMaker}.
      * Each player gets exactly two {@link Worker} objects.
      */
-    public Player(String name ) {
+    public Player(String name, PlayerColor color) {
+    	this.color = color;
     	this.name=name;
         this.workers = new Worker[2];
         workers[0] = new Worker(color);
