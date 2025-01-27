@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import src.main.java.gameComponents.GameManager;
+import src.main.java.gui.controller.GameStageController;
 import src.main.java.gui.controller.InsertPlayersController;
 import src.main.java.gui.controller.MainPageController;
 import src.main.java.gui.view.graphic.*;
@@ -31,8 +32,7 @@ public class GraphicUI implements UI {
 	}
 
 	/**
-	 * Initialize the controller and the view
-	 * in the main page for the graphic.
+	 * Initialize the controller and the view in the main page for the graphic.
 	 */
 	public void showMainPage(GameManager model) {
 		MainPageViewGraphic view = new MainPageViewGraphic(mainFrame);
@@ -41,8 +41,8 @@ public class GraphicUI implements UI {
 	}
 
 	/**
-	 * Initialize the controller and the view
-	 * in the insert players page for the graphic.
+	 * Initialize the controller and the view in the insert players page for the
+	 * graphic.
 	 */
 	public void showInsertPlayersPage(GameManager model) {
 		InsertPlayersViewGraphic view = new InsertPlayersViewGraphic(mainFrame);
@@ -52,24 +52,24 @@ public class GraphicUI implements UI {
 	}
 
 	/**
-	 * Initialize the controller and the view
-	 * in the game stage page for the graphic.
+	 * Initialize the controller and the view in the game stage page for the
+	 * graphic.
 	 */
 	public void showGameStagePage(GameManager model) {
-		/*GameStageViewGraphic view = new GameStageViewGraphic(mainFrame);
+		GameStageViewGraphic view = new GameStageViewGraphic(mainFrame);
 		GameStageController controller = new GameStageController(model, view);
-		controller.start();*/
+		controller.start();
 	}
 
 	/**
-	 * Initialize the controller and the view
-	 * in the points page for the graphic.
+	 * Initialize the controller and the view in the points page for the graphic.
 	 */
 	public void showWinnerPage(GameManager model) {
-		/*PointsPageViewGraphic view = new PointsPageViewGraphic(mainFrame);
-		PointsPageController controller = new PointsPageController(model, view);
-		controller.start();
-		*/
+		/*
+		 * WinnerPageViewGraphic view = new PointsPageViewGraphic(mainFrame);
+		 * WinnerPageController controller = new PointsPageController(model, view);
+		 * controller.start();
+		 */
 	}
 
 }

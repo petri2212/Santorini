@@ -32,7 +32,7 @@ public class InsertPlayersController extends Controller<InsertPlayersView> {
 	 * This is an override of the listener where there are the actions.
 	 */
 	protected void initViewListeners() {
-		
+
 		view.actionReturnMainPage = new ActionListener() {
 
 			/**
@@ -46,8 +46,8 @@ public class InsertPlayersController extends Controller<InsertPlayersView> {
 		view.actionInitGame = new ActionListener() {
 
 			/**
-			 * This is an action from the view check if there is
-			 * the minimum number of players.
+			 * This is an action from the view check if there is the minimum number of
+			 * players.
 			 */
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Player> players = view.getInseredPlayers();
@@ -64,15 +64,14 @@ public class InsertPlayersController extends Controller<InsertPlayersView> {
 		view.actionInsertPlayer = new ActionListener() {
 
 			/**
-			 * This is an action from the view try to insert a new player
-			 * into he list with all the controls that it needs.
+			 * This is an action from the view try to insert a new player into he list with
+			 * all the controls that it needs.
 			 */
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Player> players = view.getInseredPlayers();
 				String input = view.getInput();
-				
+
 				Player player = new Player(input);
-				
 
 				if (input == null || input.isEmpty()) {
 					view.showInvalidInputWarning();

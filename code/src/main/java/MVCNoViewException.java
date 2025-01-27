@@ -1,6 +1,7 @@
 package src.main.java;
+
 /**
- *This class has to handle the view exceptions
+ * This class has to handle the view exceptions
  */
 public class MVCNoViewException extends RuntimeException {
 

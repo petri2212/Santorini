@@ -27,9 +27,10 @@ import src.main.java.Main;
 import src.main.java.gameComponents.Player;
 import resources.Images;
 import resources.Icons;
+
 /**
- * This is the view graphic for the insert players page and it extends the abstract
- * view.
+ * This is the view graphic for the insert players page and it extends the
+ * abstract view.
  */
 public class InsertPlayersViewGraphic extends InsertPlayersView {
 
@@ -47,9 +48,8 @@ public class InsertPlayersViewGraphic extends InsertPlayersView {
 	}
 
 	/**
-	 * This is the override of the show method.
-	 *This method let the user to insert the names of  the players
-	 *and to start a new game. 
+	 * This is the override of the show method. This method let the user to insert
+	 * the names of the players and to start a new game.
 	 */
 	public void show() {
 		Image image = Images.IN_PLAYERS_BLURRED_BACK.load();
@@ -115,7 +115,7 @@ public class InsertPlayersViewGraphic extends InsertPlayersView {
 		lblPlayer2Header.setIcon(Icons.SECOND_PLAYER_ICON.load());
 		lblPlayer2Header.setIconTextGap(20);
 		lblPlayer2Header.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPlayer2Header.setForeground(new Color(70,130,180));
+		lblPlayer2Header.setForeground(new Color(70, 130, 180));
 		lblPlayer2Header.setFont(new Font("Purisa", Font.BOLD, 18));
 		panelPlayer2.add(lblPlayer2Header, BorderLayout.CENTER);
 
@@ -123,7 +123,7 @@ public class InsertPlayersViewGraphic extends InsertPlayersView {
 		JLabel lblPlayer2 = lblPlayers[PLAYER2_INDEX];
 		lblPlayer2.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblPlayer2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPlayer2.setForeground(new Color(70,130,180));
+		lblPlayer2.setForeground(new Color(70, 130, 180));
 		lblPlayer2.setFont(new Font("Purisa", Font.BOLD, 18));
 		panelPlayer2.add(lblPlayer2, BorderLayout.SOUTH);
 
@@ -261,7 +261,7 @@ public class InsertPlayersViewGraphic extends InsertPlayersView {
 			String playerName = players.get(i).getName();
 			lblPlayers[i].setText(playerName);
 		}
-		
+
 	}
 
 	private void clearInputField() {

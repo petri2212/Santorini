@@ -8,9 +8,9 @@ public enum PlayerColor {
 	/**
 	 * Represents the color red for a player.
 	 */
-    RED,
-    /**
-     * Represents the color blue for a player.
-     */
-    BLUE,
+	RED,
+	/**
+	 * Represents the color blue for a player.
+	 */
+	BLUE,
 }

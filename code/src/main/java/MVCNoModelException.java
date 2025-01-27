@@ -1,7 +1,7 @@
 package src.main.java;
 
 /**
- *This class has to handle the model exceptions
+ * This class has to handle the model exceptions
  */
 public class MVCNoModelException extends RuntimeException {
 

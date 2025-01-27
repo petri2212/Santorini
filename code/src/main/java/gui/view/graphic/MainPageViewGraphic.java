@@ -25,6 +25,7 @@ import resources.Icons;
 import src.main.java.components.BackgroundPanel;
 import src.main.java.gui.view.MainPageView;
 import src.main.java.components.*;
+
 /**
  * This is the view graphic for the home page and it extends the abstract view.
  */
@@ -40,11 +41,11 @@ public class MainPageViewGraphic extends MainPageView {
 	/**
 	 * This is the override of the show method. This method show the home page with
 	 * two buttons: the new game button and the exit button.
-	 * @throws LineUnavailableException 
+	 * 
+	 * @throws LineUnavailableException
 	 */
 	public void show() {
-		
-		
+
 		Image image = Images.MAIN_PAGE_BACKGROUND.load();
 		BackgroundPanel contentPane = new BackgroundPanel(image);
 		contentPane.setLayout(null);
@@ -52,11 +53,12 @@ public class MainPageViewGraphic extends MainPageView {
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.setOpaque(true);
 		btnNewGame.setFocusPainted(false);
-	
+
 		btnNewGame.setFont(new Font("Purisa", Font.BOLD, 18));
 		btnNewGame.setBounds(480, 232, 185, 62);
-		btnNewGame.setBorder(new RoundedBorder(10)); //10 is the radius
-		//btnNewGame.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnNewGame.setBorder(new RoundedBorder(10)); // 10 is the radius
+		// btnNewGame.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null,
+		// null, null));
 		btnNewGame.setMaximumSize(new Dimension(174, 62));
 		btnNewGame.setMinimumSize(new Dimension(174, 62));
 		btnNewGame.setPreferredSize(new Dimension(174, 62));
@@ -66,7 +68,7 @@ public class MainPageViewGraphic extends MainPageView {
 		btnNewGame.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNewGame.setForeground(Color.WHITE);
 		btnNewGame.addActionListener(actionNewGame);
-		btnNewGame.setBackground(new Color(70,130,180));
+		btnNewGame.setBackground(new Color(70, 130, 180));
 		contentPane.add(btnNewGame);
 
 		JButton btnExit = new JButton("Exit");
@@ -79,9 +81,10 @@ public class MainPageViewGraphic extends MainPageView {
 		btnExit.setForeground(Color.WHITE);
 		btnExit.setFont(new Font("Purisa", Font.BOLD, 18));
 		btnExit.setFocusPainted(false);
-		btnExit.setBorder(new RoundedBorder(10)); //10 is the radius
-		//btnExit.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		btnExit.setBackground(new Color(70,130,180));
+		btnExit.setBorder(new RoundedBorder(10)); // 10 is the radius
+		// btnExit.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null,
+		// null));
+		btnExit.setBackground(new Color(70, 130, 180));
 		btnExit.setAlignmentX(0.5f);
 		btnExit.setBounds(480, 365, 185, 62);
 		btnExit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -101,7 +104,7 @@ public class MainPageViewGraphic extends MainPageView {
 		contentPane.add(lblVersion);
 
 		JLabel lblSantorini = new JLabel("");
-		lblSantorini.setForeground(new Color(70,130,180));
+		lblSantorini.setForeground(new Color(70, 130, 180));
 		lblSantorini.setFont(new Font("Purisa", Font.BOLD, 14));
 		lblSantorini.setBounds(380, 50, 400, 147);
 		lblSantorini.setIcon(Icons.SANTORINI_LOGO.load());

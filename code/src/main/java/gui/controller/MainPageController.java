@@ -7,9 +7,10 @@ import src.main.java.gui.view.MainPageView;
 
 import src.main.java.gameComponents.GameManager;
 import src.main.java.gameComponents.GameState;
+
 /**
- * This is the controller for the main page, it extends
- * Controller because of the MVC and takes its own view as a parameter.
+ * This is the controller for the main page, it extends Controller because of
+ * the MVC and takes its own view as a parameter.
  */
 public class MainPageController extends Controller<MainPageView> {
 
@@ -35,11 +36,11 @@ public class MainPageController extends Controller<MainPageView> {
 			public void actionPerformed(ActionEvent e) {
 				model.changeState(GameState.INSERT_PLAYERS);
 			}
-			
+
 		};
-		
+
 		view.actionExit = new ActionListener() {
-			
+
 			/**
 			 * This is an action form the view it ends the program.
 			 */
