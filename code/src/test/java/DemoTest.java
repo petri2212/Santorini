@@ -7,8 +7,9 @@ public class DemoTest {
 	
 	
 	@Test
-	public void test() {
+	public void test1() {
 		
+		System.out.println("Test 1");
 		char s= 's';
 		assertEquals('s', s);
 	}
