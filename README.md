@@ -7,7 +7,22 @@ Santorini is an abstract strategy board game for 2-4 players designed by Gordon 
 
 <h4 align="center">Software Engineering Project for University of Bergamo 2024 - 2025</h4>
 
+## Run the project
 
+I recommend using a stable connection to avoid problems while downloading the repository
+Minimum requirements: Java version 11 or later
+Clone the project
+
+```bash
+ https://github.com/petri2212/Santorini.git
+```
+
+## Software used
+**Draw.io** - UML diagrams
+
+**Eclipse** - main IDE 
+
+**Sonarqube**,**EclipsePMD** - code analysis
 
 
 ## Authors
