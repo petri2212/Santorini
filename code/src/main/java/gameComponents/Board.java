@@ -1,6 +1,8 @@
 
 package src.main.java.gameComponents;
 
+import src.main.java.components.CellButton;
+
 /**
  * The Board class holds a 2D array of Cell objects, representing a 5x5 grid in
  * the Santorini board game.
@@ -112,8 +114,8 @@ public class Board {
 	 * @param fyPos  The final y-coordinate.
 	 */
 	public void moveWorker(Worker worker, Cell iniciatlCell, Cell finalCell) {
-		iniciatlCell.setWorker(worker);
-		finalCell.removeWorker();
+		iniciatlCell.removeWorker();
+		finalCell.setWorker(worker);
 	}
 	/*
 	public void removeWorker(Worker worker,int xPos, int yPos) {

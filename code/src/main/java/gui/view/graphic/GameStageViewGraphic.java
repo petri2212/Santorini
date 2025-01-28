@@ -636,26 +636,18 @@ public class GameStageViewGraphic extends GameStageView {
 			 * 
 			 * btnWorkerR1.setVisible(false); btnWorkerR1.setEnabled(false);
 			 */
-		}/*else if(!player.isFirstTurn) {
-			btnWorkerR2.setVisible(true);
-			btnWorkerR2.setEnabled(true);
-
-			btnWorkerR1.setVisible(true);
-			btnWorkerR1.setEnabled(true);
-			
-		}
-		else{
-			btnWorkerB2.setVisible(true);
-			btnWorkerB2.setEnabled(true);
-
-			btnWorkerB1.setVisible(true);
-			btnWorkerB1.setEnabled(true);
-			
-		}*/
-		
-		
-		
-		
+		} /*
+			 * else if(!player.isFirstTurn) { btnWorkerR2.setVisible(true);
+			 * btnWorkerR2.setEnabled(true);
+			 * 
+			 * btnWorkerR1.setVisible(true); btnWorkerR1.setEnabled(true);
+			 * 
+			 * } else{ btnWorkerB2.setVisible(true); btnWorkerB2.setEnabled(true);
+			 * 
+			 * btnWorkerB1.setVisible(true); btnWorkerB1.setEnabled(true);
+			 * 
+			 * }
+			 */
 
 		for (int r = 0; r < 5; r++) {
 			for (int c = 0; c < 5; c++) {
@@ -663,42 +655,35 @@ public class GameStageViewGraphic extends GameStageView {
 
 				if (objectCell.getStatusWorker() == true) {
 					int s = 30;
-					//int x = 260 + c * (s + 100);
-					//int y = 65 + r * (s + 100);
-					
+					// int x = 260 + c * (s + 100);
+					// int y = 65 + r * (s + 100);
+
 					int x = 266 + c * (s + 112);
 					int y = 66 + r * (s + 112);
-					
-					
-					if(objectCell.getWorker().getID() == 1) {
+
+					if (objectCell.getWorker().getID() == 1) {
 						btnWorkerR1.setVisible(true);
 						btnWorkerR1.setBounds(x, y, s, s);
-					
-					}else if(objectCell.getWorker().getID() == 2) {
+
+					} else if (objectCell.getWorker().getID() == 2) {
 						btnWorkerR2.setVisible(true);
 						btnWorkerR2.setBounds(x, y, s, s);
-						
-					}else if(objectCell.getWorker().getID() == 3) {
+
+					} else if (objectCell.getWorker().getID() == 3) {
 						btnWorkerB1.setVisible(true);
 						btnWorkerB1.setBounds(x, y, s, s);
-						
-					}else if(objectCell.getWorker().getID() == 4) {
+
+					} else if (objectCell.getWorker().getID() == 4) {
 						btnWorkerB2.setVisible(true);
 						btnWorkerB2.setBounds(x, y, s, s);
-						
+
 					}
 
-
-			}
+				}
 			}
 		}
-		
+
 	}
-
-		
-
-
-	
 
 	/* Private action listeners initialization */
 
@@ -726,7 +711,7 @@ public class GameStageViewGraphic extends GameStageView {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				CellButton button = (CellButton) e.getSource();
-				button.setBorder(new LineBorder(new Color(0, 0, 0), 4));// new Color(87, 227, 137), 4)
+				button.setBorder(new LineBorder(new Color(200, 200, 200), 4));// new Color(87, 227, 137), 4)
 
 			}
 
@@ -734,13 +719,14 @@ public class GameStageViewGraphic extends GameStageView {
 			public void mouseClicked(MouseEvent e) {
 				// System.out.println("mouse click: " + isFirstTurn);
 				CellButton button = (CellButton) e.getSource();
-				
-				/*System.out.println(button.getRowIndex() + " c:  " + button.getColIndex());
-				System.out.println(
-						"la cella è: " + board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker());
-				*/
-				
-				//first turn handling
+
+				/*
+				 * System.out.println(button.getRowIndex() + " c:  " + button.getColIndex());
+				 * System.out.println( "la cella è: " + board.cellAt(button.getRowIndex(),
+				 * button.getColIndex()).getStatusWorker());
+				 */
+
+				// first turn handling
 				if (isFirstTurn) {
 					if (!obj.isEmpty()) {
 						if (obj.get(0).equals(btnWorkerR1)) {
@@ -785,62 +771,65 @@ public class GameStageViewGraphic extends GameStageView {
 						}
 
 					}
-					
-					
-					
-					
-					
-					
-					if (!player.isFirstTurn) {
-					//others turns handlings
-					if (movePhase || cellButton.size() < 1) {
-						//board
-						if(board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
-							cellButton.add(button);
-						}	
 
-						
-					
-						if(movePhase && cellButton.size() == 1) {
-							if(board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
-								
-							//board.moveWorker(board.cellAt(cellButton.get(1).rowIndex, cellButton.get(1).colIndex).getWorker(), cellButton.get(1), button);
-							}	
+				}
+
+				if (!player.isFirstTurn) {
+					// others turns handlings
+					if (movePhase && cellButton.size() == 0) {
+						// board
+						if (board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+
+							if (board.cellAt(button.getRowIndex(), button.getColIndex()).getWorker().equals(player.getWorker(0))) {
+								cellButton.add(button);
+							}else if(board.cellAt(button.getRowIndex(), button.getColIndex()).getWorker().equals(player.getWorker(1))) {
+								cellButton.add(button);	
+							}
+
 							
 						}
-					}
-					}
-					
-					
-					
+					} else if (movePhase && cellButton.size() == 1) {
+						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
 
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-
-					for (int r = 0; r < 5; r++) {
-						for (int c = 0; c < 5; c++) {
-							System.out.print(" " + board.cellAt(r, c).getStatusWorker());
-
+							board.moveWorker(
+									board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex).getWorker(),
+									board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
+									board.cellAt(button.rowIndex, button.colIndex));
+							movePhase = false;
+							buildPhase = true;
+							printWorkers();
 						}
-						System.out.println("\n");
 					}
+					
+					if (buildPhase) {
+						
+						
+					}
+					
+					
+					
+					
+					
+					
+					
+					
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+				for (int r = 0; r < 5; r++) {
+					for (int c = 0; c < 5; c++) {
+						System.out.print(" " + board.cellAt(r, c).getStatusWorker());
+
+					}
+					System.out.println("\n");
 				}
 
 			}
@@ -956,42 +945,10 @@ public class GameStageViewGraphic extends GameStageView {
 						btnWorkerB2.setBounds(1020, player.posWB2_y, dim_worker, dim_worker);
 					}
 				}
-				
-				/*
-				//pichek objects other turns
-				if(!player.isFirstTurn) {
-					if (btnWorkerB1.equals(e.getSource()) && obj.size() < 2) {
-						obj.add(btnWorkerB1);
-						//board.placeWorker(player.getWorker(1), button.getRowIndex(), button.getColIndex());
-						player.posWB1_y = 400;
-						btnWorkerB1.setBounds(980, player.posWB1_y, dim_worker, dim_worker);
 
-					}else if (btnWorkerB2.equals(e.getSource() ) && obj.size() < 2) {
-						obj.add(btnWorkerB2);
-						player.posWB2_y = 400;
-						btnWorkerB2.setBounds(1020, player.posWB2_y, dim_worker, dim_worker);
-					}
-					
-				}*/
-				
-				
-				
-				
-				
-				
+			
 
 			}
-
-			/*
-			 * contentPane.revalidate(); contentPane.repaint();
-			 * 
-			 * 
-			 * if(obj.size() == 2) { obj.get(0).setBounds(980, 200, 30, 30);
-			 * obj.get(1).setBounds(980, 200, 30, 30); contentPane.revalidate();
-			 * contentPane.repaint();
-			 * 
-			 * //putWorkersInQueue(); }
-			 */
 
 		};
 
