@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import src.main.java.gameComponents.Board;
+import src.main.java.gameComponents.Player;
 import src.main.java.View;
 
 /**
@@ -13,10 +14,16 @@ import src.main.java.View;
 public abstract class GameStageView implements View {
 
 	protected static final int MAX_PICKED_WORKERS = 1;
-	private boolean isFirstTurn = true;
+	public boolean movePhase = true;
+	public boolean buildPhase = false;
+	public boolean isFirstTurn;
+	public int turn;
 
 	protected Board board;
 	protected String playerName;
+	protected String playerOpponent;
+	public Player player;
+	public Player opponent;
 
 	/**
 	 * Those are all the actions declaration.
@@ -36,8 +43,32 @@ public abstract class GameStageView implements View {
 		this.board = board;
 	}
 
-	public void setPlayerName(String playerName) {
+	public void setPlayerName(String playerName, String opponent) {
 		this.playerName = playerName;
+		this.playerOpponent = opponent;
 	}
+	public void setPlayerFirstTurn(boolean bol) {
+		this.isFirstTurn = bol;
+		
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public Player getOpponent() {
+		return opponent;
+	}
+
+	public void setOpponent(Player opponent) {
+		this.opponent = opponent;
+	}
+	
+	
+	
 
 }

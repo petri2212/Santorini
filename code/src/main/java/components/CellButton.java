@@ -9,12 +9,17 @@ public class CellButton extends JButton {
 
 	private static final long serialVersionUID = 7761064743097750289L;
 
-	private int colIndex;
-	private int rowIndex;
+	public int colIndex;
+	public int rowIndex;
+	public int posX;
+	public int posY;
 
-	public CellButton(int colIndex, int rowIndex) {
+	public CellButton( int rowIndex,int colIndex, int posX, int posY) {
 		this.colIndex = colIndex;
 		this.rowIndex = rowIndex;
+		this.posX = posX;
+		this.posY = posY;
+		
 	}
 
 	public int getColIndex() {

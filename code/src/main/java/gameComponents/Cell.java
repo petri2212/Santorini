@@ -83,8 +83,8 @@ public class Cell {
 	 *
 	 * @return the {@link WorkerStatus} enum value of this cell.
 	 */
-	public WorkerStatus getStatus() {
-		return (worker != null) ? WorkerStatus.PRESENT : WorkerStatus.ABSENT;
+	public boolean getStatusWorker() {
+		return (worker != null) ? true : false;
 	}
 
 	/**

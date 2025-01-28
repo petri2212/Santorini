@@ -1,6 +1,7 @@
 package src.main.java.gui.view.graphic;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -22,11 +23,14 @@ import javax.swing.border.SoftBevelBorder;
 
 import src.main.java.gameComponents.Board;
 import src.main.java.gameComponents.Cell;
+import src.main.java.gameComponents.Player;
+import src.main.java.gameComponents.Worker;
 import src.main.java.components.BackgroundPanel;
 import src.main.java.components.CellButton;
 import src.main.java.components.CellObjectButton;
 import src.main.java.gui.view.GameStageView;
 import resources.Icons;
+import resources.Images;
 
 /**
  * This is the view graphic for the game stage page and it extends the abstract
@@ -38,10 +42,11 @@ public class GameStageViewGraphic extends GameStageView {
 	private static final int PICKED_WORKER_2_INDEX = 1;
 	private final int spazio_x_y = 142;
 	private final int btn_length = 124;
+	private final int dim_worker = 30;
 
 	private JFrame mainFrame;
-	
-	//Jlabel
+
+	// Jlabel
 	private JLabel lblWarningHeader;
 	private JLabel lblWarning;
 	private JLabel lblBoard;
@@ -49,39 +54,54 @@ public class GameStageViewGraphic extends GameStageView {
 	private JLabel lblLateralBoarderL;
 	private JLabel lblLateralBoarderR;
 	private JLabel lblPlayerTurn;
-	
-	//JPanel
+
+	// JPanel
 	private JPanel contentPane;
+	private JPanel panelBoard;
 	private JPanel panelObjects;
 	private JPanel panelWarning;
 	private JPanel panelGuide;
 	private JPanel panelBoardbottons;
-	
-	
-	//Jbutton
+
+	// Jbutton
 	private JButton btnHelp;
 	private JButton btnEndTurn;
 	private JButton btnAcknowledge;
 	private JButton btnAccept;
 	private JButton btnCancel;
-	
+
+	private JButton btnWorkerR1;
+	/*
+	 * int posWR1_x = 980; int posWR1_y = 60;
+	 */
+	private JButton btnWorkerR2;
+	/*
+	 * int posWR2_x = 1020 ; int posWR2_y = 60;
+	 */
+
+	private JButton btnWorkerB1;
+	/*
+	 * int posWB1_x = 980; int posWB1_y = 60;
+	 */
+	private JButton btnWorkerB2;
+	/*
+	 * int posWB2_x = 1020; int posWB2_y = 60;
+	 */
+	ArrayList<JButton> obj = new ArrayList<>();
+	ArrayList<CellButton> cellButton = new ArrayList<>();
+
 	private BackgroundPanel[] panelPickedWorkers = new BackgroundPanel[2];
-	
 
 	/* private action listeners */
 	private MouseListener actionMouseOnBoard;
-	
-	
+
 	private ActionListener actionHideGuidePanel;
+	private ActionListener actionPutWorkersInQueue;
 	private ActionListener actionHideWarningPanel;
 	private ActionListener actionShowHelpDialog;
 	private ActionListener actionShowReturnHomeDialog;
 	private ActionListener actionHideReturnMainPage;
-	
-	
-	
-	
-	
+
 	/**
 	 * 
 	 *
@@ -95,6 +115,7 @@ public class GameStageViewGraphic extends GameStageView {
 		actionShowHelpDialog = initActionShowHelpDialog();
 		actionShowReturnHomeDialog = initActionShowReturnHomeDialog();
 		actionHideReturnMainPage = initActionHideReturnMainPage();
+		actionPutWorkersInQueue = initactionPutWorkersInQueue();
 	}
 
 	/**
@@ -104,7 +125,7 @@ public class GameStageViewGraphic extends GameStageView {
 	 * to Change the turn and interact with buttons.
 	 */
 	public void show() {
-		//contentPane + panelObjects
+		// contentPane + panelObjects
 		contentPane = new JPanel();
 		contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -117,8 +138,7 @@ public class GameStageViewGraphic extends GameStageView {
 		panelObjects.setVisible(false);
 		panelObjects.setEnabled(false);
 		contentPane.add(panelObjects);
-		
-		//
+
 		/* ********************* GUIDE DIALOG ************************ */
 		panelGuide = new JPanel();
 		panelGuide.setVisible(false);
@@ -178,8 +198,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnCancel.setBounds(100, 193, 117, 25);
 		btnCancel.addActionListener(actionHideReturnMainPage);
 		panelWarning.add(btnCancel);
-		
-		
+
 		/* ********************* Labels ************************ */
 		JLabel Workers = new JLabel("Workers");
 		Workers.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -189,8 +208,75 @@ public class GameStageViewGraphic extends GameStageView {
 		Workers.setFont(new Font("Purisa", Font.BOLD, 16));
 		Workers.setBounds(942, 0, 188, 46);
 		contentPane.add(Workers);
-		//printWorkers();
-		
+
+		// Worker Rossi
+		btnWorkerR1 = new JButton("WorkerR1");
+		btnWorkerR1.setIcon(Icons.ICON_WORKER_RED.load());
+		btnWorkerR1.setDisabledIcon(Icons.ICON_WORKER_RED.load());
+		// btnWorkerR1.setBackground(Color.RED);
+		btnWorkerR1.setOpaque(false);
+		btnWorkerR1.setVisible(false);
+		btnWorkerR1.setFocusPainted(false);
+
+		btnWorkerR1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnWorkerR1.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnWorkerR1.setForeground(new Color(255, 255, 255));
+		btnWorkerR1.setFont(new Font("Purisa", Font.BOLD, 16));
+		btnWorkerR1.setBounds(player.posWR1_x, player.posWR1_y, dim_worker, dim_worker);
+		btnWorkerR1.addActionListener(actionPutWorkersInQueue);
+		contentPane.add(btnWorkerR1);
+		// System.out.println(player.getName() + player.posWB1_x);
+
+		btnWorkerR2 = new JButton("WorkerR2");
+		btnWorkerR2.setIcon(Icons.ICON_WORKER_RED.load());
+		btnWorkerR2.setDisabledIcon(Icons.ICON_WORKER_RED.load());
+		// btnWorkerR2.setBackground(Color.RED);
+		btnWorkerR2.setVisible(false);
+		btnWorkerR2.setOpaque(false);
+
+		btnWorkerR2.setFocusPainted(false);
+		btnWorkerR2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnWorkerR2.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnWorkerR2.setForeground(new Color(255, 255, 255));
+		btnWorkerR2.setFont(new Font("Purisa", Font.BOLD, 16));
+		btnWorkerR2.setBounds(player.posWR2_x, player.posWR2_y, dim_worker, dim_worker);
+		btnWorkerR2.addActionListener(actionPutWorkersInQueue);
+		contentPane.add(btnWorkerR2);
+
+		// Worker Blue
+		btnWorkerB1 = new JButton("WorkerB1");
+
+		btnWorkerB1.setIcon(Icons.ICON_WORKER_BLUE.load());
+		btnWorkerB1.setDisabledIcon(Icons.ICON_WORKER_BLUE.load());
+		btnWorkerB1.setOpaque(false);
+		btnWorkerB1.setVisible(false);
+		btnWorkerB1.setFocusPainted(false);
+
+		btnWorkerB1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnWorkerB1.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnWorkerB1.setForeground(new Color(255, 255, 255));
+		btnWorkerB1.setFont(new Font("Purisa", Font.BOLD, 16));
+		btnWorkerB1.setBounds(player.posWB1_x, player.posWB1_y, 30, 30);
+		btnWorkerB1.addActionListener(actionPutWorkersInQueue);
+		contentPane.add(btnWorkerB1);
+
+		btnWorkerB2 = new JButton("WorkerB2");
+
+		btnWorkerB2.setIcon(Icons.ICON_WORKER_BLUE.load());
+		btnWorkerB2.setDisabledIcon(Icons.ICON_WORKER_BLUE.load());
+		btnWorkerB2.setVisible(false);
+		btnWorkerB2.setOpaque(false);
+
+		btnWorkerB2.setFocusPainted(false);
+		btnWorkerB2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnWorkerB2.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnWorkerB2.setForeground(new Color(255, 255, 255));
+		btnWorkerB2.setFont(new Font("Purisa", Font.BOLD, 16));
+		btnWorkerB2.setBounds(player.posWB2_x, player.posWB1_y, 30, 30);
+		btnWorkerB2.addActionListener(actionPutWorkersInQueue);
+		contentPane.add(btnWorkerB2);
+		printWorkers();
+
 		JLabel lblPlayerTurnHeader = new JLabel("Player's Turn:");
 		lblPlayerTurnHeader.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblPlayerTurnHeader.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -199,7 +285,7 @@ public class GameStageViewGraphic extends GameStageView {
 		lblPlayerTurnHeader.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayerTurnHeader.setBounds(0, 0, 188, 46);
 		contentPane.add(lblPlayerTurnHeader);
-		
+
 		lblPlayerTurn = new JLabel(playerName);
 		lblPlayerTurn.setFont(new Font("Purisa", Font.BOLD, 16));
 		lblPlayerTurn.setForeground(new Color(255, 255, 255));
@@ -208,8 +294,8 @@ public class GameStageViewGraphic extends GameStageView {
 		lblPlayerTurn.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayerTurn.setBounds(0, 47, 189, 42);
 		contentPane.add(lblPlayerTurn);
-		
-		JLabel lblPickedWorker= new JLabel("Picked Workers");
+
+		JLabel lblPickedWorker = new JLabel("Picked Workers");
 		lblPickedWorker.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblPickedWorker.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblPickedWorker.setHorizontalAlignment(SwingConstants.CENTER);
@@ -217,7 +303,7 @@ public class GameStageViewGraphic extends GameStageView {
 		lblPickedWorker.setFont(new Font("Purisa", Font.BOLD, 16));
 		lblPickedWorker.setBounds(954, 345, 167, 46);
 		contentPane.add(lblPickedWorker);
-		
+
 		/* ********************* PICKED OBJECTS ************************ */
 		panelPickedWorkers[0] = new BackgroundPanel();
 		BackgroundPanel panelObject1 = panelPickedWorkers[0];
@@ -246,8 +332,7 @@ public class GameStageViewGraphic extends GameStageView {
 		lblObject2.setFont(new Font("Purisa", Font.BOLD, 60));
 		lblObject2.setForeground(new Color(237, 51, 59));
 		panelObject2.add(lblObject2);
-		
-		
+
 		btnHelp = new JButton("Help");
 		btnHelp.setBackground(new Color(255, 255, 255));
 		btnHelp.setOpaque(false);
@@ -260,10 +345,10 @@ public class GameStageViewGraphic extends GameStageView {
 		btnHelp.addActionListener(actionShowHelpDialog);
 
 		contentPane.add(btnHelp);
-		
+
 		btnEndTurn = new JButton("End Turn");
-		btnEndTurn.setEnabled(false);
-		btnEndTurn.setVisible(false);
+		btnEndTurn.setEnabled(true);
+		btnEndTurn.setVisible(true);
 		btnEndTurn.setBackground(new Color(255, 255, 255));
 		btnEndTurn.setOpaque(false);
 		btnEndTurn.setFocusPainted(false);
@@ -271,10 +356,10 @@ public class GameStageViewGraphic extends GameStageView {
 		btnEndTurn.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnEndTurn.setForeground(new Color(255, 255, 255));
 		btnEndTurn.setFont(new Font("Purisa", Font.BOLD, 16));
-		btnEndTurn.setBounds(965, 645, 142, 57);
+		btnEndTurn.setBounds(965, 550, 142, 57);
 		btnEndTurn.addActionListener(actionEndTurn);
 		contentPane.add(btnEndTurn);
-		
+
 		JButton btnHome = new JButton("<--");
 		btnHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHome.setOpaque(false);
@@ -286,7 +371,6 @@ public class GameStageViewGraphic extends GameStageView {
 		btnHome.setBounds(20, 645, 142, 57);
 		btnHome.addActionListener(actionShowReturnHomeDialog);
 		contentPane.add(btnHome);
-		
 
 		// buttons border
 
@@ -301,7 +385,7 @@ public class GameStageViewGraphic extends GameStageView {
 
 		// Bottoni prima riga
 
-		CellButton btnRig0_col0 = new CellButton(0, 0);
+		CellButton btnRig0_col0 = new CellButton(0, 0, 0, 0);
 		btnRig0_col0.setBorder(null);
 		btnRig0_col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig0_col0.setContentAreaFilled(false);
@@ -309,7 +393,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig0_col0.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig0_col0);
 
-		CellButton btnRig0_col1 = new CellButton(0, 1);
+		CellButton btnRig0_col1 = new CellButton(0, 1, spazio_x_y, 0);
 		btnRig0_col1.setBorder(null);
 		btnRig0_col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig0_col1.setContentAreaFilled(false);
@@ -317,7 +401,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig0_col1.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig0_col1);
 
-		CellButton btnRig0_col2 = new CellButton(0, 2);
+		CellButton btnRig0_col2 = new CellButton(0, 2, spazio_x_y * 2, 0);
 		btnRig0_col2.setBorder(null);
 		btnRig0_col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig0_col2.setContentAreaFilled(false);
@@ -325,7 +409,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig0_col2.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig0_col2);
 
-		CellButton btnRig0_col3 = new CellButton(0, 3);
+		CellButton btnRig0_col3 = new CellButton(0, 3, spazio_x_y * 3, 0);
 		btnRig0_col3.setBorder(null);
 		btnRig0_col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig0_col3.setContentAreaFilled(false);
@@ -333,7 +417,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig0_col3.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig0_col3);
 
-		CellButton btnRig0_col4 = new CellButton(0, 4);
+		CellButton btnRig0_col4 = new CellButton(0, 4, spazio_x_y * 4, 0);
 		btnRig0_col4.setBorder(null);
 		btnRig0_col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig0_col4.setContentAreaFilled(false);
@@ -343,7 +427,7 @@ public class GameStageViewGraphic extends GameStageView {
 
 		// Bottoni seconda riga
 
-		CellButton btnRig1_col0 = new CellButton(1, 0);
+		CellButton btnRig1_col0 = new CellButton(1, 0, 0, spazio_x_y);
 		btnRig1_col0.setBorder(null);
 		btnRig1_col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig1_col0.setContentAreaFilled(false);
@@ -351,7 +435,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig1_col0.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig1_col0);
 
-		CellButton btnRig1_col1 = new CellButton(1, 1);
+		CellButton btnRig1_col1 = new CellButton(1, 1, spazio_x_y, spazio_x_y);
 		btnRig1_col1.setBorder(null);
 		btnRig1_col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig1_col1.setContentAreaFilled(false);
@@ -359,7 +443,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig1_col1.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig1_col1);
 
-		CellButton btnRig1_col2 = new CellButton(1, 2);
+		CellButton btnRig1_col2 = new CellButton(1, 2, spazio_x_y * 2, spazio_x_y);
 		btnRig1_col2.setBorder(null);
 		btnRig1_col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig1_col2.setContentAreaFilled(false);
@@ -367,7 +451,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig1_col2.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig1_col2);
 
-		CellButton btnRig1_col3 = new CellButton(1, 3);
+		CellButton btnRig1_col3 = new CellButton(1, 3, spazio_x_y * 3, spazio_x_y);
 		btnRig1_col3.setBorder(null);
 		btnRig1_col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig1_col3.setContentAreaFilled(false);
@@ -375,7 +459,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig1_col3.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig1_col3);
 
-		CellButton btnRig1_col4 = new CellButton(1, 4);
+		CellButton btnRig1_col4 = new CellButton(1, 4, spazio_x_y * 4, spazio_x_y);
 		btnRig1_col4.setBorder(null);
 		btnRig1_col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig1_col4.setContentAreaFilled(false);
@@ -385,7 +469,7 @@ public class GameStageViewGraphic extends GameStageView {
 
 		// Bottoni terza riga
 
-		CellButton btnRig3_col0 = new CellButton(2, 0);
+		CellButton btnRig3_col0 = new CellButton(2, 0, 0, spazio_x_y * 2);
 		btnRig3_col0.setBorder(null);
 		btnRig3_col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig3_col0.setContentAreaFilled(false);
@@ -393,7 +477,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig3_col0.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig3_col0);
 
-		CellButton btnRig3_col1 = new CellButton(2, 1);
+		CellButton btnRig3_col1 = new CellButton(2, 1, spazio_x_y, spazio_x_y * 2);
 		btnRig3_col1.setBorder(null);
 		btnRig3_col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig3_col1.setContentAreaFilled(false);
@@ -401,15 +485,15 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig3_col1.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig3_col1);
 
-		CellButton btnRig3_col2 = new CellButton(2, 2);
+		CellButton btnRig3_col2 = new CellButton(2, 2, spazio_x_y * 2, spazio_x_y * 2);
 		btnRig3_col2.setBorder(null);
 		btnRig3_col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig3_col2.setContentAreaFilled(false);
 		btnRig3_col2.setBounds(spazio_x_y * 2, spazio_x_y * 2, btn_length, btn_length);
 		btnRig3_col2.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig3_col2);
-		
-		CellButton btnRig3_col3 = new CellButton(2, 3);
+
+		CellButton btnRig3_col3 = new CellButton(2, 3, spazio_x_y * 3, spazio_x_y * 2);
 		btnRig3_col3.setBorder(null);
 		btnRig3_col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig3_col3.setContentAreaFilled(false);
@@ -417,7 +501,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig3_col3.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig3_col3);
 
-		CellButton btnRig3_col4 = new CellButton(2, 4);
+		CellButton btnRig3_col4 = new CellButton(2, 4, spazio_x_y * 4, spazio_x_y * 2);
 		btnRig3_col4.setBorder(null);
 		btnRig3_col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig3_col4.setContentAreaFilled(false);
@@ -427,7 +511,7 @@ public class GameStageViewGraphic extends GameStageView {
 
 		// Bottoni quarta riga
 
-		CellButton btnRig4_col0 = new CellButton(3, 0);
+		CellButton btnRig4_col0 = new CellButton(3, 0, 0, spazio_x_y * 3);
 		btnRig4_col0.setBorder(null);
 		btnRig4_col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig4_col0.setContentAreaFilled(false);
@@ -435,7 +519,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig4_col0.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig4_col0);
 
-		CellButton btnRig4_col1 = new CellButton(3, 1);
+		CellButton btnRig4_col1 = new CellButton(3, 1, spazio_x_y, spazio_x_y * 3);
 		btnRig4_col1.setBorder(null);
 		btnRig4_col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig4_col1.setContentAreaFilled(false);
@@ -443,7 +527,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig4_col1.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig4_col1);
 
-		CellButton btnRig4_col2 = new CellButton(3, 2);
+		CellButton btnRig4_col2 = new CellButton(3, 2, spazio_x_y * 2, spazio_x_y * 3);
 		btnRig4_col2.setBorder(null);
 		btnRig4_col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig4_col2.setContentAreaFilled(false);
@@ -451,7 +535,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig4_col2.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig4_col2);
 
-		CellButton btnRig4_col3 = new CellButton(3, 3);
+		CellButton btnRig4_col3 = new CellButton(3, 3, spazio_x_y * 3, spazio_x_y * 3);
 		btnRig4_col3.setBorder(null);
 		btnRig4_col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig4_col3.setContentAreaFilled(false);
@@ -459,7 +543,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig4_col3.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig4_col3);
 
-		CellButton btnRig4_col4 = new CellButton(3, 4);
+		CellButton btnRig4_col4 = new CellButton(3, 4, spazio_x_y * 4, spazio_x_y * 3);
 		btnRig4_col4.setBorder(null);
 		btnRig4_col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig4_col4.setContentAreaFilled(false);
@@ -469,7 +553,7 @@ public class GameStageViewGraphic extends GameStageView {
 
 		// Bottoni quinta riga
 
-		CellButton btnRig5_col0 = new CellButton(4, 0);
+		CellButton btnRig5_col0 = new CellButton(4, 0, 0, spazio_x_y * 4);
 		btnRig5_col0.setBorder(null);
 		btnRig5_col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig5_col0.setContentAreaFilled(false);
@@ -477,7 +561,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig5_col0.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig5_col0);
 
-		CellButton btnRig5_col1 = new CellButton(4, 1);
+		CellButton btnRig5_col1 = new CellButton(4, 1, spazio_x_y, spazio_x_y * 4);
 		btnRig5_col1.setBorder(null);
 		btnRig5_col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig5_col1.setContentAreaFilled(false);
@@ -485,7 +569,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig5_col1.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig5_col1);
 
-		CellButton btnRig5_col2 = new CellButton(4, 2);
+		CellButton btnRig5_col2 = new CellButton(4, 2, spazio_x_y * 2, spazio_x_y * 4);
 		btnRig5_col2.setBorder(null);
 		btnRig5_col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig5_col2.setContentAreaFilled(false);
@@ -493,7 +577,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig5_col2.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig5_col2);
 
-		CellButton btnRig5_col3 = new CellButton(4, 3);
+		CellButton btnRig5_col3 = new CellButton(4, 3, spazio_x_y * 3, spazio_x_y * 4);
 		btnRig5_col3.setBorder(null);
 		btnRig5_col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig5_col3.setContentAreaFilled(false);
@@ -501,7 +585,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig5_col3.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig5_col3);
 
-		CellButton btnRig5_col4 = new CellButton(4, 4);
+		CellButton btnRig5_col4 = new CellButton(4, 4, spazio_x_y * 4, spazio_x_y * 4);
 		btnRig5_col4.setBorder(null);
 		btnRig5_col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRig5_col4.setContentAreaFilled(false);
@@ -510,7 +594,7 @@ public class GameStageViewGraphic extends GameStageView {
 		panelBoardbottons.add(btnRig5_col4);
 
 		// Boarder Image
-		JPanel panelBoard = new JPanel();
+		panelBoard = new JPanel();
 		panelBoard.setOpaque(false);
 		panelBoard.setBounds(0, 0, 1140, 720);
 		contentPane.add(panelBoard);
@@ -521,6 +605,8 @@ public class GameStageViewGraphic extends GameStageView {
 		lblBoard.setIcon(Icons.BOARD.load());
 		panelBoard.add(lblBoard, BorderLayout.CENTER);// , BorderLayout.CENTER
 
+//
+
 		mainFrame.setBackground(new Color(36, 31, 49));
 		mainFrame.setContentPane(contentPane);
 		mainFrame.pack();
@@ -528,6 +614,91 @@ public class GameStageViewGraphic extends GameStageView {
 		mainFrame.repaint();
 
 	}
+
+	private void printWorkers() {
+		System.out.println("printWorkers: " + isFirstTurn);
+		if (player.isFirstTurn && isFirstTurn) {
+
+			btnWorkerR2.setVisible(true);
+			btnWorkerR2.setEnabled(true);
+
+			btnWorkerR1.setVisible(true);
+			btnWorkerR1.setEnabled(true);
+		} else if (player.isFirstTurn) {
+
+			btnWorkerB2.setVisible(true);
+			btnWorkerB2.setEnabled(true);
+
+			btnWorkerB1.setVisible(true);
+			btnWorkerB1.setEnabled(true);
+			/*
+			 * btnWorkerR2.setVisible(false); btnWorkerR2.setEnabled(false);
+			 * 
+			 * btnWorkerR1.setVisible(false); btnWorkerR1.setEnabled(false);
+			 */
+		}/*else if(!player.isFirstTurn) {
+			btnWorkerR2.setVisible(true);
+			btnWorkerR2.setEnabled(true);
+
+			btnWorkerR1.setVisible(true);
+			btnWorkerR1.setEnabled(true);
+			
+		}
+		else{
+			btnWorkerB2.setVisible(true);
+			btnWorkerB2.setEnabled(true);
+
+			btnWorkerB1.setVisible(true);
+			btnWorkerB1.setEnabled(true);
+			
+		}*/
+		
+		
+		
+		
+
+		for (int r = 0; r < 5; r++) {
+			for (int c = 0; c < 5; c++) {
+				Cell objectCell = board.cellAt(r, c);
+
+				if (objectCell.getStatusWorker() == true) {
+					int s = 30;
+					//int x = 260 + c * (s + 100);
+					//int y = 65 + r * (s + 100);
+					
+					int x = 266 + c * (s + 112);
+					int y = 66 + r * (s + 112);
+					
+					
+					if(objectCell.getWorker().getID() == 1) {
+						btnWorkerR1.setVisible(true);
+						btnWorkerR1.setBounds(x, y, s, s);
+					
+					}else if(objectCell.getWorker().getID() == 2) {
+						btnWorkerR2.setVisible(true);
+						btnWorkerR2.setBounds(x, y, s, s);
+						
+					}else if(objectCell.getWorker().getID() == 3) {
+						btnWorkerB1.setVisible(true);
+						btnWorkerB1.setBounds(x, y, s, s);
+						
+					}else if(objectCell.getWorker().getID() == 4) {
+						btnWorkerB2.setVisible(true);
+						btnWorkerB2.setBounds(x, y, s, s);
+						
+					}
+
+
+			}
+			}
+		}
+		
+	}
+
+		
+
+
+	
 
 	/* Private action listeners initialization */
 
@@ -561,22 +732,132 @@ public class GameStageViewGraphic extends GameStageView {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-					
+				// System.out.println("mouse click: " + isFirstTurn);
+				CellButton button = (CellButton) e.getSource();
 				
+				/*System.out.println(button.getRowIndex() + " c:  " + button.getColIndex());
+				System.out.println(
+						"la cella è: " + board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker());
+				*/
+				
+				//first turn handling
+				if (isFirstTurn) {
+					if (!obj.isEmpty()) {
+						if (obj.get(0).equals(btnWorkerR1)) {
+							if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+
+								board.placeWorker(player.getWorker(0), button.getRowIndex(), button.getColIndex());
+								obj.remove(btnWorkerR1);
+								btnWorkerR1.setBounds(button.posX + 266, button.posY + 66, dim_worker, dim_worker);
+								btnWorkerR1.setEnabled(false);
+							}
+
+						} else if (obj.get(0).equals(btnWorkerR2)) {
+							if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+								board.placeWorker(player.getWorker(1), button.getRowIndex(), button.getColIndex());
+								obj.remove(btnWorkerR2);
+								btnWorkerR2.setBounds(button.posX + 266, button.posY + 66, dim_worker, dim_worker);
+								btnWorkerR2.setEnabled(false);
+							}
+						}
+
+					}
+
+				}
+
+				if (player.isFirstTurn) {
+					if (!obj.isEmpty()) {
+						if (obj.get(0).equals(btnWorkerB1)) {
+
+							if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+								board.placeWorker(player.getWorker(0), button.getRowIndex(), button.getColIndex());
+								obj.remove(btnWorkerB1);
+								btnWorkerB1.setBounds(button.posX + 266, button.posY + 66, dim_worker, dim_worker);
+								btnWorkerB1.setEnabled(false);
+							}
+						} else if (obj.get(0).equals(btnWorkerB2)) {
+							if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+								board.placeWorker(player.getWorker(1), button.getRowIndex(), button.getColIndex());
+								obj.remove(btnWorkerB2);
+								btnWorkerB2.setBounds(button.posX + 266, button.posY + 66, dim_worker, dim_worker);
+								btnWorkerB2.setEnabled(false);
+							}
+						}
+
+					}
+					
+					
+					
+					
+					
+					
+					if (!player.isFirstTurn) {
+					//others turns handlings
+					if (movePhase || cellButton.size() < 1) {
+						//board
+						if(board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+							cellButton.add(button);
+						}	
+
+						
+					
+						if(movePhase && cellButton.size() == 1) {
+							if(board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+								
+							//board.moveWorker(board.cellAt(cellButton.get(1).rowIndex, cellButton.get(1).colIndex).getWorker(), cellButton.get(1), button);
+							}	
+							
+						}
+					}
+					}
+					
+					
+					
+
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+
+					for (int r = 0; r < 5; r++) {
+						for (int c = 0; c < 5; c++) {
+							System.out.print(" " + board.cellAt(r, c).getStatusWorker());
+
+						}
+						System.out.println("\n");
+					}
+				}
+
 			}
+
 		};
 
 	}
-	
-	
-	
+
 	private void hideGuidePanel() {
 		panelGuide.setVisible(false);
 		panelGuide.setEnabled(false);
 		panelObjects.setVisible(true);
 		panelObjects.setEnabled(true);
+		panelBoardbottons.setVisible(true);
+		panelBoardbottons.setEnabled(true);
 	}
-	
+
 	private void showReturnHomeDialog() {
 		panelWarning.setVisible(true);
 		panelWarning.setEnabled(true);
@@ -593,19 +874,20 @@ public class GameStageViewGraphic extends GameStageView {
 		panelBoardbottons.setVisible(false);
 		panelBoardbottons.setEnabled(false);
 	}
-	
+
 	private void hidePickedObjectsPanel() {
 		for (BackgroundPanel panel : panelPickedWorkers) {
 			panel.setVisible(false);
 		}
 	}
-	
 
 	private void showHelpDialog() {
 		panelGuide.setVisible(true);
 		panelObjects.setVisible(false);
 		panelObjects.setEnabled(false);
-	
+		panelBoardbottons.setVisible(false);
+		panelBoardbottons.setEnabled(false);
+
 	}
 
 	private void hideWarningPanel() {
@@ -614,12 +896,13 @@ public class GameStageViewGraphic extends GameStageView {
 		panelBoardbottons.setVisible(true);
 		panelBoardbottons.setEnabled(true);
 	}
-	
+
 	private void showEndTurnButton() {
 		btnHelp.setVisible(false);
 		btnEndTurn.setVisible(true);
 		btnEndTurn.setEnabled(true);
 	}
+
 	private void hideReturnHomeDialog() {
 		panelWarning.setVisible(false);
 		panelWarning.setEnabled(false);
@@ -632,7 +915,88 @@ public class GameStageViewGraphic extends GameStageView {
 		panelBoardbottons.setVisible(true);
 		panelBoardbottons.setEnabled(true);
 	}
-	
+
+	private void putWorkersInQueue() {
+
+	}
+
+	private ActionListener initactionPutWorkersInQueue() {
+
+		return new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				// se è il primo turno sposto entrambi gli workers del giocatore in
+				// PickedWorkers, per poi posizionarli su una casella,
+				// durante questa fase il panel board è (devo implementarlo)disattivato perchè
+				// non posso posizionare i giocatori
+				if (player.isFirstTurn && playerName != playerOpponent) {
+					if (btnWorkerR1.equals(e.getSource()) && btnWorkerR1.isEnabled()) {
+						obj.add(btnWorkerR1);
+						player.posWR1_y = 400;
+						btnWorkerR1.setBounds(980, player.posWR1_y, dim_worker, dim_worker);
+
+					} else if (btnWorkerR2.equals(e.getSource()) && btnWorkerR2.isEnabled()) {
+						obj.add(btnWorkerR2);
+						player.posWR2_y = 400;
+						btnWorkerR2.setBounds(1020, player.posWR2_y, dim_worker, dim_worker);
+					}
+				}
+
+				if (player.isFirstTurn) {
+					if (btnWorkerB1.equals(e.getSource()) && btnWorkerB1.isEnabled()) {
+						obj.add(btnWorkerB1);
+						player.posWB1_y = 400;
+						btnWorkerB1.setBounds(980, player.posWB1_y, dim_worker, dim_worker);
+
+					} else if (btnWorkerB2.equals(e.getSource()) && btnWorkerB2.isEnabled()) {
+						obj.add(btnWorkerB2);
+						player.posWB2_y = 400;
+						btnWorkerB2.setBounds(1020, player.posWB2_y, dim_worker, dim_worker);
+					}
+				}
+				
+				/*
+				//pichek objects other turns
+				if(!player.isFirstTurn) {
+					if (btnWorkerB1.equals(e.getSource()) && obj.size() < 2) {
+						obj.add(btnWorkerB1);
+						//board.placeWorker(player.getWorker(1), button.getRowIndex(), button.getColIndex());
+						player.posWB1_y = 400;
+						btnWorkerB1.setBounds(980, player.posWB1_y, dim_worker, dim_worker);
+
+					}else if (btnWorkerB2.equals(e.getSource() ) && obj.size() < 2) {
+						obj.add(btnWorkerB2);
+						player.posWB2_y = 400;
+						btnWorkerB2.setBounds(1020, player.posWB2_y, dim_worker, dim_worker);
+					}
+					
+				}*/
+				
+				
+				
+				
+				
+				
+
+			}
+
+			/*
+			 * contentPane.revalidate(); contentPane.repaint();
+			 * 
+			 * 
+			 * if(obj.size() == 2) { obj.get(0).setBounds(980, 200, 30, 30);
+			 * obj.get(1).setBounds(980, 200, 30, 30); contentPane.revalidate();
+			 * contentPane.repaint();
+			 * 
+			 * //putWorkersInQueue(); }
+			 */
+
+		};
+
+	}
+
 	/**
 	 * 
 	 * @return
@@ -688,7 +1052,7 @@ public class GameStageViewGraphic extends GameStageView {
 			}
 		};
 	}
-	
+
 	private ActionListener initActionHideReturnMainPage() {
 		return new ActionListener() {
 
@@ -698,7 +1062,5 @@ public class GameStageViewGraphic extends GameStageView {
 			}
 		};
 	}
-
-	
 
 }

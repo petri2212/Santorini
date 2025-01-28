@@ -8,7 +8,8 @@ import javax.swing.ImageIcon;
 public enum Icons implements Resource<ImageIcon> {
 
 	FIRST_PLAYER_ICON("./assets/Backgrounds/f_player.png"), BOARD("./assets/Board/Board_resized.png"),
-	SECOND_PLAYER_ICON("./assets/Backgrounds/s_player.png"), SANTORINI_LOGO("./assets/Backgrounds/santorini-logo.png"),LATERALPANE("./assets/Backgrounds/bg_panelEdgeLeft.png"),;
+	SECOND_PLAYER_ICON("./assets/Backgrounds/s_player.png"), SANTORINI_LOGO("./assets/Backgrounds/santorini-logo.png"),LATERALPANE("./assets/Backgrounds/bg_panelEdgeLeft.png"),
+	ICON_WORKER_BLUE("./assets/blocks/blu_w.png"),ICON_WORKER_RED("./assets/blocks/rosso_w.png");
 
 	private String path;
 

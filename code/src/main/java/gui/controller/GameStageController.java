@@ -18,7 +18,10 @@ import src.main.java.gameComponents.PlayerColor;
 public class GameStageController extends Controller<GameStageView> {
 
 	private Player player;
-
+	private Player opponent;
+	//private ArrayList<Player> playerscurr = new ArrayList<>();
+	private boolean isFirstTurn;
+	private int turn;
 	/**
 	 * This is the constructor of the class and it sets all the parameter of the
 	 * player that is playing.
@@ -28,16 +31,37 @@ public class GameStageController extends Controller<GameStageView> {
 	 */
 	public GameStageController(GameManager model, GameStageView view) {
 		super(model, view);
+		//playerscurr=model.getPlayers();
 
 		ArrayList<Player> players = model.getPlayers();
 		int playerTurn = model.getPlayerTurn();
+		int playerOppTurn= model.getPlayerOppTurn();
+		
 		this.player = players.get(playerTurn);
-
+		
+		this.opponent = players.get(playerOppTurn);
+		
+		this.isFirstTurn = players.get(0).getPlayerFirtsTurn();
+		
+		this.turn = playerTurn;
+		
+		String playerOpponent = opponent.getName();
+		
 		String playerName = player.getName();
+		
+		
 
 		this.view.setBoard(model.getBoard());
 
-		this.view.setPlayerName(playerName);
+		this.view.setPlayerName(playerName, playerOpponent);
+		
+		this.view.setPlayerFirstTurn(this.isFirstTurn);
+		
+		this.view.setPlayer(this.player);
+		
+		this.view.setOpponent(this.opponent);
+
+
 
 	}
 
@@ -51,7 +75,9 @@ public class GameStageController extends Controller<GameStageView> {
 			/**
 			 * This is an action from the view and it point to the controls.
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
+				player.isFirstTurn = false;
 				model.changeState(GameState.CONTROLS);
 			}
 		};

@@ -17,7 +17,7 @@ public class CellObjectButton extends JButton {
 	private int y_pos;
 
 	public CellObjectButton(Cell object, int x, int y, int level) {
-		// setBackground(object.getImage());
+		//setBackground(object.getImage());
 		this.object = object;
 	}
 

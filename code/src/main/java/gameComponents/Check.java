@@ -51,7 +51,7 @@ public class Check {
 	 * @return true if a worker is present, false otherwise.
 	 */
 	public static boolean isWorkerPresent(Cell cell) {
-		return cell.getStatus() == WorkerStatus.PRESENT;
+		return cell.getStatusWorker() == true;
 	}
 
 	/**

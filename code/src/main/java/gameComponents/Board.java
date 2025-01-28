@@ -83,6 +83,7 @@ public class Board {
 	public int getWidth() {
 		return width;
 	}
+	
 
 	// SETTERS
 
@@ -110,10 +111,16 @@ public class Board {
 	 * @param fxPos  The final x-coordinate.
 	 * @param fyPos  The final y-coordinate.
 	 */
-	public void moveWorker(Worker worker, Cell startingCell, Cell finalCell) {
-		startingCell.removeWorker();
-		finalCell.setWorker(worker);
+	public void moveWorker(Worker worker, Cell iniciatlCell, Cell finalCell) {
+		iniciatlCell.setWorker(worker);
+		finalCell.removeWorker();
 	}
+	/*
+	public void removeWorker(Worker worker,int xPos, int yPos) {
+		cellAt(xPos, yPos).removeWorker();;
+	}*/
+	
+	
 
 	/**
 	 * Builds (levels up) a tower at the specified coordinates.
@@ -124,6 +131,10 @@ public class Board {
 	public void buildTower(Cell cell) {
 		cell.getTower().levelUp();
 	}
+	
+	
+	
+	
 
 	// UTILS
 

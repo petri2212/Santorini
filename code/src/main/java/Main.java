@@ -33,7 +33,7 @@ public class Main {
 		// Player redPlayer = new Player(PlayerColor.RED);
 		// Player bluePlayer = new Player(PlayerColor.BLUE);
 		UI ui = new GraphicUI();
-
+		
 		GameManager game = new GameManager(ui);
 		// inizia il gioco
 		/*

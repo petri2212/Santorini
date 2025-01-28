@@ -21,6 +21,8 @@ public class GameManager {
 	private Board board;
 	/** The current player's turn, can be RED or BLUE. */
 	private int turn;
+	private int turnOpp = 1;
+	private boolean isLastTurn;
 	
 	 
 	/** The current state of the game. */
@@ -247,6 +249,11 @@ public class GameManager {
 			 * }
 			 */
 			break;
+			
+			
+		case CONTROLS:
+			updatePlayerTurnAndChangeState();
+			break;
 
 		case ENDED:
 			// qui ci si arriva se qualcuno o è arrivato al terzo piano oppure ha entrambi
@@ -268,6 +275,24 @@ public class GameManager {
 			break;
 		}
 
+	}
+	/**
+	 * Updates the player turn and checks if this is the last turn to be done.
+	 */
+	public void updatePlayerTurnAndChangeState() {
+		if (turn < players.size() - 1) {
+			turn++;
+			turnOpp=0;
+			changeState(GameState.GAME_STAGE);
+		} else {
+			if (isLastTurn) {
+				changeState(GameState.ENDED);
+			} else {
+				turnOpp++;
+				turn = 0;
+				changeState(GameState.GAME_STAGE);
+			}
+		}
 	}
 
 	/*
@@ -295,6 +320,10 @@ public class GameManager {
 	public int getPlayerTurn() {
 		return this.turn;
 	}
+	public int getPlayerOppTurn() {
+		return this.turnOpp;
+	}
+	
 	
 	/**
 	 * @return the current playing players
