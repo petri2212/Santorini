@@ -343,7 +343,11 @@ public class GameStageViewGraphic extends GameStageView {
 		contentPane.add(btnHelp);
 
 		btnEndTurn = new JButton("End Turn");
-		btnEndTurn.setEnabled(true);
+		if (isFirstTurn || player.isFirstTurn) {
+			btnEndTurn.setEnabled(false);
+		}else {
+			btnEndTurn.setEnabled(true);
+		}
 		btnEndTurn.setVisible(true);
 		btnEndTurn.setBackground(new Color(255, 255, 255));
 		btnEndTurn.setOpaque(false);
@@ -741,6 +745,7 @@ public class GameStageViewGraphic extends GameStageView {
 								obj.remove(btnWorkerR1);
 								btnWorkerR1.setBounds(button.posX + 266, button.posY + 66, dim_worker, dim_worker);
 								btnWorkerR1.setEnabled(false);
+								
 							}
 
 						} else if (obj.get(0).equals(btnWorkerR2)) {
@@ -753,7 +758,16 @@ public class GameStageViewGraphic extends GameStageView {
 						}
 
 					}
+					
 
+				}
+				
+				/*
+				 * This control for the red's turn enable the endButton only when he
+				 * has placed all two workers
+				 */
+				if(!btnWorkerR1.isEnabled() && !btnWorkerR2.isEnabled()) {
+					btnEndTurn.setEnabled(true);
 				}
 
 				if (player.isFirstTurn) {
@@ -776,10 +790,20 @@ public class GameStageViewGraphic extends GameStageView {
 						}
 
 					}
-
+					
 				}
-
+				
+				/*
+				 * This control for the blue's turn enable the endButton only when he
+				 * has placed all two workers
+				 */
+				if(!btnWorkerB1.isEnabled() && !btnWorkerB2.isEnabled()) {
+					btnEndTurn.setEnabled(true);
+				}
+				
+				
 				if (!player.isFirstTurn) {
+					btnEndTurn.setEnabled(true);
 					// others turns handlings
 					if (movePhase && cellButton.size() == 0) {
 						// board
@@ -797,7 +821,9 @@ public class GameStageViewGraphic extends GameStageView {
 					} else if (movePhase && cellButton.size() == 1) {
 						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker() && Check
 								.isValidMovement(board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
-										board.cellAt(button.getRowIndex(), button.getColIndex()))) {
+										board.cellAt(button.getRowIndex(), button.getColIndex())) && Check
+											.aroundWorkerCells(board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
+													board.cellAt(button.getRowIndex(), button.getColIndex()))) {
 
 							board.moveWorker(
 									board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex).getWorker(),
@@ -841,7 +867,11 @@ public class GameStageViewGraphic extends GameStageView {
 					}
 
 				}
-
+				
+				if (!player.isFirstTurn) {
+					btnEndTurn.setEnabled(true);
+				}
+				
 				for (int r = 0; r < 5; r++) {
 					for (int c = 0; c < 5; c++) {
 						System.out.print(" " + board.cellAt(r, c).getStatusWorker());
