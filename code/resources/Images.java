@@ -17,7 +17,7 @@ public enum Images implements Resource<Image> {
 	IN_PLAYERS_BLURRED_BACK("./assets/Backgrounds/in_player_blurred.png"),
 
 	ICON_BLOCK_layer1("./assets/blocks/BlockLevel1_resized.png"), ICON_BLOCK_layer2("./assets/blocks/BlockLevel2_resized.png"),
-	ICON_BLOCK_layer3("./assets/blocks/BlockLevel3_resized.png"), ICON_BLOCK_Dome("./assets/blocks/dome.png")
+	ICON_BLOCK_layer3("./assets/blocks/BlockLevel3_resized.png"), ICON_BLOCK_DOME("./assets/blocks/Dome_resized.png")
 	;
 
 	private String path;

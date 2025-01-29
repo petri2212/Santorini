@@ -91,7 +91,8 @@ public class GameStageViewGraphic extends GameStageView {
 	 */
 	ArrayList<JButton> obj = new ArrayList<>();
 	ArrayList<CellButton> cellButton = new ArrayList<>();
-
+	BackgroundPanel [][] objectPanel = new BackgroundPanel[25][25];
+	
 	private BackgroundPanel[] panelPickedWorkers = new BackgroundPanel[2];
 
 	/* private action listeners */
@@ -724,7 +725,6 @@ public class GameStageViewGraphic extends GameStageView {
 			public void mouseClicked(MouseEvent e) {
 				// System.out.println("mouse click: " + isFirstTurn);
 				CellButton button = (CellButton) e.getSource();
-				printTowers();
 				/*
 				 * System.out.println(button.getRowIndex() + " c:  " + button.getColIndex());
 				 * System.out.println( "la cella è: " + board.cellAt(button.getRowIndex(),
@@ -882,7 +882,7 @@ public class GameStageViewGraphic extends GameStageView {
 				if(height == 0) {
 					continue;
 				}
-				BackgroundPanel objectPanel = new BackgroundPanel();
+				
 				Image image = null ;
 				if (height == 1) {
 
@@ -895,11 +895,19 @@ public class GameStageViewGraphic extends GameStageView {
 					 image = Images.ICON_BLOCK_layer3.load();
 
 				}
-				objectPanel.setBackground(image);
-				objectPanel.setBounds(x, y, s, s);
-				panelObjects.add(objectPanel);
-				//panelObjects.repaint();
-				//panelObjects.revalidate();
+				else if (height == 4) {
+					 image = Images.ICON_BLOCK_DOME.load();
+
+				}
+				if(objectPanel[r][c] == null) {
+					objectPanel[r][c] = new BackgroundPanel(image);
+				}else {
+					objectPanel[r][c].setBackground(image);
+				}
+				objectPanel[r][c].setBounds(x, y, s, s);
+				panelObjects.add(objectPanel[r][c]);
+				panelObjects.repaint();
+				panelObjects.revalidate();
 
 			}
 		}
