@@ -252,6 +252,19 @@ public class GameManager {
 			
 			
 		case CONTROLS:
+			
+			Cell [] workerCells;
+			workerCells= board.findWorkersOf(players.get(turn));
+			
+			for (Cell worker : workerCells) {
+				if(Check.isWinCondition(worker)) {
+					changeState(GameState.ENDED);
+				}
+				
+				
+				
+			}
+			
 			updatePlayerTurnAndChangeState();
 			break;
 
@@ -259,10 +272,10 @@ public class GameManager {
 			// qui ci si arriva se qualcuno o è arrivato al terzo piano oppure ha entrambi
 			// gli worker che non si riescono a muovere, in ogni caso ora
 			// è parte della gui festeggiare per la vittoria/sconfitta 🥳🥳
-
-			print("Congratulazioni", winner, "hai vinto!!");
-			print("Riprova di nuovo", looser);
-
+			
+			print("Congratulazioni", players.get(turn).getName(), "hai vinto!!");
+			print("Riprova di nuovo", players.get(turnOpp).getName());
+			System.exit(0);
 			break;
 
 		case EXIT:

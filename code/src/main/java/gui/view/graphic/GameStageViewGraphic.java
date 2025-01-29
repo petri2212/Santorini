@@ -5,6 +5,7 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -23,6 +24,7 @@ import javax.swing.border.SoftBevelBorder;
 
 import src.main.java.gameComponents.Board;
 import src.main.java.gameComponents.Cell;
+import src.main.java.gameComponents.Check;
 import src.main.java.gameComponents.Player;
 import src.main.java.gameComponents.Worker;
 import src.main.java.components.BackgroundPanel;
@@ -130,14 +132,6 @@ public class GameStageViewGraphic extends GameStageView {
 		contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.setLayout(null);
-
-		panelObjects = new JPanel();
-		panelObjects.setOpaque(false);
-		panelObjects.setBounds(0, 0, 1140, 760);
-		panelObjects.setLayout(null);
-		panelObjects.setVisible(false);
-		panelObjects.setEnabled(false);
-		contentPane.add(panelObjects);
 
 		/* ********************* GUIDE DIALOG ************************ */
 		panelGuide = new JPanel();
@@ -275,6 +269,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnWorkerB2.setBounds(player.posWB2_x, player.posWB1_y, 30, 30);
 		btnWorkerB2.addActionListener(actionPutWorkersInQueue);
 		contentPane.add(btnWorkerB2);
+
 		printWorkers();
 
 		JLabel lblPlayerTurnHeader = new JLabel("Player's Turn:");
@@ -371,6 +366,14 @@ public class GameStageViewGraphic extends GameStageView {
 		btnHome.setBounds(20, 645, 142, 57);
 		btnHome.addActionListener(actionShowReturnHomeDialog);
 		contentPane.add(btnHome);
+
+		panelObjects = new JPanel();
+		panelObjects.setOpaque(false);
+		panelObjects.setBounds(220, 18, 1140, 750);
+		panelObjects.setLayout(null);
+		panelObjects.setVisible(true);
+		panelObjects.setEnabled(false);
+		contentPane.add(panelObjects);
 
 		// buttons border
 
@@ -593,6 +596,8 @@ public class GameStageViewGraphic extends GameStageView {
 		btnRig5_col4.addMouseListener(actionMouseOnBoard);
 		panelBoardbottons.add(btnRig5_col4);
 
+		printTowers();
+
 		// Boarder Image
 		panelBoard = new JPanel();
 		panelBoard.setOpaque(false);
@@ -719,7 +724,7 @@ public class GameStageViewGraphic extends GameStageView {
 			public void mouseClicked(MouseEvent e) {
 				// System.out.println("mouse click: " + isFirstTurn);
 				CellButton button = (CellButton) e.getSource();
-
+				printTowers();
 				/*
 				 * System.out.println(button.getRowIndex() + " c:  " + button.getColIndex());
 				 * System.out.println( "la cella è: " + board.cellAt(button.getRowIndex(),
@@ -780,16 +785,19 @@ public class GameStageViewGraphic extends GameStageView {
 						// board
 						if (board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
 
-							if (board.cellAt(button.getRowIndex(), button.getColIndex()).getWorker().equals(player.getWorker(0))) {
+							if (board.cellAt(button.getRowIndex(), button.getColIndex()).getWorker()
+									.equals(player.getWorker(0))) {
 								cellButton.add(button);
-							}else if(board.cellAt(button.getRowIndex(), button.getColIndex()).getWorker().equals(player.getWorker(1))) {
-								cellButton.add(button);	
+							} else if (board.cellAt(button.getRowIndex(), button.getColIndex()).getWorker()
+									.equals(player.getWorker(1))) {
+								cellButton.add(button);
 							}
 
-							
 						}
 					} else if (movePhase && cellButton.size() == 1) {
-						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker() && Check
+								.isValidMovement(board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
+										board.cellAt(button.getRowIndex(), button.getColIndex()))) {
 
 							board.moveWorker(
 									board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex).getWorker(),
@@ -798,31 +806,41 @@ public class GameStageViewGraphic extends GameStageView {
 							movePhase = false;
 							buildPhase = true;
 							printWorkers();
+						} else {
+							cellButton.remove(0);
+						}
+
+					}
+
+					if (buildPhase && cellButton.size() == 0) {
+						// && Check.isValidMovement(null, null)
+						if (board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+							if (board.cellAt(button.getRowIndex(), button.getColIndex()).getWorker()
+									.equals(player.getWorker(0))) {
+								cellButton.add(button);
+							} else if (board.cellAt(button.getRowIndex(), button.getColIndex()).getWorker()
+									.equals(player.getWorker(1))) {
+								cellButton.add(button);
+							}
+
+						}
+					} else if (buildPhase && cellButton.size() == 1) {
+						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+
+							if (Check.isValidConstruction(board.cellAt(button.getRowIndex(), button.getColIndex()))) {
+								board.cellAt(button.rowIndex, button.colIndex).levelUpTower();
+								// int height = board.cellAt(button.rowIndex, button.colIndex).getHeight();
+								System.out.println("il livello della torre su cui si vuole costruire è: "
+										+ board.cellAt(button.rowIndex, button.colIndex).getHeight());
+							}
+							movePhase = false;
+							buildPhase = false;
+							printTowers();
+							printWorkers();
 						}
 					}
-					
-					if (buildPhase) {
-						
-						
-					}
-					
-					
-					
-					
-					
-					
-					
-					
+
 				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
 
 				for (int r = 0; r < 5; r++) {
 					for (int c = 0; c < 5; c++) {
@@ -832,9 +850,59 @@ public class GameStageViewGraphic extends GameStageView {
 					System.out.println("\n");
 				}
 
+				for (int r = 0; r < 5; r++) {
+					for (int c = 0; c < 5; c++) {
+						System.out.print(" " + board.cellAt(r, c).getHeight());
+
+					}
+					System.out.println("\n");
+				}
+
 			}
 
 		};
+
+	}
+
+	private void printTowers() {
+
+		for (int r = 0; r < 5; r++) {
+			for (int c = 0; c < 5; c++) {
+				Cell objectCell = board.cellAt(r, c);
+
+				int height = objectCell.getHeight();
+				int s = 112;
+				// int x = 260 + c * (s + 100);
+				// int y = 65 + r * (s + 100);
+
+				// ---> giusta int x = 226 + c * (s + 30);
+				int x = 6 + c * (s + 30);
+				// ---> giusta int y = 25 + r * (s + 30);
+				int y = 6 + r * (s + 30);
+				if(height == 0) {
+					continue;
+				}
+				BackgroundPanel objectPanel = new BackgroundPanel();
+				Image image = null ;
+				if (height == 1) {
+
+					 image = Images.ICON_BLOCK_layer1.load();
+
+				} else if (height == 2) {
+					 image = Images.ICON_BLOCK_layer2.load();
+
+				} else if (height == 3) {
+					 image = Images.ICON_BLOCK_layer3.load();
+
+				}
+				objectPanel.setBackground(image);
+				objectPanel.setBounds(x, y, s, s);
+				panelObjects.add(objectPanel);
+				//panelObjects.repaint();
+				//panelObjects.revalidate();
+
+			}
+		}
 
 	}
 
@@ -860,8 +928,8 @@ public class GameStageViewGraphic extends GameStageView {
 		btnCancel.setEnabled(true);
 		panelObjects.setVisible(false);
 		panelObjects.setEnabled(false);
-		panelBoardbottons.setVisible(false);
-		panelBoardbottons.setEnabled(false);
+		panelBoardbottons.setVisible(true);
+		panelBoardbottons.setEnabled(true);
 	}
 
 	private void hidePickedObjectsPanel() {
@@ -874,8 +942,8 @@ public class GameStageViewGraphic extends GameStageView {
 		panelGuide.setVisible(true);
 		panelObjects.setVisible(false);
 		panelObjects.setEnabled(false);
-		panelBoardbottons.setVisible(false);
-		panelBoardbottons.setEnabled(false);
+		panelBoardbottons.setVisible(true);
+		panelBoardbottons.setEnabled(true);
 
 	}
 
@@ -889,7 +957,7 @@ public class GameStageViewGraphic extends GameStageView {
 	private void showEndTurnButton() {
 		btnHelp.setVisible(false);
 		btnEndTurn.setVisible(true);
-		btnEndTurn.setEnabled(true);
+		btnEndTurn.setEnabled(false);
 	}
 
 	private void hideReturnHomeDialog() {
@@ -945,8 +1013,6 @@ public class GameStageViewGraphic extends GameStageView {
 						btnWorkerB2.setBounds(1020, player.posWB2_y, dim_worker, dim_worker);
 					}
 				}
-
-			
 
 			}
 

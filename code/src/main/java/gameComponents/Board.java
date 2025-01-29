@@ -1,6 +1,8 @@
 
 package src.main.java.gameComponents;
 
+import java.util.ArrayList;
+
 import src.main.java.components.CellButton;
 
 /**
@@ -149,32 +151,49 @@ public class Board {
 	/*
 	public Cell[] findWorkersOf(Player player) {
 
-		PlayerColor color = player.getColor();
+		
 
-		int count = 0;
-		Cell[] positions = new Cell[2];
+		/**
+     * Finds the positions of two workers belonging to a specific player color.
+     *
+     * @param color The {@link PlayerColor} of the workers to find.
+     * @return A 2D array of size [2][2], where each sub-array is [x, y].
+     */
+    public Cell[] findWorkersOf(Player player) {
+   
+        int count = 0;
+        Cell[] positions = new Cell[2];
 
-		for (int i = 0; i < this.height; i++) {
-			for (int j = 0; j < this.width; j++) {
+        for (int i = 0; i < this.height; i++) {
+            for (int j = 0; j < this.width; j++) {
+                Cell cell = cellAt(i, j);
 
-				Cell cell = cellAt(i, j);
-				if (cell.getStatus() == WorkerStatus.ABSENT)
-					continue;
+                if (cell.getStatusWorker() == false) {
+                    continue;
+                }
 
-				if (cell.getWorker().getPlayer() == color) {
-					positions[count] = cell;
-					count++;
+                if (cell.getWorker().equals(player.getWorker(0)) || cell.getWorker().equals(player.getWorker(1))) {
+                    positions[count] = cell;
+                    count++;
 
-					// quick exit
-					if (count == 2)
-						return positions;
-				}
-				
-			}
-		}
-		// ridondante, ma almeno non da' errore
-		return positions;
-	}
-	*/
+                    if (count == 2) {
+                        break;
+                    }
+                }
+            }
+
+            if (count == 2) {
+                break;
+            }
+        }
+
+        if (positions[0].getWorker().getID() > positions[1].getWorker().getID()) {
+            Cell temp = positions[0];
+            positions[0] = positions[1];
+            positions[1] = temp;
+        }
+
+        return positions;
+    }
 
 }
