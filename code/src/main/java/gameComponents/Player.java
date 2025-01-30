@@ -46,6 +46,10 @@ public class Player {
 		return workers[i];
 	}
 
+	public Worker[] getWorkers() {
+		return workers;
+	}
+	
 	public String getName() {
 		return name;
 	}
