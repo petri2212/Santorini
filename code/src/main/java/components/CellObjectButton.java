@@ -21,8 +21,8 @@ public class CellObjectButton extends JButton {
 		this.object = object;
 	}
 
-	public void setBackground(Image background) {
-		this.background = background;
+	public void setBackground(Image background1) {
+		this.background = background1;
 	}
 
 	@Override
