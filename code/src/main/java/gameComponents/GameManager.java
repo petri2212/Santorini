@@ -102,7 +102,7 @@ public class GameManager {
 			//aggiungere pagina vittoria
 			print("Congratulazioni", players.get(turn).getName(), "hai vinto!!");
 			print("Riprova di nuovo", players.get(turnOpp).getName());
-			System.exit(0);
+			ui.showWinnerPage(this);
 			break;
 
 		case EXIT:
@@ -119,6 +119,10 @@ public class GameManager {
 	 * Updates the player turn and checks if this is the last turn to be done.
 	 */
 	public void updatePlayerTurnAndChangeState() {
+		changeState(GameState.ENDED);
+	}
+	
+	/*public void updatePlayerTurnAndChangeState() {
 		if (turn < players.size() - 1) {
 			turn++;
 			turnOpp = 0;
@@ -133,6 +137,7 @@ public class GameManager {
 			}
 		}
 	}
+	*/
 
 	public Board getBoard() {
 		return board;

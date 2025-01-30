@@ -8,6 +8,7 @@ import src.main.java.gameComponents.GameManager;
 import src.main.java.gui.controller.GameStageController;
 import src.main.java.gui.controller.InsertPlayersController;
 import src.main.java.gui.controller.MainPageController;
+import src.main.java.gui.controller.WinnerPageController;
 import src.main.java.gui.view.graphic.*;
 import resources.Images;
 
@@ -65,11 +66,11 @@ public class GraphicUI implements UI {
 	 * Initialize the controller and the view in the points page for the graphic.
 	 */
 	public void showWinnerPage(GameManager model) {
-		/*
-		 * WinnerPageViewGraphic view = new PointsPageViewGraphic(mainFrame);
-		 * WinnerPageController controller = new PointsPageController(model, view);
-		 * controller.start();
-		 */
+		
+		 WinnerPageViewGraphic view = new WinnerPageViewGraphic(mainFrame);
+		 WinnerPageController controller = new WinnerPageController(model, view);
+		 controller.start();
+		 
 	}
 
 }

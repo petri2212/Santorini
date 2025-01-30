@@ -108,7 +108,7 @@ public class Check {
 		Cell upCell = new Cell(startingRow, startingColumn - 1);
 		aroundWorkerCells.add(upCell);
 		
-		Cell upRightCell = new Cell(startingRow + 1, startingColumn);
+		Cell upRightCell = new Cell(startingRow + 1, startingColumn -1);
 		aroundWorkerCells.add(upRightCell);
 		
 		Cell CenterleftCell = new Cell(startingRow - 1, startingColumn);

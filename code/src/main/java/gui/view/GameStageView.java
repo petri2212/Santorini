@@ -33,6 +33,8 @@ public abstract class GameStageView implements View {
 	public ActionListener actionBuild;
 
 	public ActionListener actionReturnMainPage;
+	
+	public ActionListener actionGoToWinnerPage;
 
 	/**
 	 * Those methods are all setters for parameters of this class.
