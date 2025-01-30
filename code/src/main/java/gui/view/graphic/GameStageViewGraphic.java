@@ -137,9 +137,17 @@ public class GameStageViewGraphic extends GameStageView {
 		lblGuideHeader.setBounds(0, 0, 537, 41);
 		panelGuide.add(lblGuideHeader);
 
-		JLabel lblGuide = new JLabel("<html>ciao questo è come funaizona il gioca</html>");
+		JLabel lblGuide = new JLabel("<html><p dir=\"auto\">In <strong>ogni turno</strong> il giocatore sceglier&agrave; solo uno tra i suoi worker, lo dovr&agrave; muovere e solo dopo costruire con lo stesso.</p>\r\n"
+				+ "<p dir=\"auto\">&nbsp;</p>\r\n"
+				+ "<p dir=\"auto\">Il <strong>worker</strong> si pu&ograve; muovere nelle 8 caselle adiacenti a s&eacute; che non siano occupati da un altro worker o una&nbsp;<strong><em>dome</em></strong> (cupola). Il <strong>worker</strong> pu&ograve; muoversi verso l'alto di solo un livello alla volta (non pu&ograve; salire due livelli in un solo turno). Il <strong>worker</strong> pu&ograve; sempre muoversi verso il basso, indipendentemente da quanti livelli deve passare.</p>\r\n"
+				+ "<p dir=\"auto\">Si pu&ograve; costruire un&nbsp;<strong><em>block</em>&nbsp;</strong>o una&nbsp;<strong><em>dome</em>&nbsp;</strong>in una delle 8 caselle adiacenti e libere da altri lavoratori attorno al lavoratore appena mosso. Si pu&ograve; costruire una&nbsp;<em>dome</em>&nbsp;solo sopra un edificio composto da 3&nbsp;<em>blocks. </em>Una torre di 3&nbsp;<em>blocks</em>&nbsp;e una&nbsp;<em>dome</em>&nbsp;in cima viene chiamata&nbsp;<strong><em>Complete Tower</em></strong> (Torre Completa).</p>\r\n"
+				+ "<p dir=\"auto\">&nbsp;</p>\r\n"
+				+ "<p dir=\"auto\">Se un <strong>worke</strong>r arriva ad altezza 3 il suo rispettivo giocatore vince. Un giocatore deve sempre avere un worker capace di muoversi di una casella, altrimenti ha perso</p>\r\n"
+				+ "<div class=\"markdown-heading\" dir=\"auto\">&nbsp;</div>\r\n"
+				+ "<div class=\"markdown-heading\" dir=\"auto\">&nbsp;</div>\r\n"
+				+ "<div class=\"markdown-heading\" dir=\"auto\">&nbsp;</div></html>");
 		lblGuide.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGuide.setBounds(10, 40, 515, 230);
+		lblGuide.setBounds(10, 40, 515, 270); // 515, 230
 		panelGuide.add(lblGuide);
 
 		JButton btnGuideAcknowledge = new JButton("Ok");
@@ -961,8 +969,8 @@ public class GameStageViewGraphic extends GameStageView {
 		btnCancel.setEnabled(true);
 		panelObjects.setVisible(false);
 		panelObjects.setEnabled(false);
-		panelBoardbottons.setVisible(true);
-		panelBoardbottons.setEnabled(true);
+		panelBoardbottons.setVisible(false);
+		panelBoardbottons.setEnabled(false);
 	}
 
 
@@ -970,8 +978,8 @@ public class GameStageViewGraphic extends GameStageView {
 		panelGuide.setVisible(true);
 		panelObjects.setVisible(false);
 		panelObjects.setEnabled(false);
-		panelBoardbottons.setVisible(true);
-		panelBoardbottons.setEnabled(true);
+		panelBoardbottons.setVisible(false);
+		panelBoardbottons.setEnabled(false);
 
 	}
 
