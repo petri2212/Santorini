@@ -9,7 +9,7 @@ import src.main.java.gui.view.GameStageView;
 import src.main.java.gameComponents.GameManager;
 import src.main.java.gameComponents.GameState;
 import src.main.java.gameComponents.Player;
-import src.main.java.gameComponents.PlayerColor;
+
 
 /**
  * This is the controller for the game stage, it extends Controller because of
@@ -19,9 +19,8 @@ public class GameStageController extends Controller<GameStageView> {
 
 	private Player player;
 	private Player opponent;
-	//private ArrayList<Player> playerscurr = new ArrayList<>();
 	private boolean isFirstTurn;
-	private int turn;
+	
 	/**
 	 * This is the constructor of the class and it sets all the parameter of the
 	 * player that is playing.
@@ -31,7 +30,6 @@ public class GameStageController extends Controller<GameStageView> {
 	 */
 	public GameStageController(GameManager model, GameStageView view) {
 		super(model, view);
-		//playerscurr=model.getPlayers();
 
 		ArrayList<Player> players = model.getPlayers();
 		int playerTurn = model.getPlayerTurn();
@@ -43,7 +41,7 @@ public class GameStageController extends Controller<GameStageView> {
 		
 		this.isFirstTurn = players.get(0).getPlayerFirtsTurn();
 		
-		this.turn = playerTurn;
+		
 		
 		String playerOpponent = opponent.getName();
 		

@@ -1,10 +1,6 @@
 
 package src.main.java.gameComponents;
 
-import java.awt.Image;
-
-import resources.Images;
-import src.main.java.DrawableObject;
 
 /**
  * Represents a worker in the Santorini board game. Each worker has a unique ID

@@ -1,10 +1,6 @@
 
 package src.main.java.gameComponents;
 
-import java.awt.Image;
-
-import resources.Images;
-import src.main.java.DrawableObject;
 
 /**
  * Represents a single cell on the Santorini board. Each Cell contains a Tower

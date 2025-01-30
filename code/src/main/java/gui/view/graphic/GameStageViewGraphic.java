@@ -1,7 +1,6 @@
 package src.main.java.gui.view.graphic;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -22,14 +21,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import src.main.java.gameComponents.Board;
 import src.main.java.gameComponents.Cell;
 import src.main.java.gameComponents.Check;
-import src.main.java.gameComponents.Player;
-import src.main.java.gameComponents.Worker;
 import src.main.java.components.BackgroundPanel;
 import src.main.java.components.CellButton;
-import src.main.java.components.CellObjectButton;
 import src.main.java.gui.view.GameStageView;
 import resources.Icons;
 import resources.Images;
@@ -40,8 +35,6 @@ import resources.Images;
  */
 public class GameStageViewGraphic extends GameStageView {
 
-	private static final int PICKED_WORKER_1_INDEX = 0;
-	private static final int PICKED_WORKER_2_INDEX = 1;
 	private final int spazio_x_y = 142;
 	private final int btn_length = 124;
 	private final int dim_worker = 30;
@@ -52,9 +45,6 @@ public class GameStageViewGraphic extends GameStageView {
 	private JLabel lblWarningHeader;
 	private JLabel lblWarning;
 	private JLabel lblBoard;
-	private JLabel lblBottons;
-	private JLabel lblLateralBoarderL;
-	private JLabel lblLateralBoarderR;
 	private JLabel lblPlayerTurn;
 
 	// JPanel
@@ -970,11 +960,6 @@ public class GameStageViewGraphic extends GameStageView {
 		panelBoardbottons.setEnabled(true);
 	}
 
-	private void hidePickedObjectsPanel() {
-		for (BackgroundPanel panel : panelPickedWorkers) {
-			panel.setVisible(false);
-		}
-	}
 
 	private void showHelpDialog() {
 		panelGuide.setVisible(true);
@@ -992,11 +977,6 @@ public class GameStageViewGraphic extends GameStageView {
 		panelBoardbottons.setEnabled(true);
 	}
 
-	private void showEndTurnButton() {
-		btnHelp.setVisible(false);
-		btnEndTurn.setVisible(true);
-		btnEndTurn.setEnabled(false);
-	}
 
 	private void hideReturnHomeDialog() {
 		panelWarning.setVisible(false);
@@ -1011,9 +991,6 @@ public class GameStageViewGraphic extends GameStageView {
 		panelBoardbottons.setEnabled(true);
 	}
 
-	private void putWorkersInQueue() {
-
-	}
 
 	private ActionListener initactionPutWorkersInQueue() {
 

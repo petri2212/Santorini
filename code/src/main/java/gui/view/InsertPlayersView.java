@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import src.main.java.View;
 import src.main.java.gameComponents.Player;
-import src.main.java.gameComponents.PlayerColor;
 
 /**
  * This is an abstract class that implements the view interface. it is the

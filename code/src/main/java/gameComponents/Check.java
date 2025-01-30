@@ -1,7 +1,6 @@
 package src.main.java.gameComponents;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Provides static methods to validate moves, construction, and game statuses in
@@ -9,8 +8,6 @@ import java.util.Iterator;
  */
 public class Check {
 
-	// Check generali
-	// Prefissi: s = starting, f = final
 
 	/**
 	 * Checks if the specified position is inside the board.

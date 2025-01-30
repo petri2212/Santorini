@@ -8,9 +8,7 @@ import src.main.java.Controller;
 import src.main.java.gui.view.InsertPlayersView;
 import src.main.java.gameComponents.GameManager;
 import src.main.java.gameComponents.GameState;
-import src.main.java.Main;
 import src.main.java.gameComponents.Player;
-import src.main.java.gameComponents.PlayerColor;
 
 /**
  * This is the controller for the insert players, it extends Controller because

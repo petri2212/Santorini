@@ -1,9 +1,6 @@
 
 package src.main.java.gameComponents;
 
-import java.util.ArrayList;
-
-import src.main.java.components.CellButton;
 
 /**
  * The Board class holds a 2D array of Cell objects, representing a 5x5 grid in

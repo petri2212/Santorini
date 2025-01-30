@@ -23,7 +23,6 @@ import javax.swing.border.SoftBevelBorder;
 
 import src.main.java.components.BackgroundPanel;
 import src.main.java.gui.view.InsertPlayersView;
-import src.main.java.Main;
 import src.main.java.gameComponents.Player;
 import resources.Images;
 import resources.Icons;

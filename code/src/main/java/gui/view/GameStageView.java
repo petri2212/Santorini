@@ -1,7 +1,6 @@
 package src.main.java.gui.view;
 
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import src.main.java.gameComponents.Board;
 import src.main.java.gameComponents.Player;

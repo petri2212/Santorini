@@ -1,7 +1,5 @@
-
 package src.main.java.gameComponents;
 
-import javax.swing.JButton;
 
 /**
  * Represents a player in the Santorini board game. Each player has a color (RED
@@ -9,9 +7,6 @@ import javax.swing.JButton;
  */
 public class Player {
 	public boolean isFirstTurn = true;
-
-	/** The color of this player: RED or BLUE. */
-	private int color;
 	
 	public int posWR1_x = 980;
 	public int posWR1_y = 60;
@@ -42,22 +37,6 @@ public class Player {
 	}
 
 	// GETTERS
-
-	/**
-	 * Returns this player's color.
-	 *
-	 * @return the {@link PlayerColor}.
-	 */
-	/*public PlayerColor getColor() {
-		return color;
-	}
-*/
-	/*
-	public void setColor(PlayerColor color) {
-		this.color = color;
-	}
-	*/
-
 	/**
 	 * Returns the two workers belonging to this player.
 	 *
