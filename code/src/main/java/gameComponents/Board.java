@@ -157,11 +157,7 @@ public class Board {
      * @return A 2D array of size [2][2], where each sub-array is [x, y].
      */
     public Cell[] findWorkersOf(Player player) {
-<<<<<<< HEAD
    
-=======
-        PlayerColor color = player.getColor();
->>>>>>> refs/remotes/origin/testAlpha0.1.1
         int count = 0;
         Cell[] positions = new Cell[2];
 
@@ -169,19 +165,11 @@ public class Board {
             for (int j = 0; j < this.width; j++) {
                 Cell cell = cellAt(i, j);
 
-<<<<<<< HEAD
                 if (cell.getStatusWorker() == false) {
                     continue;
                 }
 
                 if (cell.getWorker().equals(player.getWorker(0)) || cell.getWorker().equals(player.getWorker(1))) {
-=======
-                if (cell.getStatus() == WorkerStatus.ABSENT) {
-                    continue;
-                }
-
-                if (cell.getWorker().getPlayer() == color) {
->>>>>>> refs/remotes/origin/testAlpha0.1.1
                     positions[count] = cell;
                     count++;
 
@@ -205,8 +193,4 @@ public class Board {
         return positions;
     }
 
-<<<<<<< HEAD
-=======
-    
->>>>>>> refs/remotes/origin/testAlpha0.1.1
 }
