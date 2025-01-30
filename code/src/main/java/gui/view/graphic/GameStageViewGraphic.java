@@ -812,7 +812,7 @@ public class GameStageViewGraphic extends GameStageView {
 						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker() && Check
 								.isValidMovement(board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
 										board.cellAt(button.getRowIndex(), button.getColIndex())) && Check
-											.aroundWorkerCells(board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
+											.aroundWorkerAndTowerCells(board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
 													board.cellAt(button.getRowIndex(), button.getColIndex()))) {
 
 							board.moveWorker(
@@ -843,17 +843,22 @@ public class GameStageViewGraphic extends GameStageView {
 					} else if (buildPhase && cellButton.size() == 1) {
 						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
 
-							if (Check.isValidConstruction(board.cellAt(button.getRowIndex(), button.getColIndex()))) {
+							if (Check.isValidConstruction(board.cellAt(button.getRowIndex(), button.getColIndex())) && Check
+									.aroundWorkerAndTowerCells(board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
+											board.cellAt(button.getRowIndex(), button.getColIndex()))) {
 								board.cellAt(button.rowIndex, button.colIndex).levelUpTower();
 								// int height = board.cellAt(button.rowIndex, button.colIndex).getHeight();
 								System.out.println("il livello della torre su cui si vuole costruire è: "
 										+ board.cellAt(button.rowIndex, button.colIndex).getHeight());
+								movePhase = false;
+								buildPhase = false;
+								printTowers();
+								printWorkers();
+							}else{
+								cellButton.remove(0);
 							}
-							movePhase = false;
-							buildPhase = false;
-							printTowers();
-							printWorkers();
 						}
+
 					}
 
 				}

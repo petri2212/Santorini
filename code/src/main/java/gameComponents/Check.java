@@ -87,7 +87,7 @@ public class Check {
 	 * @return true if a cell is into the board and if the selected cell is around the worker.
 	 */
 	
-	public static boolean aroundWorkerCells (Cell startingCell, Cell finalCell) {
+	public static boolean aroundWorkerAndTowerCells (Cell startingCell, Cell finalCell) {
 		//Initialization of some variables and boardEnd wich is the max index in rows and cols of he borad
 		int boardStart = 0;
 		int boardEnd = 4;
