@@ -2,6 +2,7 @@ package src.main.java;
 
 import src.main.java.gameComponents.GameManager;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.sound.sampled.*;
@@ -30,7 +31,7 @@ public class Santorini {
 		GameManager game = new GameManager(ui);
 		// inizia il gioco
 		
-		/*File file = new File("./assets/music/back_sound.wav");
+		File file = new File("./assets/music/back_sound.wav");
 		AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
 
 		Clip clip = AudioSystem.getClip();
@@ -39,7 +40,7 @@ public class Santorini {
 		clip.start();
 		FloatControl fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		fc.setValue(-40.0f);
-		*/
+		
 
 		// System.out.println(clip.getLevel());
 

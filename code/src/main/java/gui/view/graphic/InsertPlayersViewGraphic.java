@@ -135,7 +135,7 @@ public class InsertPlayersViewGraphic extends InsertPlayersView {
 		JLabel lblInsertNewPlayer = new JLabel("Insert New Player");
 		lblInsertNewPlayer.setFont(new Font("Purisa", Font.BOLD, 18));
 		lblInsertNewPlayer.setForeground(new Color(255, 255, 255));
-		lblInsertNewPlayer.setBounds(469, 460, 209, 30);
+		lblInsertNewPlayer.setBounds(500, 460, 209, 30);
 		contentPane.add(lblInsertNewPlayer);
 
 		JPanel panelInsertPlayer = new JPanel();

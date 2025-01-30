@@ -19,7 +19,7 @@ import src.main.java.gui.view.WinnerPageView;
 public class WinnerPageController extends Controller<WinnerPageView> {
 	
 	private Player player;
-	public String winner;
+	
 
 	public WinnerPageController(GameManager model, WinnerPageView view) {
 		super(model, view);
@@ -29,9 +29,9 @@ public class WinnerPageController extends Controller<WinnerPageView> {
 		
 		this.player = players.get(playerTurn);
 		
-		this.winner = player.getName();
 		
-	}
+		this.view.setWinnerName(this.player);	
+		}
 
 	@Override
 	protected void initViewListeners() {
