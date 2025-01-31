@@ -16,7 +16,7 @@ Clone the project
 ```bash
  https://github.com/petri2212/Santorini.git
 ```
-**From ECLIPSE IDEA (Maven required)**
+**From ECLIPSE (Maven required)**
 1. Open Eclipse IDE
 2. Run `mvn clean` then `mvn Inastall`
 3. Right Click on the project, select Maven -> Update Project
