@@ -16,7 +16,8 @@ Clone the project
 ```bash
  https://github.com/petri2212/Santorini.git
 ```
-1. Open Terminal Eclipse IDE
+**From ECLIPSE IDEA (Maven required)**
+1. Open Eclipse IDE
 2. Run `mvn clean` then `mvn Inastall`
 3. Right Click on the project, select Maven -> Update Project
 4. Run `run as Java Application`
