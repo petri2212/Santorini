@@ -74,7 +74,7 @@ public class WinnerPageViewGraphic extends WinnerPageView {
 		lblPlayer1Header.setFont(new Font("Purisa", Font.BOLD, 18));
 		lblPlayer1Header.setForeground(new Color(255, 255, 255));
 		lblPlayer1Header.setIconTextGap(20);
-		lblPlayer1Header.setIcon(Icons.FIRST_PLAYER_ICON.load());
+		lblPlayer1Header.setIcon(Icons.WINNER_PLAYER_ICON.load());
 
 		lblPlayer = new JLabel(winner);
 		JLabel lblPlayer1 = lblPlayer;

@@ -18,7 +18,7 @@ public enum Images implements Resource<Image> {
 
 	ICON_BLOCK_LAYER1("./assets/blocks/BlockLevel1_resized.png"), ICON_BLOCK_LAYER2("./assets/blocks/BlockLevel2_resized.png"),
 	ICON_BLOCK_LAYER3("./assets/blocks/BlockLevel3_resized.png"), ICON_BLOCK_DOME("./assets/blocks/Dome_resized_final.png"),
-	END_PAGE_BACKGROUND("./assets/Backgrounds//end_background.png")
+	END_PAGE_BACKGROUND("./assets/Backgrounds/end_background.png")
 	;
 
 	private String path;
