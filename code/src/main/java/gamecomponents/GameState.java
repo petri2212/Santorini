@@ -1,5 +1,5 @@
 
-package src.main.java.gameComponents;
+package src.main.java.gamecomponents;
 
 /**
  * Represents the various states the game can be in: STARTING (players place

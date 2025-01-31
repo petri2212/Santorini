@@ -2,9 +2,9 @@ package src.main.java.gui.view;
 
 import java.awt.event.ActionListener;
 
-import src.main.java.gameComponents.Board;
-import src.main.java.gameComponents.Player;
 import src.main.java.View;
+import src.main.java.gamecomponents.Board;
+import src.main.java.gamecomponents.Player;
 
 /**
  * This is an abstract class that implements the view interface. it is the

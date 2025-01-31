@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import src.main.java.View;
-import src.main.java.gameComponents.Player;
+import src.main.java.gamecomponents.Player;
 
 /**
  * This is an abstract class that implements the view interface. it is the

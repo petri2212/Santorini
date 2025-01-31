@@ -1,14 +1,14 @@
-package src.test.java.gameComponents;
+package src.test.java.gamecomponents;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import src.main.java.gameComponents.Cell;
-import src.main.java.gameComponents.Tower;
-import src.main.java.gameComponents.Worker;
-import src.main.java.gameComponents.WorkerStatus;
+import src.main.java.gamecomponents.Cell;
+import src.main.java.gamecomponents.Tower;
+import src.main.java.gamecomponents.Worker;
+import src.main.java.gamecomponents.WorkerStatus;
 
 class CellTest {
 

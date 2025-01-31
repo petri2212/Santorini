@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import src.main.java.Controller;
+import src.main.java.gamecomponents.GameManager;
+import src.main.java.gamecomponents.GameState;
+import src.main.java.gamecomponents.Player;
 import src.main.java.gui.view.InsertPlayersView;
-import src.main.java.gameComponents.GameManager;
-import src.main.java.gameComponents.GameState;
-import src.main.java.gameComponents.Player;
 
 /**
  * This is the controller for the insert players, it extends Controller because

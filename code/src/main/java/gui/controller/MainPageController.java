@@ -3,10 +3,9 @@ package src.main.java.gui.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import src.main.java.Controller;
+import src.main.java.gamecomponents.GameManager;
+import src.main.java.gamecomponents.GameState;
 import src.main.java.gui.view.MainPageView;
-
-import src.main.java.gameComponents.GameManager;
-import src.main.java.gameComponents.GameState;
 
 /**
  * This is the controller for the main page, it extends Controller because of

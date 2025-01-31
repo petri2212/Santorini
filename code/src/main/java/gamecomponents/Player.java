@@ -1,4 +1,4 @@
-package src.main.java.gameComponents;
+package src.main.java.gamecomponents;
 
 
 /**
@@ -8,17 +8,17 @@ package src.main.java.gameComponents;
 public class Player {
 	public boolean isFirstTurn = true;
 	
-	public int posWR1_x = 980;
-	public int posWR1_y = 60;
+	public int posWR1X = 980;
+	public int posWR1Y = 60;
 	
-	public int posWR2_x = 1020 ;
-	public int posWR2_y = 60;
+	public int posWR2X = 1020 ;
+	public int posWR2Y = 60;
 	
-	public int posWB1_x = 980;
-	public int posWB1_y = 60;
+	public int posWB1X = 980;
+	public int posWB1Y = 60;
 	
-	public int posWB2_x = 1020;
-	public int posWB2_y = 60;
+	public int posWB2X = 1020;
+	public int posWB2Y = 60;
 	
 
 	/** The two workers belonging to this player. */

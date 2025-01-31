@@ -2,7 +2,7 @@ package src.main.java;
 
 import javax.sound.sampled.LineUnavailableException;
 
-import src.main.java.gameComponents.GameManager;
+import src.main.java.gamecomponents.GameManager;
 
 /**
  * Abstract class for the creation of Controller classes of the MVC design

@@ -1,5 +1,5 @@
 
-package src.main.java.gameComponents;
+package src.main.java.gamecomponents;
 
 /**
  * Enumeration of possible player colors in Santorini: RED or BLUE.

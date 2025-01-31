@@ -2,13 +2,13 @@ package src.main.java;
 
 import javax.sound.sampled.LineUnavailableException;
 
-import src.main.java.gameComponents.GameManager;
+import src.main.java.gamecomponents.GameManager;
 
 /**
  * Interface to handle the user interaction with the program both input and
  * output.
  */
-public interface UI {
+public interface Ui {
 
 	/**
 	 * Visualize the main page.

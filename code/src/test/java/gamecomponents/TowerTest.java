@@ -1,11 +1,11 @@
-package src.test.java.gameComponents;
+package src.test.java.gamecomponents;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import src.main.java.gameComponents.Tower;
+import src.main.java.gamecomponents.Tower;
 
 class TowerTest {
 

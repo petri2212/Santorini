@@ -91,7 +91,7 @@ public class MainPageViewGraphic extends MainPageView {
 		lblVersionHeader.setBounds(37, 696, 70, 15);
 		contentPane.add(lblVersionHeader);
 
-		JLabel lblVersion = new JLabel("1.0.0");
+		JLabel lblVersion = new JLabel("Alphav0.1");
 		lblVersion.setForeground(Color.WHITE);
 		lblVersion.setFont(new Font("Purisa", Font.BOLD, 14));
 		lblVersion.setBounds(114, 696, 70, 15);

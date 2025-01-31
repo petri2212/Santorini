@@ -1,5 +1,5 @@
 
-package src.main.java.gameComponents;
+package src.main.java.gamecomponents;
 
 
 /**
@@ -116,11 +116,6 @@ public class Board {
 		iniciatlCell.removeWorker();
 		finalCell.setWorker(worker);
 	}
-	/*
-	public void removeWorker(Worker worker,int xPos, int yPos) {
-		cellAt(xPos, yPos).removeWorker();;
-	}*/
-	
 	
 
 	/**
@@ -139,19 +134,8 @@ public class Board {
 
 	// UTILS
 
-	/**
-	 * Finds the positions of two workers belonging to a specific player color.
-	 *
-	 * @param color The {@link PlayerColor} of the workers to find.
-	 * @return A 2D array of size [2][2], where each sub-array is [x, y].
-	 */
-	/*
-	public Cell[] findWorkersOf(Player player) {
-
-		
-
-		/**
-     * Finds the positions of two workers belonging to a specific player color.
+	
+     /* Finds the positions of two workers belonging to a specific player color.
      *
      * @param color The {@link PlayerColor} of the workers to find.
      * @return A 2D array of size [2][2], where each sub-array is [x, y].

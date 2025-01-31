@@ -1,4 +1,4 @@
-package src.main.java.gameComponents;
+package src.main.java.gamecomponents;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * the Santorini board game.
  */
 public class Check {
-
 
 	/**
 	 * Checks if the specified position is inside the board.
@@ -74,74 +73,74 @@ public class Check {
 		int finalHeight = finalCell.getTower().getHeight();
 		return (finalHeight - startingHeight) <= 1;
 	}
-	
+
 	/**
 	 * Check if the destination cell is around the worker.
 	 *
-	 * @param startingRow starting row of the worker.
-	 * @param startingColumn starting column of the worker.
-	 * @param finalRow destination row of the worker.
-	 * @param finalColumn destination column of the worker.
-	 * @param aroundWorkerCells an ArrayList of Cells that contains all the cells around the worker
+	 * @param startingRow                  starting row of the worker.
+	 * @param startingColumn               starting column of the worker.
+	 * @param finalRow                     destination row of the worker.
+	 * @param finalColumn                  destination column of the worker.
+	 * @param aroundWorkerCells            an ArrayList of Cells that contains all
+	 *                                     the cells around the worker
 	 * @param upLeftCell.....downRightCell cells arounf the worker
-	 * @return true if a cell is into the board and if the selected cell is around the worker.
+	 * @return true if a cell is into the board and if the selected cell is around
+	 *         the worker.
 	 */
-	
-	public static boolean aroundWorkerAndTowerCells (Cell startingCell, Cell finalCell) {
-		//Initialization of some variables and boardEnd wich is the max index in rows and cols of he borad
+
+	public static boolean aroundWorkerAndTowerCells(Cell startingCell, Cell finalCell) {
+		// Initialization of some variables and boardEnd wich is the max index in rows
+		// and cols of he borad
 		int boardStart = 0;
 		int boardEnd = 4;
 		int cellX = 0;
 		int cellY = 0;
-		
+
 		int startingRow = startingCell.getX();
 		int startingColumn = startingCell.getY();
 
 		int finalRow = finalCell.getX();
 		int finalColumn = finalCell.getY();
-		
-		 ArrayList<Cell> aroundWorkerCells = new ArrayList<Cell>();
-		 
+
+		ArrayList<Cell> aroundWorkerCells = new ArrayList<Cell>();
+
 		Cell upLeftCell = new Cell(startingRow - 1, startingColumn - 1);
 		aroundWorkerCells.add(upLeftCell);
-		
+
 		Cell upCell = new Cell(startingRow, startingColumn - 1);
 		aroundWorkerCells.add(upCell);
-		
-		Cell upRightCell = new Cell(startingRow + 1, startingColumn -1);
+
+		Cell upRightCell = new Cell(startingRow + 1, startingColumn - 1);
 		aroundWorkerCells.add(upRightCell);
-		
+
 		Cell CenterleftCell = new Cell(startingRow - 1, startingColumn);
 		aroundWorkerCells.add(CenterleftCell);
-		
+
 		Cell CenterRightCell = new Cell(startingRow + 1, startingColumn);
 		aroundWorkerCells.add(CenterRightCell);
-		
+
 		Cell downLeftCell = new Cell(startingRow - 1, startingColumn + 1);
 		aroundWorkerCells.add(downLeftCell);
-		
+
 		Cell downCell = new Cell(startingRow, startingColumn + 1);
 		aroundWorkerCells.add(downCell);
-		
+
 		Cell downRightCell = new Cell(startingRow + 1, startingColumn + 1);
 		aroundWorkerCells.add(downRightCell);
-		
+
 		for (Cell cell : aroundWorkerCells) {
-			
+
 			cellX = cell.getX();
 			cellY = cell.getY();
-			
-			if((cellX <= boardEnd && cellX >= boardStart) && (cellY <= boardEnd && cellY >= boardStart)){
-				
-				if(finalRow == cellX && finalColumn == cellY ) {
-					//this is for debug purpose
-					System.out.println("the cll is :" + cellX + "  " + cellY );
-					return true;
-				}
+
+			if ((cellX <= boardEnd && cellX >= boardStart) && (cellY <= boardEnd && cellY >= boardStart)
+					&& (finalRow == cellX && finalColumn == cellY)) {
+				// this is for debug purpose
+				System.out.println("the cll is :" + cellX + "  " + cellY);
+				return true;
 			}
-			
 		}
-		
+
 		return false;
 	}
 

@@ -1,9 +1,9 @@
 
-package src.main.java.gameComponents;
+package src.main.java.gamecomponents;
 
 import java.util.ArrayList;
 
-import src.main.java.UI;
+import src.main.java.Ui;
 
 /**
  * PROTOTYPE Controls the overall flow of the game, managing turn order and the
@@ -21,7 +21,7 @@ public class GameManager {
 	/** The current state of the game. */
 	private GameState gameState;
 	private ArrayList<Player> players;
-	private UI ui;
+	private Ui ui;
 
 	/**
 	 * Constructs a {@code GameController} with a given board, sets the initial
@@ -30,7 +30,7 @@ public class GameManager {
 	 *
 	 * @param board the {@link Board} to be used by the game.
 	 */
-	public GameManager(UI ui) {
+	public GameManager(Ui ui) {
 
 		// this.board = board;
 		// initializePlayers(redPlayer, bluePlayer);
@@ -43,14 +43,6 @@ public class GameManager {
 		gameLoop();
 	}
 
-	/*
-	 * private void initializePlayers(Player redPlayer, Player bluePlayer) {
-	 * this.currentPlayer = new Random().nextBoolean() ? redPlayer : bluePlayer;
-	 * this.opponentPlayer = (this.currentPlayer == redPlayer) ? bluePlayer :
-	 * redPlayer;
-	 * 
-	 * }
-	 */
 	/**
 	 * Set the current players.
 	 *
@@ -64,9 +56,6 @@ public class GameManager {
 	 * Outlines the main game loop logic based on {@link GameState}.
 	 */
 	public void gameLoop() {
-
-		// Non funziona ancora, questa è giusto l'idea raffazzonata
-
 		switch (gameState) {
 
 		case HOME:
@@ -101,9 +90,6 @@ public class GameManager {
 			break;
 
 		case ENDED:
-			//aggiungere pagina vittoria
-			print("Congratulazioni", players.get(turn).getName(), "hai vinto!!");
-			print("Riprova di nuovo", players.get(turnOpp).getName());
 			ui.showWinnerPage(this);
 			break;
 
@@ -116,13 +102,6 @@ public class GameManager {
 		}
 
 	}
-
-	/**
-	 * Updates the player turn and checks if this is the last turn to be done.
-	 */
-	/*public void updatePlayerTurnAndChangeState() {
-		changeState(GameState.ENDED);
-	}*/
 	
 	public void updatePlayerTurnAndChangeState() {
 		
@@ -168,13 +147,5 @@ public class GameManager {
 		gameLoop();
 	}
 
-	// TODO rimuovere più avanti
-	// Odio scrivere System.Out.Print
-	private void print(Object... args) {
-		for (Object arg : args) {
-			System.out.print(arg + " ");
-		}
-		System.out.println();
-	}
 
 }

@@ -4,7 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import src.main.java.gameComponents.GameManager;
+import src.main.java.gamecomponents.GameManager;
 import src.main.java.gui.controller.GameStageController;
 import src.main.java.gui.controller.InsertPlayersController;
 import src.main.java.gui.controller.MainPageController;
@@ -12,7 +12,7 @@ import src.main.java.gui.controller.WinnerPageController;
 import src.main.java.gui.view.graphic.*;
 import resources.Images;
 
-public class GraphicUI implements UI {
+public class GraphicUI implements Ui {
 
 	private JFrame mainFrame;
 

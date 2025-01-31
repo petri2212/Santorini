@@ -1,5 +1,5 @@
 
-package src.main.java.gameComponents;
+package src.main.java.gamecomponents;
 
 /**
  * Tracks whether a cell currently has a worker present or absent.

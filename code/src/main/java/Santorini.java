@@ -1,13 +1,12 @@
 package src.main.java;
 
-import src.main.java.gameComponents.GameManager;
-
 import java.io.File;
 import java.io.IOException;
 
 import javax.sound.sampled.*;
 
-import src.main.java.gameComponents.Board;
+import src.main.java.gamecomponents.Board;
+import src.main.java.gamecomponents.GameManager;
 
 /**
  * The Main class is the entry point for the Santorini board game application.
@@ -26,7 +25,7 @@ public class Santorini {
 	 */
 	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
-		UI ui = new GraphicUI();
+		Ui ui = new GraphicUI();
 		
 		GameManager game = new GameManager(ui);
 		// inizia il gioco

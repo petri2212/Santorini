@@ -1,15 +1,14 @@
-package src.test.java.gameComponents;
+package src.test.java.gamecomponents;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import src.main.java.gameComponents.Board;
-import src.main.java.gameComponents.Cell;
-import src.main.java.gameComponents.Player;
-import src.main.java.gameComponents.PlayerColor;
-import src.main.java.gameComponents.Worker;
+import src.main.java.gamecomponents.Board;
+import src.main.java.gamecomponents.Cell;
+import src.main.java.gamecomponents.Player;
+import src.main.java.gamecomponents.Worker;
 
 class BoardTest {
 
@@ -65,7 +64,7 @@ class BoardTest {
         board.placeWorker(worker, 2, 3);
         Cell cell = board.cellAt(2, 3);
         assertEquals(worker, cell.getWorker(), "Worker should be placed at (2,3)");
-        assertEquals(cell.getStatusWorker(), src.main.java.gameComponents.WorkerStatus.PRESENT, "Worker status should be PRESENT");
+        assertEquals(cell.getStatusWorker(), src.main.java.gamecomponents.WorkerStatus.PRESENT, "Worker status should be PRESENT");
     }
 
     /* 

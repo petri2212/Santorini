@@ -1,5 +1,5 @@
 
-package src.main.java.gameComponents;
+package src.main.java.gamecomponents;
 
 /**
  * A thread-safe singleton class generating unique incremental IDs. It's used in

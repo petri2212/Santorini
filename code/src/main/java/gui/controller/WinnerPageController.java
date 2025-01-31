@@ -5,10 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import src.main.java.Controller;
-
-import src.main.java.gameComponents.GameManager;
-import src.main.java.gameComponents.GameState;
-import src.main.java.gameComponents.Player;
+import src.main.java.gamecomponents.GameManager;
+import src.main.java.gamecomponents.GameState;
+import src.main.java.gamecomponents.Player;
 import src.main.java.gui.view.WinnerPageView;
 
 /**

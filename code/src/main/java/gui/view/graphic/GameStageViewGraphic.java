@@ -21,10 +21,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import src.main.java.gameComponents.Cell;
-import src.main.java.gameComponents.Check;
 import src.main.java.components.BackgroundPanel;
 import src.main.java.components.CellButton;
+import src.main.java.gamecomponents.Cell;
+import src.main.java.gamecomponents.Check;
 import src.main.java.gui.view.GameStageView;
 import resources.Icons;
 import resources.Images;
@@ -35,9 +35,11 @@ import resources.Images;
  */
 public class GameStageViewGraphic extends GameStageView {
 
-	private final int spazio_x_y = 142;
-	private final int btn_length = 124;
-	private final int dim_worker = 30;
+	private final static String FONT = "Purisa";
+
+	private final int spazioXY = 142;
+	private final int btnLength = 124;
+	private final int dimWorker = 30;
 
 	private JFrame mainFrame;
 
@@ -81,8 +83,8 @@ public class GameStageViewGraphic extends GameStageView {
 	 */
 	ArrayList<JButton> obj = new ArrayList<>();
 	ArrayList<CellButton> cellButton = new ArrayList<>();
-	BackgroundPanel [][] objectPanel = new BackgroundPanel[25][25];
-	
+	BackgroundPanel[][] objectPanel = new BackgroundPanel[25][25];
+
 	private BackgroundPanel[] panelPickedWorkers = new BackgroundPanel[2];
 
 	/* private action listeners */
@@ -137,15 +139,16 @@ public class GameStageViewGraphic extends GameStageView {
 		lblGuideHeader.setBounds(0, 0, 537, 41);
 		panelGuide.add(lblGuideHeader);
 
-		JLabel lblGuide = new JLabel("<html><p dir=\"auto\">In <strong>ogni turno</strong> il giocatore sceglier&agrave; solo uno tra i suoi worker, lo dovr&agrave; muovere e solo dopo costruire con lo stesso.</p>\r\n"
-				+ "<p dir=\"auto\">&nbsp;</p>\r\n"
-				+ "<p dir=\"auto\">Il <strong>worker</strong> si pu&ograve; muovere nelle 8 caselle adiacenti a s&eacute; che non siano occupati da un altro worker o una&nbsp;<strong><em>dome</em></strong> (cupola). Il <strong>worker</strong> pu&ograve; muoversi verso l'alto di solo un livello alla volta (non pu&ograve; salire due livelli in un solo turno). Il <strong>worker</strong> pu&ograve; sempre muoversi verso il basso, indipendentemente da quanti livelli deve passare.</p>\r\n"
-				+ "<p dir=\"auto\">Si pu&ograve; costruire un&nbsp;<strong><em>block</em>&nbsp;</strong>o una&nbsp;<strong><em>dome</em>&nbsp;</strong>in una delle 8 caselle adiacenti e libere da altri lavoratori attorno al lavoratore appena mosso. Si pu&ograve; costruire una&nbsp;<em>dome</em>&nbsp;solo sopra un edificio composto da 3&nbsp;<em>blocks. </em>Una torre di 3&nbsp;<em>blocks</em>&nbsp;e una&nbsp;<em>dome</em>&nbsp;in cima viene chiamata&nbsp;<strong><em>Complete Tower</em></strong> (Torre Completa).</p>\r\n"
-				+ "<p dir=\"auto\">&nbsp;</p>\r\n"
-				+ "<p dir=\"auto\">Se un <strong>worke</strong>r arriva ad altezza 3 il suo rispettivo giocatore vince. Un giocatore deve sempre avere un worker capace di muoversi di una casella, altrimenti ha perso</p>\r\n"
-				+ "<div class=\"markdown-heading\" dir=\"auto\">&nbsp;</div>\r\n"
-				+ "<div class=\"markdown-heading\" dir=\"auto\">&nbsp;</div>\r\n"
-				+ "<div class=\"markdown-heading\" dir=\"auto\">&nbsp;</div></html>");
+		JLabel lblGuide = new JLabel(
+				"<html><p dir=\"auto\">In <strong>ogni turno</strong> il giocatore sceglier&agrave; solo uno tra i suoi worker, lo dovr&agrave; muovere e solo dopo costruire con lo stesso.</p>\r\n"
+						+ "<p dir=\"auto\">&nbsp;</p>\r\n"
+						+ "<p dir=\"auto\">Il <strong>worker</strong> si pu&ograve; muovere nelle 8 caselle adiacenti a s&eacute; che non siano occupati da un altro worker o una&nbsp;<strong><em>dome</em></strong> (cupola). Il <strong>worker</strong> pu&ograve; muoversi verso l'alto di solo un livello alla volta (non pu&ograve; salire due livelli in un solo turno). Il <strong>worker</strong> pu&ograve; sempre muoversi verso il basso, indipendentemente da quanti livelli deve passare.</p>\r\n"
+						+ "<p dir=\"auto\">Si pu&ograve; costruire un&nbsp;<strong><em>block</em>&nbsp;</strong>o una&nbsp;<strong><em>dome</em>&nbsp;</strong>in una delle 8 caselle adiacenti e libere da altri lavoratori attorno al lavoratore appena mosso. Si pu&ograve; costruire una&nbsp;<em>dome</em>&nbsp;solo sopra un edificio composto da 3&nbsp;<em>blocks. </em>Una torre di 3&nbsp;<em>blocks</em>&nbsp;e una&nbsp;<em>dome</em>&nbsp;in cima viene chiamata&nbsp;<strong><em>Complete Tower</em></strong> (Torre Completa).</p>\r\n"
+						+ "<p dir=\"auto\">&nbsp;</p>\r\n"
+						+ "<p dir=\"auto\">Se un <strong>worke</strong>r arriva ad altezza 3 il suo rispettivo giocatore vince. Un giocatore deve sempre avere un worker capace di muoversi di una casella, altrimenti ha perso</p>\r\n"
+						+ "<div class=\"markdown-heading\" dir=\"auto\">&nbsp;</div>\r\n"
+						+ "<div class=\"markdown-heading\" dir=\"auto\">&nbsp;</div>\r\n"
+						+ "<div class=\"markdown-heading\" dir=\"auto\">&nbsp;</div></html>");
 		lblGuide.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGuide.setBounds(10, 40, 515, 270); // 515, 230
 		panelGuide.add(lblGuide);
@@ -193,14 +196,14 @@ public class GameStageViewGraphic extends GameStageView {
 		panelWarning.add(btnCancel);
 
 		/* ********************* Labels ************************ */
-		JLabel Workers = new JLabel("Workers");
-		Workers.setVerticalAlignment(SwingConstants.BOTTOM);
-		Workers.setHorizontalTextPosition(SwingConstants.CENTER);
-		Workers.setHorizontalAlignment(SwingConstants.CENTER);
-		Workers.setForeground(Color.WHITE);
-		Workers.setFont(new Font("Purisa", Font.BOLD, 16));
-		Workers.setBounds(942, 0, 188, 46);
-		contentPane.add(Workers);
+		JLabel workers = new JLabel("Workers");
+		workers.setVerticalAlignment(SwingConstants.BOTTOM);
+		workers.setHorizontalTextPosition(SwingConstants.CENTER);
+		workers.setHorizontalAlignment(SwingConstants.CENTER);
+		workers.setForeground(Color.WHITE);
+		workers.setFont(new Font(FONT, Font.BOLD, 16));
+		workers.setBounds(942, 0, 188, 46);
+		contentPane.add(workers);
 
 		// Worker Rossi
 		btnWorkerR1 = new JButton("WorkerR1");
@@ -214,8 +217,8 @@ public class GameStageViewGraphic extends GameStageView {
 		btnWorkerR1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWorkerR1.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnWorkerR1.setForeground(new Color(255, 255, 255));
-		btnWorkerR1.setFont(new Font("Purisa", Font.BOLD, 16));
-		btnWorkerR1.setBounds(player.posWR1_x, player.posWR1_y, dim_worker, dim_worker);
+		btnWorkerR1.setFont(new Font(FONT, Font.BOLD, 16));
+		btnWorkerR1.setBounds(player.posWR1X, player.posWR1Y, dimWorker, dimWorker);
 		btnWorkerR1.addActionListener(actionPutWorkersInQueue);
 		contentPane.add(btnWorkerR1);
 		// System.out.println(player.getName() + player.posWB1_x);
@@ -231,8 +234,8 @@ public class GameStageViewGraphic extends GameStageView {
 		btnWorkerR2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWorkerR2.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnWorkerR2.setForeground(new Color(255, 255, 255));
-		btnWorkerR2.setFont(new Font("Purisa", Font.BOLD, 16));
-		btnWorkerR2.setBounds(player.posWR2_x, player.posWR2_y, dim_worker, dim_worker);
+		btnWorkerR2.setFont(new Font(FONT, Font.BOLD, 16));
+		btnWorkerR2.setBounds(player.posWR2X, player.posWR2Y, dimWorker, dimWorker);
 		btnWorkerR2.addActionListener(actionPutWorkersInQueue);
 		contentPane.add(btnWorkerR2);
 
@@ -248,8 +251,8 @@ public class GameStageViewGraphic extends GameStageView {
 		btnWorkerB1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWorkerB1.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnWorkerB1.setForeground(new Color(255, 255, 255));
-		btnWorkerB1.setFont(new Font("Purisa", Font.BOLD, 16));
-		btnWorkerB1.setBounds(player.posWB1_x, player.posWB1_y, 30, 30);
+		btnWorkerB1.setFont(new Font(FONT, Font.BOLD, 16));
+		btnWorkerB1.setBounds(player.posWB1X, player.posWB1Y, 30, 30);
 		btnWorkerB1.addActionListener(actionPutWorkersInQueue);
 		contentPane.add(btnWorkerB1);
 
@@ -264,8 +267,8 @@ public class GameStageViewGraphic extends GameStageView {
 		btnWorkerB2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWorkerB2.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnWorkerB2.setForeground(new Color(255, 255, 255));
-		btnWorkerB2.setFont(new Font("Purisa", Font.BOLD, 16));
-		btnWorkerB2.setBounds(player.posWB2_x, player.posWB1_y, 30, 30);
+		btnWorkerB2.setFont(new Font(FONT, Font.BOLD, 16));
+		btnWorkerB2.setBounds(player.posWB2X, player.posWB1Y, 30, 30);
 		btnWorkerB2.addActionListener(actionPutWorkersInQueue);
 		contentPane.add(btnWorkerB2);
 
@@ -274,14 +277,14 @@ public class GameStageViewGraphic extends GameStageView {
 		JLabel lblPlayerTurnHeader = new JLabel("Player's Turn:");
 		lblPlayerTurnHeader.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblPlayerTurnHeader.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblPlayerTurnHeader.setFont(new Font("Purisa", Font.BOLD, 16));
+		lblPlayerTurnHeader.setFont(new Font(FONT, Font.BOLD, 16));
 		lblPlayerTurnHeader.setForeground(new Color(255, 255, 255));
 		lblPlayerTurnHeader.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayerTurnHeader.setBounds(0, 0, 188, 46);
 		contentPane.add(lblPlayerTurnHeader);
 
 		lblPlayerTurn = new JLabel(playerName);
-		lblPlayerTurn.setFont(new Font("Purisa", Font.BOLD, 16));
+		lblPlayerTurn.setFont(new Font(FONT, Font.BOLD, 16));
 		lblPlayerTurn.setForeground(new Color(255, 255, 255));
 		lblPlayerTurn.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblPlayerTurn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -294,7 +297,7 @@ public class GameStageViewGraphic extends GameStageView {
 		lblPickedWorker.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblPickedWorker.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPickedWorker.setForeground(Color.WHITE);
-		lblPickedWorker.setFont(new Font("Purisa", Font.BOLD, 16));
+		lblPickedWorker.setFont(new Font(FONT, Font.BOLD, 16));
 		lblPickedWorker.setBounds(954, 345, 167, 46);
 		contentPane.add(lblPickedWorker);
 
@@ -307,7 +310,7 @@ public class GameStageViewGraphic extends GameStageView {
 		contentPane.add(panelObject1);
 
 		JLabel lblObject1 = new JLabel("1");
-		lblObject1.setFont(new Font("Purisa", Font.BOLD, 60));
+		lblObject1.setFont(new Font(FONT, Font.BOLD, 60));
 		lblObject1.setForeground(new Color(237, 51, 59));
 		lblObject1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblObject1.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -323,7 +326,7 @@ public class GameStageViewGraphic extends GameStageView {
 		JLabel lblObject2 = new JLabel("2");
 		lblObject2.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblObject2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblObject2.setFont(new Font("Purisa", Font.BOLD, 60));
+		lblObject2.setFont(new Font(FONT, Font.BOLD, 60));
 		lblObject2.setForeground(new Color(237, 51, 59));
 		panelObject2.add(lblObject2);
 
@@ -334,7 +337,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHelp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnHelp.setForeground(new Color(255, 255, 255));
-		btnHelp.setFont(new Font("Purisa", Font.BOLD, 16));
+		btnHelp.setFont(new Font(FONT, Font.BOLD, 16));
 		btnHelp.setBounds(965, 645, 142, 57);
 		btnHelp.addActionListener(actionShowHelpDialog);
 
@@ -343,7 +346,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnEndTurn = new JButton("End Turn");
 		if (isFirstTurn || player.isFirstTurn) {
 			btnEndTurn.setEnabled(false);
-		}else {
+		} else {
 			btnEndTurn.setEnabled(true);
 		}
 		btnEndTurn.setVisible(true);
@@ -353,7 +356,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnEndTurn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEndTurn.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnEndTurn.setForeground(new Color(255, 255, 255));
-		btnEndTurn.setFont(new Font("Purisa", Font.BOLD, 16));
+		btnEndTurn.setFont(new Font(FONT, Font.BOLD, 16));
 		btnEndTurn.setBounds(965, 550, 142, 57);
 		btnEndTurn.addActionListener(actionEndTurn);
 		contentPane.add(btnEndTurn);
@@ -362,7 +365,7 @@ public class GameStageViewGraphic extends GameStageView {
 		btnHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHome.setOpaque(false);
 		btnHome.setForeground(Color.WHITE);
-		btnHome.setFont(new Font("Purisa", Font.BOLD, 16));
+		btnHome.setFont(new Font(FONT, Font.BOLD, 16));
 		btnHome.setFocusPainted(false);
 		btnHome.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnHome.setBackground(Color.WHITE);
@@ -391,213 +394,213 @@ public class GameStageViewGraphic extends GameStageView {
 
 		// Bottoni prima riga
 
-		CellButton btnRig0_col0 = new CellButton(0, 0, 0, 0);
-		btnRig0_col0.setBorder(null);
-		btnRig0_col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig0_col0.setContentAreaFilled(false);
-		btnRig0_col0.setBounds(0, 0, btn_length, btn_length);
-		btnRig0_col0.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig0_col0);
+		CellButton btnRig0Col0 = new CellButton(0, 0, 0, 0);
+		btnRig0Col0.setBorder(null);
+		btnRig0Col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig0Col0.setContentAreaFilled(false);
+		btnRig0Col0.setBounds(0, 0, btnLength, btnLength);
+		btnRig0Col0.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig0Col0);
 
-		CellButton btnRig0_col1 = new CellButton(0, 1, spazio_x_y, 0);
-		btnRig0_col1.setBorder(null);
-		btnRig0_col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig0_col1.setContentAreaFilled(false);
-		btnRig0_col1.setBounds(spazio_x_y, 0, btn_length, btn_length);
-		btnRig0_col1.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig0_col1);
+		CellButton btnRig0Col1 = new CellButton(0, 1, spazioXY, 0);
+		btnRig0Col1.setBorder(null);
+		btnRig0Col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig0Col1.setContentAreaFilled(false);
+		btnRig0Col1.setBounds(spazioXY, 0, btnLength, btnLength);
+		btnRig0Col1.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig0Col1);
 
-		CellButton btnRig0_col2 = new CellButton(0, 2, spazio_x_y * 2, 0);
-		btnRig0_col2.setBorder(null);
-		btnRig0_col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig0_col2.setContentAreaFilled(false);
-		btnRig0_col2.setBounds(spazio_x_y * 2, 0, btn_length, btn_length);
-		btnRig0_col2.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig0_col2);
+		CellButton btnRig0Col2 = new CellButton(0, 2, spazioXY * 2, 0);
+		btnRig0Col2.setBorder(null);
+		btnRig0Col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig0Col2.setContentAreaFilled(false);
+		btnRig0Col2.setBounds(spazioXY * 2, 0, btnLength, btnLength);
+		btnRig0Col2.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig0Col2);
 
-		CellButton btnRig0_col3 = new CellButton(0, 3, spazio_x_y * 3, 0);
-		btnRig0_col3.setBorder(null);
-		btnRig0_col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig0_col3.setContentAreaFilled(false);
-		btnRig0_col3.setBounds(spazio_x_y * 3, 0, btn_length, btn_length);
-		btnRig0_col3.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig0_col3);
+		CellButton btnRig0Col3 = new CellButton(0, 3, spazioXY * 3, 0);
+		btnRig0Col3.setBorder(null);
+		btnRig0Col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig0Col3.setContentAreaFilled(false);
+		btnRig0Col3.setBounds(spazioXY * 3, 0, btnLength, btnLength);
+		btnRig0Col3.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig0Col3);
 
-		CellButton btnRig0_col4 = new CellButton(0, 4, spazio_x_y * 4, 0);
-		btnRig0_col4.setBorder(null);
-		btnRig0_col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig0_col4.setContentAreaFilled(false);
-		btnRig0_col4.setBounds(spazio_x_y * 4, 0, btn_length, btn_length);
-		btnRig0_col4.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig0_col4);
+		CellButton btnRig0Col4 = new CellButton(0, 4, spazioXY * 4, 0);
+		btnRig0Col4.setBorder(null);
+		btnRig0Col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig0Col4.setContentAreaFilled(false);
+		btnRig0Col4.setBounds(spazioXY * 4, 0, btnLength, btnLength);
+		btnRig0Col4.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig0Col4);
 
 		// Bottoni seconda riga
 
-		CellButton btnRig1_col0 = new CellButton(1, 0, 0, spazio_x_y);
-		btnRig1_col0.setBorder(null);
-		btnRig1_col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig1_col0.setContentAreaFilled(false);
-		btnRig1_col0.setBounds(0, spazio_x_y, btn_length, btn_length);
-		btnRig1_col0.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig1_col0);
+		CellButton btnRig1Col0 = new CellButton(1, 0, 0, spazioXY);
+		btnRig1Col0.setBorder(null);
+		btnRig1Col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig1Col0.setContentAreaFilled(false);
+		btnRig1Col0.setBounds(0, spazioXY, btnLength, btnLength);
+		btnRig1Col0.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig1Col0);
 
-		CellButton btnRig1_col1 = new CellButton(1, 1, spazio_x_y, spazio_x_y);
-		btnRig1_col1.setBorder(null);
-		btnRig1_col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig1_col1.setContentAreaFilled(false);
-		btnRig1_col1.setBounds(spazio_x_y, spazio_x_y, btn_length, btn_length);
-		btnRig1_col1.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig1_col1);
+		CellButton btnRig1Col1 = new CellButton(1, 1, spazioXY, spazioXY);
+		btnRig1Col1.setBorder(null);
+		btnRig1Col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig1Col1.setContentAreaFilled(false);
+		btnRig1Col1.setBounds(spazioXY, spazioXY, btnLength, btnLength);
+		btnRig1Col1.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig1Col1);
 
-		CellButton btnRig1_col2 = new CellButton(1, 2, spazio_x_y * 2, spazio_x_y);
-		btnRig1_col2.setBorder(null);
-		btnRig1_col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig1_col2.setContentAreaFilled(false);
-		btnRig1_col2.setBounds(spazio_x_y * 2, spazio_x_y, btn_length, btn_length);
-		btnRig1_col2.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig1_col2);
+		CellButton btnRig1Col2 = new CellButton(1, 2, spazioXY * 2, spazioXY);
+		btnRig1Col2.setBorder(null);
+		btnRig1Col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig1Col2.setContentAreaFilled(false);
+		btnRig1Col2.setBounds(spazioXY * 2, spazioXY, btnLength, btnLength);
+		btnRig1Col2.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig1Col2);
 
-		CellButton btnRig1_col3 = new CellButton(1, 3, spazio_x_y * 3, spazio_x_y);
-		btnRig1_col3.setBorder(null);
-		btnRig1_col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig1_col3.setContentAreaFilled(false);
-		btnRig1_col3.setBounds(spazio_x_y * 3, spazio_x_y, btn_length, btn_length);
-		btnRig1_col3.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig1_col3);
+		CellButton btnRig1Col3 = new CellButton(1, 3, spazioXY * 3, spazioXY);
+		btnRig1Col3.setBorder(null);
+		btnRig1Col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig1Col3.setContentAreaFilled(false);
+		btnRig1Col3.setBounds(spazioXY * 3, spazioXY, btnLength, btnLength);
+		btnRig1Col3.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig1Col3);
 
-		CellButton btnRig1_col4 = new CellButton(1, 4, spazio_x_y * 4, spazio_x_y);
-		btnRig1_col4.setBorder(null);
-		btnRig1_col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig1_col4.setContentAreaFilled(false);
-		btnRig1_col4.setBounds(spazio_x_y * 4, spazio_x_y, btn_length, btn_length);
-		btnRig1_col4.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig1_col4);
+		CellButton btnRig1Col4 = new CellButton(1, 4, spazioXY * 4, spazioXY);
+		btnRig1Col4.setBorder(null);
+		btnRig1Col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig1Col4.setContentAreaFilled(false);
+		btnRig1Col4.setBounds(spazioXY * 4, spazioXY, btnLength, btnLength);
+		btnRig1Col4.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig1Col4);
 
 		// Bottoni terza riga
 
-		CellButton btnRig3_col0 = new CellButton(2, 0, 0, spazio_x_y * 2);
-		btnRig3_col0.setBorder(null);
-		btnRig3_col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig3_col0.setContentAreaFilled(false);
-		btnRig3_col0.setBounds(0, spazio_x_y * 2, btn_length, btn_length);
-		btnRig3_col0.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig3_col0);
+		CellButton btnRig3Col0 = new CellButton(2, 0, 0, spazioXY * 2);
+		btnRig3Col0.setBorder(null);
+		btnRig3Col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig3Col0.setContentAreaFilled(false);
+		btnRig3Col0.setBounds(0, spazioXY * 2, btnLength, btnLength);
+		btnRig3Col0.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig3Col0);
 
-		CellButton btnRig3_col1 = new CellButton(2, 1, spazio_x_y, spazio_x_y * 2);
-		btnRig3_col1.setBorder(null);
-		btnRig3_col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig3_col1.setContentAreaFilled(false);
-		btnRig3_col1.setBounds(spazio_x_y, spazio_x_y * 2, btn_length, btn_length);
-		btnRig3_col1.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig3_col1);
+		CellButton btnRig3Col1 = new CellButton(2, 1, spazioXY, spazioXY * 2);
+		btnRig3Col1.setBorder(null);
+		btnRig3Col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig3Col1.setContentAreaFilled(false);
+		btnRig3Col1.setBounds(spazioXY, spazioXY * 2, btnLength, btnLength);
+		btnRig3Col1.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig3Col1);
 
-		CellButton btnRig3_col2 = new CellButton(2, 2, spazio_x_y * 2, spazio_x_y * 2);
-		btnRig3_col2.setBorder(null);
-		btnRig3_col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig3_col2.setContentAreaFilled(false);
-		btnRig3_col2.setBounds(spazio_x_y * 2, spazio_x_y * 2, btn_length, btn_length);
-		btnRig3_col2.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig3_col2);
+		CellButton btnRig3Col2 = new CellButton(2, 2, spazioXY * 2, spazioXY * 2);
+		btnRig3Col2.setBorder(null);
+		btnRig3Col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig3Col2.setContentAreaFilled(false);
+		btnRig3Col2.setBounds(spazioXY * 2, spazioXY * 2, btnLength, btnLength);
+		btnRig3Col2.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig3Col2);
 
-		CellButton btnRig3_col3 = new CellButton(2, 3, spazio_x_y * 3, spazio_x_y * 2);
-		btnRig3_col3.setBorder(null);
-		btnRig3_col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig3_col3.setContentAreaFilled(false);
-		btnRig3_col3.setBounds(spazio_x_y * 3, spazio_x_y * 2, btn_length, btn_length);
-		btnRig3_col3.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig3_col3);
+		CellButton btnRig3Col3 = new CellButton(2, 3, spazioXY * 3, spazioXY * 2);
+		btnRig3Col3.setBorder(null);
+		btnRig3Col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig3Col3.setContentAreaFilled(false);
+		btnRig3Col3.setBounds(spazioXY * 3, spazioXY * 2, btnLength, btnLength);
+		btnRig3Col3.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig3Col3);
 
-		CellButton btnRig3_col4 = new CellButton(2, 4, spazio_x_y * 4, spazio_x_y * 2);
-		btnRig3_col4.setBorder(null);
-		btnRig3_col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig3_col4.setContentAreaFilled(false);
-		btnRig3_col4.setBounds(spazio_x_y * 4, spazio_x_y * 2, btn_length, btn_length);
-		btnRig3_col4.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig3_col4);
+		CellButton btnRig3Col4 = new CellButton(2, 4, spazioXY * 4, spazioXY * 2);
+		btnRig3Col4.setBorder(null);
+		btnRig3Col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig3Col4.setContentAreaFilled(false);
+		btnRig3Col4.setBounds(spazioXY * 4, spazioXY * 2, btnLength, btnLength);
+		btnRig3Col4.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig3Col4);
 
 		// Bottoni quarta riga
 
-		CellButton btnRig4_col0 = new CellButton(3, 0, 0, spazio_x_y * 3);
-		btnRig4_col0.setBorder(null);
-		btnRig4_col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig4_col0.setContentAreaFilled(false);
-		btnRig4_col0.setBounds(0, spazio_x_y * 3, btn_length, btn_length);
-		btnRig4_col0.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig4_col0);
+		CellButton btnRig4Col0 = new CellButton(3, 0, 0, spazioXY * 3);
+		btnRig4Col0.setBorder(null);
+		btnRig4Col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig4Col0.setContentAreaFilled(false);
+		btnRig4Col0.setBounds(0, spazioXY * 3, btnLength, btnLength);
+		btnRig4Col0.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig4Col0);
 
-		CellButton btnRig4_col1 = new CellButton(3, 1, spazio_x_y, spazio_x_y * 3);
-		btnRig4_col1.setBorder(null);
-		btnRig4_col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig4_col1.setContentAreaFilled(false);
-		btnRig4_col1.setBounds(spazio_x_y, spazio_x_y * 3, btn_length, btn_length);
-		btnRig4_col1.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig4_col1);
+		CellButton btnRig4Col1 = new CellButton(3, 1, spazioXY, spazioXY * 3);
+		btnRig4Col1.setBorder(null);
+		btnRig4Col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig4Col1.setContentAreaFilled(false);
+		btnRig4Col1.setBounds(spazioXY, spazioXY * 3, btnLength, btnLength);
+		btnRig4Col1.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig4Col1);
 
-		CellButton btnRig4_col2 = new CellButton(3, 2, spazio_x_y * 2, spazio_x_y * 3);
-		btnRig4_col2.setBorder(null);
-		btnRig4_col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig4_col2.setContentAreaFilled(false);
-		btnRig4_col2.setBounds(spazio_x_y * 2, spazio_x_y * 3, btn_length, btn_length);
-		btnRig4_col2.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig4_col2);
+		CellButton btnRig4Col2 = new CellButton(3, 2, spazioXY * 2, spazioXY * 3);
+		btnRig4Col2.setBorder(null);
+		btnRig4Col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig4Col2.setContentAreaFilled(false);
+		btnRig4Col2.setBounds(spazioXY * 2, spazioXY * 3, btnLength, btnLength);
+		btnRig4Col2.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig4Col2);
 
-		CellButton btnRig4_col3 = new CellButton(3, 3, spazio_x_y * 3, spazio_x_y * 3);
-		btnRig4_col3.setBorder(null);
-		btnRig4_col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig4_col3.setContentAreaFilled(false);
-		btnRig4_col3.setBounds(spazio_x_y * 3, spazio_x_y * 3, btn_length, btn_length);
-		btnRig4_col3.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig4_col3);
+		CellButton btnRig4Col3 = new CellButton(3, 3, spazioXY * 3, spazioXY * 3);
+		btnRig4Col3.setBorder(null);
+		btnRig4Col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig4Col3.setContentAreaFilled(false);
+		btnRig4Col3.setBounds(spazioXY * 3, spazioXY * 3, btnLength, btnLength);
+		btnRig4Col3.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig4Col3);
 
-		CellButton btnRig4_col4 = new CellButton(3, 4, spazio_x_y * 4, spazio_x_y * 3);
-		btnRig4_col4.setBorder(null);
-		btnRig4_col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig4_col4.setContentAreaFilled(false);
-		btnRig4_col4.setBounds(spazio_x_y * 4, spazio_x_y * 3, btn_length, btn_length);
-		btnRig4_col4.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig4_col4);
+		CellButton btnRig4Col4 = new CellButton(3, 4, spazioXY * 4, spazioXY * 3);
+		btnRig4Col4.setBorder(null);
+		btnRig4Col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig4Col4.setContentAreaFilled(false);
+		btnRig4Col4.setBounds(spazioXY * 4, spazioXY * 3, btnLength, btnLength);
+		btnRig4Col4.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig4Col4);
 
 		// Bottoni quinta riga
 
-		CellButton btnRig5_col0 = new CellButton(4, 0, 0, spazio_x_y * 4);
-		btnRig5_col0.setBorder(null);
-		btnRig5_col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig5_col0.setContentAreaFilled(false);
-		btnRig5_col0.setBounds(0, spazio_x_y * 4, btn_length, btn_length);
-		btnRig5_col0.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig5_col0);
+		CellButton btnRig5Col0 = new CellButton(4, 0, 0, spazioXY * 4);
+		btnRig5Col0.setBorder(null);
+		btnRig5Col0.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig5Col0.setContentAreaFilled(false);
+		btnRig5Col0.setBounds(0, spazioXY * 4, btnLength, btnLength);
+		btnRig5Col0.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig5Col0);
 
-		CellButton btnRig5_col1 = new CellButton(4, 1, spazio_x_y, spazio_x_y * 4);
-		btnRig5_col1.setBorder(null);
-		btnRig5_col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig5_col1.setContentAreaFilled(false);
-		btnRig5_col1.setBounds(spazio_x_y, spazio_x_y * 4, btn_length, btn_length);
-		btnRig5_col1.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig5_col1);
+		CellButton btnRig5Col1 = new CellButton(4, 1, spazioXY, spazioXY * 4);
+		btnRig5Col1.setBorder(null);
+		btnRig5Col1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig5Col1.setContentAreaFilled(false);
+		btnRig5Col1.setBounds(spazioXY, spazioXY * 4, btnLength, btnLength);
+		btnRig5Col1.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig5Col1);
 
-		CellButton btnRig5_col2 = new CellButton(4, 2, spazio_x_y * 2, spazio_x_y * 4);
-		btnRig5_col2.setBorder(null);
-		btnRig5_col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig5_col2.setContentAreaFilled(false);
-		btnRig5_col2.setBounds(spazio_x_y * 2, spazio_x_y * 4, btn_length, btn_length);
-		btnRig5_col2.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig5_col2);
+		CellButton btnRig5Col2 = new CellButton(4, 2, spazioXY * 2, spazioXY * 4);
+		btnRig5Col2.setBorder(null);
+		btnRig5Col2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig5Col2.setContentAreaFilled(false);
+		btnRig5Col2.setBounds(spazioXY * 2, spazioXY * 4, btnLength, btnLength);
+		btnRig5Col2.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig5Col2);
 
-		CellButton btnRig5_col3 = new CellButton(4, 3, spazio_x_y * 3, spazio_x_y * 4);
-		btnRig5_col3.setBorder(null);
-		btnRig5_col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig5_col3.setContentAreaFilled(false);
-		btnRig5_col3.setBounds(spazio_x_y * 3, spazio_x_y * 4, btn_length, btn_length);
-		btnRig5_col3.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig5_col3);
+		CellButton btnRig5Col3 = new CellButton(4, 3, spazioXY * 3, spazioXY * 4);
+		btnRig5Col3.setBorder(null);
+		btnRig5Col3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig5Col3.setContentAreaFilled(false);
+		btnRig5Col3.setBounds(spazioXY * 3, spazioXY * 4, btnLength, btnLength);
+		btnRig5Col3.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig5Col3);
 
-		CellButton btnRig5_col4 = new CellButton(4, 4, spazio_x_y * 4, spazio_x_y * 4);
-		btnRig5_col4.setBorder(null);
-		btnRig5_col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRig5_col4.setContentAreaFilled(false);
-		btnRig5_col4.setBounds(spazio_x_y * 4, spazio_x_y * 4, btn_length, btn_length);
-		btnRig5_col4.addMouseListener(actionMouseOnBoard);
-		panelBoardbottons.add(btnRig5_col4);
+		CellButton btnRig5Col4 = new CellButton(4, 4, spazioXY * 4, spazioXY * 4);
+		btnRig5Col4.setBorder(null);
+		btnRig5Col4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRig5Col4.setContentAreaFilled(false);
+		btnRig5Col4.setBounds(spazioXY * 4, spazioXY * 4, btnLength, btnLength);
+		btnRig5Col4.addMouseListener(actionMouseOnBoard);
+		panelBoardbottons.add(btnRig5Col4);
 
 		printTowers();
 
@@ -734,72 +737,63 @@ public class GameStageViewGraphic extends GameStageView {
 				 */
 
 				// first turn handling
-				if (isFirstTurn) {
-					if (!obj.isEmpty()) {
-						if (obj.get(0).equals(btnWorkerR1)) {
-							if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
-
-								board.placeWorker(player.getWorker(0), button.getRowIndex(), button.getColIndex());
-								obj.remove(btnWorkerR1);
-								btnWorkerR1.setBounds(button.posX + 266, button.posY + 66, dim_worker, dim_worker);
-								btnWorkerR1.setEnabled(false);
-								
-							}
-
-						} else if (obj.get(0).equals(btnWorkerR2)) {
-							if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
-								board.placeWorker(player.getWorker(1), button.getRowIndex(), button.getColIndex());
-								obj.remove(btnWorkerR2);
-								btnWorkerR2.setBounds(button.posX + 266, button.posY + 66, dim_worker, dim_worker);
-								btnWorkerR2.setEnabled(false);
-							}
+				if (isFirstTurn && !obj.isEmpty()) {
+					if (obj.get(0).equals(btnWorkerR1)) {
+						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+							board.placeWorker(player.getWorker(0), button.getRowIndex(), button.getColIndex());
+							obj.remove(btnWorkerR1);
+							btnWorkerR1.setBounds(button.posX + 266, button.posY + 66, dimWorker, dimWorker);
+							btnWorkerR1.setEnabled(false);
 						}
 
+					} else if (obj.get(0).equals(btnWorkerR2)) {
+						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+							board.placeWorker(player.getWorker(1), button.getRowIndex(), button.getColIndex());
+							obj.remove(btnWorkerR2);
+							btnWorkerR2.setBounds(button.posX + 266, button.posY + 66, dimWorker, dimWorker);
+							btnWorkerR2.setEnabled(false);
+						}
 					}
-					
 
 				}
-				
+
 				/*
-				 * This control for the red's turn enable the endButton only when he
-				 * has placed all two workers
+				 * This control for the red's turn enable the endButton only when he has placed
+				 * all two workers
 				 */
-				if(!btnWorkerR1.isEnabled() && !btnWorkerR2.isEnabled()) {
+				if (!btnWorkerR1.isEnabled() && !btnWorkerR2.isEnabled()) {
 					btnEndTurn.setEnabled(true);
 				}
 
-				if (player.isFirstTurn) {
-					if (!obj.isEmpty()) {
-						if (obj.get(0).equals(btnWorkerB1)) {
+				if (player.isFirstTurn && !obj.isEmpty()) {
 
-							if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
-								board.placeWorker(player.getWorker(0), button.getRowIndex(), button.getColIndex());
-								obj.remove(btnWorkerB1);
-								btnWorkerB1.setBounds(button.posX + 266, button.posY + 66, dim_worker, dim_worker);
-								btnWorkerB1.setEnabled(false);
-							}
-						} else if (obj.get(0).equals(btnWorkerB2)) {
-							if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
-								board.placeWorker(player.getWorker(1), button.getRowIndex(), button.getColIndex());
-								obj.remove(btnWorkerB2);
-								btnWorkerB2.setBounds(button.posX + 266, button.posY + 66, dim_worker, dim_worker);
-								btnWorkerB2.setEnabled(false);
-							}
+					if (obj.get(0).equals(btnWorkerB1)) {
+
+						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+							board.placeWorker(player.getWorker(0), button.getRowIndex(), button.getColIndex());
+							obj.remove(btnWorkerB1);
+							btnWorkerB1.setBounds(button.posX + 266, button.posY + 66, dimWorker, dimWorker);
+							btnWorkerB1.setEnabled(false);
 						}
-
+					} else if (obj.get(0).equals(btnWorkerB2)) {
+						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+							board.placeWorker(player.getWorker(1), button.getRowIndex(), button.getColIndex());
+							obj.remove(btnWorkerB2);
+							btnWorkerB2.setBounds(button.posX + 266, button.posY + 66, dimWorker, dimWorker);
+							btnWorkerB2.setEnabled(false);
+						}
 					}
-					
+
 				}
-				
+
 				/*
-				 * This control for the blue's turn enable the endButton only when he
-				 * has placed all two workers
+				 * This control for the blue's turn enable the endButton only when he has placed
+				 * all two workers
 				 */
-				if(!btnWorkerB1.isEnabled() && !btnWorkerB2.isEnabled()) {
+				if (!btnWorkerB1.isEnabled() && !btnWorkerB2.isEnabled()) {
 					btnEndTurn.setEnabled(true);
 				}
-				
-				
+
 				if (!player.isFirstTurn) {
 					btnEndTurn.setEnabled(true);
 					// others turns handlings
@@ -817,11 +811,13 @@ public class GameStageViewGraphic extends GameStageView {
 
 						}
 					} else if (movePhase && cellButton.size() == 1) {
-						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker() && Check
-								.isValidMovement(board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
-										board.cellAt(button.getRowIndex(), button.getColIndex())) && Check
-											.aroundWorkerAndTowerCells(board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
-													board.cellAt(button.getRowIndex(), button.getColIndex()))) {
+						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()
+								&& Check.isValidMovement(
+										board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
+										board.cellAt(button.getRowIndex(), button.getColIndex()))
+								&& Check.aroundWorkerAndTowerCells(
+										board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
+										board.cellAt(button.getRowIndex(), button.getColIndex()))) {
 
 							board.moveWorker(
 									board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex).getWorker(),
@@ -848,33 +844,33 @@ public class GameStageViewGraphic extends GameStageView {
 							}
 
 						}
-					} else if (buildPhase && cellButton.size() == 1) {
-						if (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker()) {
+					} else if ((buildPhase && cellButton.size() == 1)
+							&& (!board.cellAt(button.getRowIndex(), button.getColIndex()).getStatusWorker())) {
 
-							if (Check.isValidConstruction(board.cellAt(button.getRowIndex(), button.getColIndex())) && Check
-									.aroundWorkerAndTowerCells(board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
-											board.cellAt(button.getRowIndex(), button.getColIndex()))) {
-								board.cellAt(button.rowIndex, button.colIndex).levelUpTower();
-								// int height = board.cellAt(button.rowIndex, button.colIndex).getHeight();
-								System.out.println("il livello della torre su cui si vuole costruire è: "
-										+ board.cellAt(button.rowIndex, button.colIndex).getHeight());
-								movePhase = false;
-								buildPhase = false;
-								printTowers();
-								printWorkers();
-							}else{
-								cellButton.remove(0);
-							}
+						if (Check.isValidConstruction(board.cellAt(button.getRowIndex(), button.getColIndex()))
+								&& Check.aroundWorkerAndTowerCells(
+										board.cellAt(cellButton.get(0).rowIndex, cellButton.get(0).colIndex),
+										board.cellAt(button.getRowIndex(), button.getColIndex()))) {
+							board.cellAt(button.rowIndex, button.colIndex).levelUpTower();
+							// int height = board.cellAt(button.rowIndex, button.colIndex).getHeight();
+							System.out.println("il livello della torre su cui si vuole costruire è: "
+									+ board.cellAt(button.rowIndex, button.colIndex).getHeight());
+							movePhase = false;
+							buildPhase = false;
+							printTowers();
+							printWorkers();
+						} else {
+							cellButton.remove(0);
 						}
 
 					}
 
 				}
-				
+
 				if (!player.isFirstTurn) {
 					btnEndTurn.setEnabled(true);
 				}
-				
+
 				for (int r = 0; r < 5; r++) {
 					for (int c = 0; c < 5; c++) {
 						System.out.print(" " + board.cellAt(r, c).getStatusWorker());
@@ -912,29 +908,28 @@ public class GameStageViewGraphic extends GameStageView {
 				int x = 6 + c * (s + 30);
 				// ---> giusta int y = 25 + r * (s + 30);
 				int y = 6 + r * (s + 30);
-				if(height == 0) {
+				if (height == 0) {
 					continue;
 				}
-				
-				Image image = null ;
+
+				Image image = null;
 				if (height == 1) {
 
-					 image = Images.ICON_BLOCK_layer1.load();
+					image = Images.ICON_BLOCK_LAYER1.load();
 
 				} else if (height == 2) {
-					 image = Images.ICON_BLOCK_layer2.load();
+					image = Images.ICON_BLOCK_LAYER2.load();
 
 				} else if (height == 3) {
-					 image = Images.ICON_BLOCK_layer3.load();
+					image = Images.ICON_BLOCK_LAYER3.load();
+
+				} else if (height == 4) {
+					image = Images.ICON_BLOCK_DOME.load();
 
 				}
-				else if (height == 4) {
-					 image = Images.ICON_BLOCK_DOME.load();
-
-				}
-				if(objectPanel[r][c] == null) {
+				if (objectPanel[r][c] == null) {
 					objectPanel[r][c] = new BackgroundPanel(image);
-				}else {
+				} else {
 					objectPanel[r][c].setBackground(image);
 				}
 				objectPanel[r][c].setBounds(x, y, s, s);
@@ -973,7 +968,6 @@ public class GameStageViewGraphic extends GameStageView {
 		panelBoardbottons.setEnabled(false);
 	}
 
-
 	private void showHelpDialog() {
 		panelGuide.setVisible(true);
 		panelObjects.setVisible(false);
@@ -990,7 +984,6 @@ public class GameStageViewGraphic extends GameStageView {
 		panelBoardbottons.setEnabled(true);
 	}
 
-
 	private void hideReturnHomeDialog() {
 		panelWarning.setVisible(false);
 		panelWarning.setEnabled(false);
@@ -1003,7 +996,6 @@ public class GameStageViewGraphic extends GameStageView {
 		panelBoardbottons.setVisible(true);
 		panelBoardbottons.setEnabled(true);
 	}
-
 
 	private ActionListener initactionPutWorkersInQueue() {
 
@@ -1019,26 +1011,26 @@ public class GameStageViewGraphic extends GameStageView {
 				if (player.isFirstTurn && playerName != playerOpponent) {
 					if (btnWorkerR1.equals(e.getSource()) && btnWorkerR1.isEnabled()) {
 						obj.add(btnWorkerR1);
-						player.posWR1_y = 400;
-						btnWorkerR1.setBounds(980, player.posWR1_y, dim_worker, dim_worker);
+						player.posWR1Y = 400;
+						btnWorkerR1.setBounds(980, player.posWR1Y, dimWorker, dimWorker);
 
 					} else if (btnWorkerR2.equals(e.getSource()) && btnWorkerR2.isEnabled()) {
 						obj.add(btnWorkerR2);
-						player.posWR2_y = 400;
-						btnWorkerR2.setBounds(1020, player.posWR2_y, dim_worker, dim_worker);
+						player.posWR2Y = 400;
+						btnWorkerR2.setBounds(1020, player.posWR2Y, dimWorker, dimWorker);
 					}
 				}
 
 				if (player.isFirstTurn) {
 					if (btnWorkerB1.equals(e.getSource()) && btnWorkerB1.isEnabled()) {
 						obj.add(btnWorkerB1);
-						player.posWB1_y = 400;
-						btnWorkerB1.setBounds(980, player.posWB1_y, dim_worker, dim_worker);
+						player.posWB1Y = 400;
+						btnWorkerB1.setBounds(980, player.posWB1Y, dimWorker, dimWorker);
 
 					} else if (btnWorkerB2.equals(e.getSource()) && btnWorkerB2.isEnabled()) {
 						obj.add(btnWorkerB2);
-						player.posWB2_y = 400;
-						btnWorkerB2.setBounds(1020, player.posWB2_y, dim_worker, dim_worker);
+						player.posWB2Y = 400;
+						btnWorkerB2.setBounds(1020, player.posWB2Y, dimWorker, dimWorker);
 					}
 				}
 

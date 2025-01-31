@@ -1,13 +1,13 @@
-package src.test.java.gameComponents;
+package src.test.java.gamecomponents;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import src.main.java.gameComponents.Player;
-import src.main.java.gameComponents.PlayerColor;
-import src.main.java.gameComponents.Worker;
+import src.main.java.gamecomponents.Player;
+
+import src.main.java.gamecomponents.Worker;
 
 class PlayerTest {
 

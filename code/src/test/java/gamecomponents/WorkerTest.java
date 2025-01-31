@@ -1,12 +1,11 @@
-package src.test.java.gameComponents;
+package src.test.java.gamecomponents;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import src.main.java.gameComponents.IDMaker;
-import src.main.java.gameComponents.PlayerColor;
-import src.main.java.gameComponents.Worker;
+import src.main.java.gamecomponents.IDMaker;
+import src.main.java.gamecomponents.Worker;
 
 class WorkerTest {
 
